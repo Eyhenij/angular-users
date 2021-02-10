@@ -1,0 +1,49 @@
+.sidebar__container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: cornflowerblue;
+
+    .sidebar__card {
+        padding-top: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        color: white;
+
+        .sidebar__card_content {
+            padding-left: 3px;
+            cursor: pointer;
+        }
+
+        .sidebar__card_content:hover {
+            transform: translateX(3px);
+            box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+        }
+
+        .sidebar__card_selected {
+            color: black;
+            font-weight: 700;
+            font-size: large;
+        }
+    }
+
+    .sidebar__button_new {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: large;
+        background-color: rgba(255, 255, 255, .0);
+        .sidebar__button_img {
+            width: 50px;
+            height: 50px;
+            margin-left: 20px;
+        }
+    }
+}

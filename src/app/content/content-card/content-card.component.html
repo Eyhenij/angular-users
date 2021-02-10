@@ -1,0 +1,30 @@
+<div class="header__card">
+    <div class="card__title">
+        <div>
+            {{selectedUser?.name}}
+        </div>
+    </div>
+
+    <div class="card__content">
+        <div>Email: {{selectedUser?.email}}</div>
+        <div>Login: {{selectedUser?.login}}</div>
+        <div>User id: {{selectedUser?.id}}</div>
+        <button class="card__btn_delete">
+            <img
+                src="../../../assets/buttons/remove-button-red.png"
+                alt="Remove User"
+                width="50"
+                height="50"
+            >
+        </button>
+        <button class="card__btn_edit">
+            <img
+                src="../../../assets/buttons/edit-button-yellow.png"
+                alt="Edit User"
+                width="50"
+                height="50"
+            >
+        </button>
+    </div>
+
+</div>

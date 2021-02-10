@@ -1,0 +1,52 @@
+:host {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$pageWidth: 1200px;
+$pageHeight: 98vh;
+
+.page {
+    width: $pageWidth;
+    height: $pageHeight;
+    margin: 0 auto;
+    display: grid;
+    grid-template-areas:
+        "h h h"
+        "s c c";
+    grid-template-rows: 60px;
+    grid-template-columns: 6fr 25fr;
+    grid-gap: 3px;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #000;
+    text-align: left;
+    background-color: #fdfdfc;
+
+    .onLoading {
+        position: absolute;
+        width: $pageWidth;
+        height: $pageHeight;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .page__header {
+        grid-area: h;
+    }
+
+    .page__sidebar {
+        grid-area: s;
+    }
+
+    .page__content {
+        grid-area: c;
+    }
+}
+

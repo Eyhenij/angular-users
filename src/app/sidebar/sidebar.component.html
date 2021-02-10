@@ -1,0 +1,22 @@
+<div class="sidebar__container">
+    <div class="sidebar__card">
+        <div
+            class="sidebar__card_content"
+            *ngFor="let user of users"
+            [class.sidebar__card_selected]="user === selectedUser"
+            (click)="selectUser(user)"
+        >
+            {{user?.name}}
+        </div>
+        <div>
+            <button class="sidebar__button_new">
+                Add new User
+                <img
+                    src="./assets/buttons/new-button-green.png"
+                    alt="Add new User"
+                    class="sidebar__button_img"
+                />
+            </button>
+        </div>
+    </div>
+</div>
