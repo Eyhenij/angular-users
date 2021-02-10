@@ -21,11 +21,6 @@ export class AppComponent implements OnInit {
     private _getUsers(): void {
         this._usersService.getUsersData().subscribe((users: IUser[]) => {
             this.users = users;
-            this.selectedUser = users[0];
         });
-    }
-
-    public onUserChange(user: IUser): void {
-        this.selectedUser = user;
     }
 }

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IUser} from '../../interfaces/user.interface';
 import {UsersService} from '../../users.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -10,8 +10,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class UserPageComponent implements OnInit{
 
-    public user: IUser;
-    public id: number;
+    public user!: IUser;
 
     constructor(
         private readonly _usersService: UsersService,
@@ -22,6 +21,7 @@ export class UserPageComponent implements OnInit{
     ngOnInit(): void {
         this._routeWithUserId();
     }
+
     private _routeWithUserId(): void {
         // this.id = this._route.snapshot.params.id;
         // this._getUserById(this.id);
@@ -35,8 +35,18 @@ export class UserPageComponent implements OnInit{
             if (user) {
                 this.user = user;
             } else {
-                this._router.navigateByUrl('/user/unknownData');
+                this._router.navigateByUrl('not-found');
             }
+        });
+    }
+
+    public redirectToEditPage(): void {
+        this._router.navigateByUrl(`edit/${this.user.id}`);
+    }
+
+    public deleteUserById(id: number): any {
+        this._usersService.deleteUserById(id).subscribe((response: any) => {
+            console.log(response);
         });
     }
 

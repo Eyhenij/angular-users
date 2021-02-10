@@ -1,4 +1,5 @@
 <div class="user__card">
+
     <div class="card__title">
         <div>
             {{user?.name}}
@@ -9,20 +10,29 @@
         <div>Email: {{user?.email}}</div>
         <div>Login: {{user?.login}}</div>
         <div>User id: {{user?.id}}</div>
-        <button class="card__btn_delete">
+
+        <button
+            class="card__btn_delete"
+            (click)="deleteUserById(user.id)"
+        >
             <img
                 src="../../../assets/buttons/remove-button-red.png"
                 alt="Remove User"
                 class="card__btn_img"
             >
         </button>
-        <button class="card__btn_edit">
+
+        <button
+            class="card__btn_edit"
+            (click)="redirectToEditPage()"
+        >
             <img
                 src="../../../assets/buttons/edit-button-yellow.png"
                 alt="Edit User"
                 class="card__btn_img"
             >
         </button>
+
     </div>
 
 </div>
