@@ -10,10 +10,8 @@ export class ContentComponent implements OnInit {
     @Input()
     public selectedUser: IUser | undefined;
 
-    constructor() {
-    }
+    constructor() {}
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 
 }

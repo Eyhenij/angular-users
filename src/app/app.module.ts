@@ -9,7 +9,10 @@ import {ContentComponent} from './content/content.component';
 import {OnLoadingComponent} from './on-loading/on-loading.component';
 import {UsersService} from './users.service';
 import {HttpClientModule} from '@angular/common/http';
-import { ContentCardComponent } from './content/content-card/content-card.component';
+import {NewUserPageComponent} from './content/new-user-page/new-user-page.component';
+import {UserPageComponent} from './content/user-page/user-page.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { UnknownDataPageComponent } from './content/unknown-data-page/unknown-data-page.component';
 
 @NgModule({
     declarations: [
@@ -18,7 +21,10 @@ import { ContentCardComponent } from './content/content-card/content-card.compon
         SidebarComponent,
         ContentComponent,
         OnLoadingComponent,
-        ContentCardComponent
+        NewUserPageComponent,
+        UserPageComponent,
+        HomePageComponent,
+        UnknownDataPageComponent
     ],
     imports: [
         BrowserModule,
