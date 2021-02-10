@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IUser} from '../../interfaces/user.interface';
 import {UsersService} from '../../users.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'app-user-page',
@@ -10,18 +10,24 @@ import {Router} from '@angular/router';
 })
 export class UserPageComponent implements OnInit{
 
-    @Input()
-    public selectedUser: IUser | undefined;
-
-    public user: IUser | undefined;
+    public user: IUser;
+    public id: number;
 
     constructor(
         private readonly _usersService: UsersService,
-        private readonly _router: Router
+        private readonly _router: Router,
+        private readonly _route: ActivatedRoute
     ) {}
 
     ngOnInit(): void {
-        this._getUserById(2);
+        this._routeWithUserId();
+    }
+    private _routeWithUserId(): void {
+        // this.id = this._route.snapshot.params.id;
+        // this._getUserById(this.id);
+        this._route.params.subscribe((params) => {
+            this._getUserById(params.id);
+        });
     }
 
     private _getUserById(id: number): void {
@@ -33,4 +39,5 @@ export class UserPageComponent implements OnInit{
             }
         });
     }
+
 }

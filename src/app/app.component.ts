@@ -25,12 +25,7 @@ export class AppComponent implements OnInit {
         });
     }
 
-    private _getUserById(id: number): void {
-        this._usersService.getUserById(id);
-    }
-
     public onUserChange(user: IUser): void {
         this.selectedUser = user;
-        this._getUserById(user.id);
     }
 }
