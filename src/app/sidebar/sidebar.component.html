@@ -1,12 +1,14 @@
 <div class="sidebar__container">
-    <div class="sidebar__card">
-        <div
+
+    <div *ngFor="let user of users" class="sidebar__card">
+        <button
+            mat-flat-button
             class="sidebar__card_content"
-            *ngFor="let user of users"
+            routerLinkActive="sidebar__card_selected"
             [routerLink]="['/user', user.id]"
-            routerLinkActive="selected"
         >
             {{user?.name}}
-        </div>
+        </button>
     </div>
+
 </div>

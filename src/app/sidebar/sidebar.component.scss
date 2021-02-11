@@ -5,15 +5,21 @@
     background-color: cornflowerblue;
 
     .sidebar__card {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
         padding-top: 10px;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        color: white;
 
         .sidebar__card_content {
+            border: 1px solid white;
             padding-left: 3px;
             cursor: pointer;
+            color: white;
+            font-size: 18px;
+            background-color: #bdbbbf;
         }
 
         .sidebar__card_content:hover {
@@ -22,9 +28,7 @@
         }
 
         .sidebar__card_selected {
-            color: black;
-            font-weight: 700;
-            font-size: large;
+            background-color: coral;
         }
     }
 }
