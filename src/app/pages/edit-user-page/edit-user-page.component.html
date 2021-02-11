@@ -1,0 +1,82 @@
+<mat-card class="card__container">
+
+    <div>
+        <mat-form-field
+            appearance="fill"
+            floatLabel="always"
+            class="form__container"
+        >
+            <mat-label>Name</mat-label>
+            <input
+                aria-label="Name"
+                matInput
+                [(ngModel)]="userForPost.name"
+            >
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field
+            appearance="fill"
+            floatLabel="always"
+            class="form__container"
+        >
+            <mat-label>Login</mat-label>
+                <input
+                    aria-label="Login"
+                    matInput
+                    placeholder="{{user?.login}}"
+                    [(ngModel)]="userForPost.login"
+                >
+        </mat-form-field>
+    </div>
+
+    <div >
+        <mat-form-field
+            appearance="fill"
+            floatLabel="always"
+            class="form__container"
+        >
+            <mat-label>Email</mat-label>
+                <input
+                    aria-label="Email"
+                    matInput
+                    [(ngModel)]="userForPost.email"
+                >
+        </mat-form-field>
+    </div>
+
+    <div class="btn__container">
+        <span>
+            <button
+                mat-flat-button
+                (click)="updateUserData(userForPost)"
+            >
+                Save
+            </button>
+        </span>
+
+        <span>
+            <button
+                mat-flat-button
+
+            >
+                Cancel
+            </button>
+        </span>
+    </div>
+
+</mat-card>
+
+<!--<div>-->
+<!--    <button mat-flat-button color="primary">-->
+<!--        There is mat-flat-button-->
+<!--    </button>-->
+<!--</div>-->
+
+<!--<div>-->
+<!--    <button mat-stroked-button>-->
+<!--        There is mat-stroked-button-->
+<!--    </button>-->
+<!--</div>-->
+

@@ -17,11 +17,8 @@ import {HomePageComponent} from './pages/home-page/home-page.component';
 import {NotFoundPageComponent} from './pages/not-found-page/not-found-page.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatSliderModule} from '@angular/material/slider';
-import {MatButtonModule} from '@angular/material/button';
-import {MatOptionModule} from '@angular/material/core';
-import {MatCardModule} from '@angular/material/card';
+import {FormsModule} from '@angular/forms';
+import {MaterialModule} from './material/material.module';
 
 @NgModule({
     declarations: [
@@ -37,15 +34,12 @@ import {MatCardModule} from '@angular/material/card';
         EditUserPageComponent
     ],
     imports: [
+        MaterialModule,
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
         BrowserAnimationsModule,
-        MatButtonToggleModule,
-        MatSliderModule,
-        MatButtonModule,
-        MatOptionModule,
-        MatCardModule
+        FormsModule
     ],
     providers: [UsersService],
     bootstrap: [AppComponent]
