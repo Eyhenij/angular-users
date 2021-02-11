@@ -1,18 +1,14 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IUser} from './interfaces/user.interface';
 import {IUserForPost} from './interfaces/user-for-post.interface';
+import {IServerResponse} from './interfaces/server-response.interface';
 
 @Injectable()
 export class UsersService {
 
     private readonly _usersUrl: string = 'http://localhost:3000/api/users';
-    private readonly _httpOptions = {
-        headers: new HttpHeaders({
-
-        })
-    };
 
     constructor(private readonly _http: HttpClient) {}
 
@@ -24,15 +20,15 @@ export class UsersService {
         return this._http.get<IUser>(`${this._usersUrl}/${id}`);
     }
 
-    public postNewUserData(newData: IUserForPost): Observable<any> {
-        return this._http.post(this._usersUrl, newData);
+    public postNewUserData(newData: IUserForPost): Observable<IServerResponse> {
+        return this._http.post<IServerResponse>(this._usersUrl, newData);
     }
 
-    public putNewUserData(newData: IUserForPost, id: number): Observable<any> {
-        return this._http.put(`${this._usersUrl}/${id}`, newData);
+    public putNewUserData(newData: IUserForPost, id: number): Observable<IServerResponse> {
+        return this._http.put<IServerResponse>(`${this._usersUrl}/${id}`, newData);
     }
 
-    public deleteUserById(id: number): Observable<any> {
-        return this._http.delete(`${this._usersUrl}/${id}`);
+    public deleteUserById(id: number): Observable<IServerResponse> {
+        return this._http.delete<IServerResponse>(`${this._usersUrl}/${id}`);
     }
 }

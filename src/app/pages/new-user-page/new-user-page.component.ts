@@ -1,15 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {IUserForPost} from '../../interfaces/user-for-post.interface';
 import {UsersService} from '../../users.service';
 import {Router} from '@angular/router';
+import {IServerResponse} from '../../interfaces/server-response.interface';
+import {SubscriptionLike} from 'rxjs';
 
 @Component({
     selector: 'app-new-user-page',
     templateUrl: './new-user-page.component.html',
     styleUrls: ['./new-user-page.component.scss']
 })
-export class NewUserPageComponent implements OnInit {
+export class NewUserPageComponent implements OnInit, OnDestroy {
 
+    private _subscription: SubscriptionLike[] = [];
     public newUser: IUserForPost = {
         name: '',
         login: '',
@@ -25,13 +28,23 @@ export class NewUserPageComponent implements OnInit {
     ngOnInit(): void {}
 
     public createNewUser(newData: IUserForPost): void {
-        this._usersService.postNewUserData(newData).subscribe((response: any) => {
-            console.log(response);
-        });
+        this._subscription.push(
+            this._usersService.postNewUserData(newData).subscribe((response: IServerResponse) => {
+                alert(response.message);
+                this.redirectTo('home');
+            })
+        );
     }
 
-    public cancel(): void {
-        this._router.navigateByUrl('home');
+    public redirectTo(url: string): void {
+        this._router.navigateByUrl(url);
+    }
+
+    ngOnDestroy(): void {
+        this._subscription.forEach(
+            (subscription: SubscriptionLike) => subscription.unsubscribe()
+        );
+        this._subscription = [];
     }
 
 }

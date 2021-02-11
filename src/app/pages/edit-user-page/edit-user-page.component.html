@@ -3,31 +3,31 @@
     <div>
         <mat-form-field appearance="fill" class="form__container">
             <mat-label>Name</mat-label>
-            <input aria-label="label" matInput [(ngModel)]="userForPost.name">
+            <input aria-label="label" matInput [(ngModel)]="userDataForUpdate.name">
         </mat-form-field>
     </div>
 
     <div>
         <mat-form-field appearance="fill" class="form__container">
             <mat-label>Login</mat-label>
-            <input aria-label="label" matInput [(ngModel)]="userForPost.login">
+            <input aria-label="label" matInput [(ngModel)]="userDataForUpdate.login">
         </mat-form-field>
     </div>
 
     <div>
         <mat-form-field appearance="fill" class="form__container">
             <mat-label>Email</mat-label>
-            <input aria-label="label" matInput [(ngModel)]="userForPost.email">
+            <input aria-label="label" matInput [(ngModel)]="userDataForUpdate.email">
         </mat-form-field>
     </div>
 
     <div class="btn__container">
         <span>
-            <button mat-flat-button (click)="updateUserData(userForPost)">Save</button>
+            <button mat-flat-button (click)="updateUserData(userDataForUpdate)">Save</button>
         </span>
 
         <span>
-            <button mat-flat-button (click)="cancel()">Cancel</button>
+            <button mat-flat-button (click)="redirectTo()">Cancel</button>
         </span>
     </div>
 
