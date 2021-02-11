@@ -4,6 +4,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {UsersService} from './users.service';
 import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FormsModule} from '@angular/forms';
 
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
@@ -16,8 +18,6 @@ import {NewUserPageComponent} from './pages/new-user-page/new-user-page.componen
 import {HomePageComponent} from './pages/home-page/home-page.component';
 import {NotFoundPageComponent} from './pages/not-found-page/not-found-page.component';
 
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {FormsModule} from '@angular/forms';
 import {MaterialModule} from './material/material.module';
 
 @NgModule({
@@ -39,10 +39,9 @@ import {MaterialModule} from './material/material.module';
         AppRoutingModule,
         HttpClientModule,
         BrowserAnimationsModule,
-        FormsModule
+        FormsModule,
     ],
     providers: [UsersService],
     bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}

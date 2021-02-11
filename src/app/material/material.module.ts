@@ -6,27 +6,21 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatOptionModule} from '@angular/material/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
+
+const MaterialComponents = [
+    MatButtonToggleModule,
+    MatSliderModule,
+    MatButtonModule,
+    MatOptionModule,
+    MatCardModule,
+    MatInputModule,
+    MatFormFieldModule
+];
 
 @NgModule({
-    imports: [
-        MatButtonToggleModule,
-        MatSliderModule,
-        MatButtonModule,
-        MatOptionModule,
-        MatCardModule,
-        MatInputModule,
-        MatFormFieldModule
-    ],
-    exports: [
-        MatButtonToggleModule,
-        MatSliderModule,
-        MatButtonModule,
-        MatOptionModule,
-        MatCardModule,
-        MatInputModule,
-        MatFormFieldModule
-    ]
+    providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {floatLabel: 'always'}}],
+    imports: [MaterialComponents],
+    exports: [MaterialComponents]
 })
-export class MaterialModule {
-}
+export class MaterialModule {}

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {IUserForPost} from '../../interfaces/user-for-post.interface';
 import {UsersService} from '../../users.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-new-user-page',
@@ -9,14 +10,28 @@ import {UsersService} from '../../users.service';
 })
 export class NewUserPageComponent implements OnInit {
 
-    constructor(private readonly _usersService: UsersService) {}
+    public newUser: IUserForPost = {
+        name: '',
+        login: '',
+        email: '',
+        password: ''
+    };
+
+    constructor(
+        private readonly _usersService: UsersService,
+        private readonly _router: Router
+    ) {}
 
     ngOnInit(): void {}
 
-    public postNewUserData(newData: IUserForPost): void {
+    public createNewUser(newData: IUserForPost): void {
         this._usersService.postNewUserData(newData).subscribe((response: any) => {
             console.log(response);
         });
+    }
+
+    public cancel(): void {
+        this._router.navigateByUrl('home');
     }
 
 }

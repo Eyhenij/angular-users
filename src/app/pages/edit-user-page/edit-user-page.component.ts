@@ -27,10 +27,13 @@ export class EditUserPageComponent implements OnInit {
     }
 
     public updateUserData(newData: IUserForPost): void {
-        console.log(this.user.id);
         this._usersService.putNewUserData(newData, this.user.id).subscribe((response: any) => {
             console.log(response);
         });
+    }
+
+    public cancel(): void {
+        this._router.navigateByUrl(`user/${this.user.id}`);
     }
 
     private _getUserById(id: number): void {
