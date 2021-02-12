@@ -5,8 +5,4 @@ import {Component} from '@angular/core';
     templateUrl: './on-loading.component.html',
     styleUrls: ['./on-loading.component.scss']
 })
-export class OnLoadingComponent {
-
-    constructor() {}
-
-}
+export class OnLoadingComponent {}

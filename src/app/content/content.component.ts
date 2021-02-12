@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {IUser} from '../interfaces/user.interface';
 
 @Component({
@@ -6,12 +6,8 @@ import {IUser} from '../interfaces/user.interface';
     templateUrl: './content.component.html',
     styleUrls: ['./content.component.scss']
 })
-export class ContentComponent implements OnInit {
+export class ContentComponent{
     @Input()
     public selectedUser: IUser | undefined;
-
-    constructor() {}
-
-    ngOnInit(): void {}
 
 }

@@ -10,7 +10,6 @@ import {IUser} from './interfaces/user.interface';
 export class AppComponent implements OnInit {
     public isLoading = false;
     public users: IUser[] = [];
-    public selectedUser: IUser | undefined;
 
     constructor(private readonly _usersService: UsersService) {}
 
