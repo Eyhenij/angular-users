@@ -1,12 +1,3 @@
-:host {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 14px;
-    color: #333;
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
 $pageWidth: 1200px;
 $pageHeight: 98vh;
 
@@ -16,9 +7,9 @@ $pageHeight: 98vh;
     margin: 0 auto;
     display: grid;
     grid-template-areas:
-        "h"
-        "c";
-    grid-template-rows: 60px;
+        "s c c";
+    //grid-template-rows: 60px;
+    grid-template-columns: 6fr 25fr;
     grid-gap: 3px;
     font-size: 1rem;
     line-height: 1.5;
@@ -36,8 +27,8 @@ $pageHeight: 98vh;
         background-color: rgba(255, 255, 255, 0.5);
     }
 
-    .page__header {
-        grid-area: h;
+    .page__sidebar {
+        grid-area: s;
     }
 
     .page__content {

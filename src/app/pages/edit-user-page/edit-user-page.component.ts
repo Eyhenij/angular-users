@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {UsersService} from '../../users.service';
+import {UsersService} from '../../services/users.service';
 import {IUser} from '../../interfaces/user.interface';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IUserForPost} from '../../interfaces/user-for-post.interface';
@@ -37,6 +37,13 @@ export class EditUserPageComponent implements OnInit, OnDestroy {
         );
     }
 
+    ngOnDestroy(): void {
+        this._subscription.forEach(
+            (subscription: SubscriptionLike) => subscription.unsubscribe()
+        );
+        this._subscription = [];
+    }
+
     public updateUserData(newData: IUserForPost): void {
         this._subscription.push(
             this._usersService.putNewUserData(newData, this.userId).subscribe((response: IServerResponse) => {
@@ -46,7 +53,7 @@ export class EditUserPageComponent implements OnInit, OnDestroy {
         );
     }
 
-    public redirectTo(url: string = `user/${this.userId}`): void {
+    public redirectTo(url: string = 'users'): void {
         this._router.navigateByUrl(url);
     }
 
@@ -61,13 +68,6 @@ export class EditUserPageComponent implements OnInit, OnDestroy {
                 };
             })
         );
-    }
-
-    ngOnDestroy(): void {
-        this._subscription.forEach(
-            (subscription: SubscriptionLike) => subscription.unsubscribe()
-        );
-        this._subscription = [];
     }
 
 }

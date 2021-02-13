@@ -1,0 +1,21 @@
+<mat-card class="card__container">
+
+    <div>
+        <mat-form-field appearance="fill" class="form__container">
+            <mat-label>Login</mat-label>
+            <input aria-label="label" matInput [(ngModel)]="login">
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field appearance="fill" class="form__container">
+            <mat-label>Password</mat-label>
+            <input aria-label="label" matInput [(ngModel)]="password">
+        </mat-form-field>
+    </div>
+
+    <div class="btn__container">
+        <button mat-flat-button (click)="authorization()">Login</button>
+    </div>
+
+</mat-card>

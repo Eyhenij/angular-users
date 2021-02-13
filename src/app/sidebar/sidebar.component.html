@@ -1,14 +1,27 @@
 <div class="sidebar__container">
 
-    <div *ngFor="let user of users" class="sidebar__card">
-        <button
-            mat-flat-button
-            class="sidebar__card_content"
-            routerLinkActive="sidebar__card_selected"
-            [routerLink]="['/user', user.id]"
-        >
-            {{user?.name}}
-        </button>
-    </div>
+    <button class="sidebar__card" routerLink="/">Home
+        <img
+            src="./assets/buttons/home-button-blue.png"
+            alt="Back to home page"
+            class="sidebar__card_img"
+        />
+    </button>
+
+    <button class="sidebar__card" routerLink="/users">Users
+        <img
+            src="./assets/buttons/user-button-green.png"
+            alt="Back to home page"
+            class="sidebar__card_img"
+        />
+    </button>
+
+    <button class="sidebar__card" routerLink="/user/new">Add new User
+        <img
+            src="./assets/buttons/new-button-green.png"
+            alt="Add new User"
+            class="sidebar__card_img"
+        />
+    </button>
 
 </div>

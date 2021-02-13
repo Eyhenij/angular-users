@@ -1,0 +1,15 @@
+<div class="page">
+    <div class="onLoading" *ngIf="isLoading === true">
+        <app-on-loading></app-on-loading>
+    </div>
+
+    <div class="page__sidebar">
+        <app-sidebar
+            [users]="users"
+        ></app-sidebar>
+    </div>
+
+    <div class="page__content">
+        <app-content></app-content>
+    </div>
+</div>

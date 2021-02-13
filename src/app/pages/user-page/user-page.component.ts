@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {IUser} from '../../interfaces/user.interface';
-import {UsersService} from '../../users.service';
+import {UsersService} from '../../services/users.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IServerResponse} from '../../interfaces/server-response.interface';
 import {SubscriptionLike} from 'rxjs';
@@ -23,6 +23,13 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this._routeWithUserId();
+    }
+
+    ngOnDestroy(): void {
+        this._subscription.forEach(
+            (subscription: SubscriptionLike) => subscription.unsubscribe()
+        );
+        this._subscription = [];
     }
 
     private _routeWithUserId(): void {
@@ -56,13 +63,6 @@ export class UserPageComponent implements OnInit, OnDestroy {
                 this.redirectTo(`home`);
             })
         );
-    }
-
-    ngOnDestroy(): void {
-        this._subscription.forEach(
-            (subscription: SubscriptionLike) => subscription.unsubscribe()
-        );
-        this._subscription = [];
     }
 
 }
