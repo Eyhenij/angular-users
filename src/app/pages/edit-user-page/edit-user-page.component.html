@@ -1,35 +1,27 @@
 <mat-card class="card__container">
 
-    <div>
-        <mat-form-field appearance="fill" class="form__container">
-            <mat-label>Name</mat-label>
-            <input aria-label="label" matInput [(ngModel)]="userDataForUpdate.name">
-        </mat-form-field>
-    </div>
-
-    <div>
-        <mat-form-field appearance="fill" class="form__container">
-            <mat-label>Login</mat-label>
-            <input aria-label="label" matInput [(ngModel)]="userDataForUpdate.login">
-        </mat-form-field>
-    </div>
-
-    <div>
-        <mat-form-field appearance="fill" class="form__container">
-            <mat-label>Email</mat-label>
-            <input aria-label="label" matInput [(ngModel)]="userDataForUpdate.email">
-        </mat-form-field>
-    </div>
+    <app-user-form [user]="userDataForUpdate"></app-user-form>
 
     <div class="btn__container">
         <span>
-            <button mat-flat-button (click)="updateUserData(userDataForUpdate)">Save</button>
+            <button
+                mat-flat-button
+                color="primary"
+                class="btn"
+                (click)="updateUserData(userDataForUpdate)"
+            >Save</button>
         </span>
 
         <span>
-            <button mat-flat-button (click)="redirectTo()">Cancel</button>
+            <button
+                mat-flat-button
+                color="primary"
+                class="btn"
+                (click)="redirectTo()"
+            >Cancel</button>
         </span>
     </div>
 
 </mat-card>
+
 
