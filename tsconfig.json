@@ -2,15 +2,7 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
-
-        "strict": true,
-        "noImplicitAny": true,
-        "noImplicitThis": true,
-        "alwaysStrict": true,
-        "strictNullChecks": true,
-        "strictFunctionTypes": true,
-        "strictPropertyInitialization": true,
-
+        "strictPropertyInitialization": false,
         "baseUrl": "./",
         "outDir": "./dist/out-tsc",
         "sourceMap": true,
@@ -27,9 +19,6 @@
         ]
     },
     "angularCompilerOptions": {
-
-        "strictPropertyInitialization": true,
-        
         "enableI18nLegacyMessageIdFormat": false
     }
 }
