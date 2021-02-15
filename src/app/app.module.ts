@@ -54,9 +54,9 @@ import {AuthInterceptor} from './interceptors/auth.interceptor';
     ],
     providers: [
         {
-          provide: HTTP_INTERCEPTORS,
-          multi: true,
-          useClass: AuthInterceptor
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
         },
         UsersService,
         AuthService,
@@ -65,4 +65,5 @@ import {AuthInterceptor} from './interceptors/auth.interceptor';
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}
