@@ -2,10 +2,12 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
-import {UsersService} from './services/users.service';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {UsersService} from './services/users.service';
+import {MaterialModule} from './material/material.module';
+import {AuthService} from './services/auth.service';
 
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
@@ -19,12 +21,11 @@ import {NotFoundPageComponent} from './pages/not-found-page/not-found-page.compo
 import {LoginPageComponent} from './pages/login-page/login-page.component';
 import {UsersPageComponent} from './pages/users-page/users-page.component';
 import {MainPageComponent} from './pages/main-page/main-page.component';
+import {UserFormComponent} from './forms/user-form/user-form.component';
 
-import {MaterialModule} from './material/material.module';
 import {RoleGuard} from './guards/role.guard';
 import {AuthGuard} from './guards/auth.guard';
-import {AuthService} from './services/auth.service';
-import { UserFormComponent } from './forms/user-form/user-form.component';
+import {AuthInterceptor} from './interceptors/auth.interceptor';
 
 @NgModule({
     declarations: [
@@ -52,6 +53,11 @@ import { UserFormComponent } from './forms/user-form/user-form.component';
         ReactiveFormsModule
     ],
     providers: [
+        {
+          provide: HTTP_INTERCEPTORS,
+          multi: true,
+          useClass: AuthInterceptor
+        },
         UsersService,
         AuthService,
         RoleGuard,
@@ -59,5 +65,4 @@ import { UserFormComponent } from './forms/user-form/user-form.component';
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}
