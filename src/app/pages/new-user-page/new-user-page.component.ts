@@ -14,10 +14,10 @@ export class NewUserPageComponent implements OnDestroy {
 
     private _subscription: SubscriptionLike[] = [];
     public newUser: IUserForPost = {
-        name: '',
-        login: '',
-        email: '',
-        password: ''
+        name: 'John Doe',
+        login: '@john',
+        email: 'john@email.com',
+        password: 'thePasswordOfJohnDoe'
     };
 
     constructor(
@@ -36,7 +36,7 @@ export class NewUserPageComponent implements OnDestroy {
         this._subscription.push(
             this._usersService.postNewUserData(newData).subscribe((response: IServerResponse) => {
                 alert(response.message);
-                this.redirectTo('home');
+                this.redirectTo('/');
             })
         );
     }

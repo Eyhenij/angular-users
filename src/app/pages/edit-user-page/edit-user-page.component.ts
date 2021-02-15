@@ -14,12 +14,12 @@ import {SubscriptionLike} from 'rxjs';
 export class EditUserPageComponent implements OnInit, OnDestroy {
 
     private _subscription: SubscriptionLike[] = [];
-    public userId = 0;
+    public userId: number;
     public userDataForUpdate: IUserForPost = {
-        name: '',
-        login: '',
-        email: '',
-        password: ''
+        name: 'John Doe111',
+        login: '@john',
+        email: 'john@email.com',
+        password: 'thePasswordOfJohnDoe'
     };
 
     constructor(
@@ -32,7 +32,18 @@ export class EditUserPageComponent implements OnInit, OnDestroy {
         this._subscription.push(
             this._route.params.subscribe((params) => {
                 this.userId = params.id;
-                this._getUserById(this.userId);
+                // this._getUserById(this.userId);
+                this._subscription.push(
+                    this._usersService.getUserById(params.id).subscribe((data: IUser) => {
+                        console.log(data);
+                        this.userDataForUpdate = {
+                            name: data.name,
+                            email: data.email,
+                            login: data.login,
+                            password: data.password
+                        };
+                    })
+                );
             })
         );
     }
@@ -60,6 +71,7 @@ export class EditUserPageComponent implements OnInit, OnDestroy {
     private _getUserById(id: number): void {
         this._subscription.push(
             this._usersService.getUserById(id).subscribe((data: IUser) => {
+                console.log(data);
                 this.userDataForUpdate = {
                     name: data.name,
                     email: data.email,

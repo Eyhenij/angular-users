@@ -3,7 +3,7 @@ import {IUser} from '../../interfaces/user.interface';
 import {SubscriptionLike} from 'rxjs';
 import {UsersService} from '../../services/users.service';
 import {IServerResponse} from '../../interfaces/server-response.interface';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'app-users-page',
@@ -18,7 +18,9 @@ export class UsersPageComponent implements OnInit, OnDestroy {
     constructor(
         private readonly _usersService: UsersService,
         private readonly _router: Router,
-    ) {}
+        private _route: ActivatedRoute
+    ) {
+    }
 
     ngOnInit(): void {
         this._subscription.push(
@@ -35,8 +37,8 @@ export class UsersPageComponent implements OnInit, OnDestroy {
         this._subscription = [];
     }
 
-    public redirectToEditPage(userId: number): void {
-        this._router.navigateByUrl(`edit/${userId}`);
+    public goToEditPage(userId: number): void {
+        this._router.navigate(['edit/', userId], {skipLocationChange: true});
     }
 
     public deleteUserById(id: number): void {
