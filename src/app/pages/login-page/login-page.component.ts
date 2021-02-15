@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {UsersService} from '../../services/users.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SubscriptionLike} from 'rxjs';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
     selector: 'app-login-page',
@@ -18,7 +18,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     public passwordControl: FormControl;
 
     constructor(
-        private readonly _usersService: UsersService,
+        private readonly _authService: AuthService,
         private readonly _router: Router
     ) {}
 
@@ -44,14 +44,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
         const login = this.form.get('loginControl').value;
         const password = this.form.get('passwordControl').value;
         this._subscription.push(
-            this._usersService.login(login, password).subscribe()
+            this._authService.login(login, password).subscribe()
         );
-        this.getToken();
-    }
-
-    public getToken(): void {
-        const result = this._usersService.getToken();
-        console.log(result);
     }
 
     public redirectToUsersPage(): void {
