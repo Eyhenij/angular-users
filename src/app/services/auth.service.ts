@@ -8,32 +8,36 @@ import {tap} from 'rxjs/operators';
 export class AuthService {
 
     private readonly _authUrl = 'http://localhost:3000/api/login';
-    private _token: string;
+    private _token: string = null;
 
-     constructor(private readonly _http: HttpClient) {}
+    constructor(private readonly _http: HttpClient) {}
 
-     public isAuth(): boolean {
-        return true;
-     }
-
-    public login(login: string, password: string): Observable<any> {
+    public logIn(login: string, password: string): Observable<IServerResponse> {
         return this._http.post<IServerResponse>(this._authUrl, {login, password})
             .pipe(
-                tap((data: IServerResponse): any => {
-                    localStorage.setItem('auth-token', data.message);
-                    this.setToken(data.message);
-                    console.log(this._token);
-                }
-            )
-        );
+                tap(({message}): void => {
+                        localStorage.setItem('auth-token', message);
+                        this.setToken(message);
+                    }
+                )
+            );
     }
 
     public getToken(): string {
-         return this._token;
+        return this._token;
     }
 
     public setToken(token: string): void {
-         this._token = token;
+        this._token = token;
+    }
+
+    public isAuthorized(): boolean {
+        return !!this._token;
+    }
+
+    public logOut(): void {
+        this.setToken(null);
+        localStorage.removeItem('auth-token');
     }
 
 }

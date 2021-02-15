@@ -44,7 +44,9 @@ export class LoginPageComponent implements OnInit, OnDestroy {
         const login = this.form.get('loginControl').value;
         const password = this.form.get('passwordControl').value;
         this._subscription.push(
-            this._authService.login(login, password).subscribe()
+            this._authService.logIn(login, password).subscribe(
+                () => this.redirectToUsersPage()
+            )
         );
     }
 

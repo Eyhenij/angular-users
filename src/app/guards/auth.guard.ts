@@ -1,25 +1,26 @@
 import {Injectable} from '@angular/core';
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, UrlSerializer} from '@angular/router';
-import {Observable} from 'rxjs';
+import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanActivateChild} from '@angular/router';
 import {AuthService} from '../services/auth.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanActivateChild {
 
     constructor(
         private readonly _authService: AuthService,
-        private readonly _serializer: UrlSerializer
+        private readonly _router: Router
     ) {}
 
-    canActivate(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot
-    ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        if (this._authService.isAuth()) {
+    canActivate( route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        if (this._authService.isAuthorized()) {
             return true;
         } else {
-            return this._serializer.parse('/login');
+            this._router.navigateByUrl('/login');
+            return false;
         }
+    }
+
+    canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        return this.canActivate(childRoute, state);
     }
 
 }

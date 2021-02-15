@@ -11,18 +11,17 @@ import {UsersPageComponent} from './pages/users-page/users-page.component';
 import {MainPageComponent} from './pages/main-page/main-page.component';
 
 const routes: Routes = [
-    // {path: '', redirectTo: 'login', pathMatch: 'full'},
     {path: 'login', component: LoginPageComponent},
+    {path: 'register', component: NewUserPageComponent},
     {
         path: '',
         canActivate: [AuthGuard],
         component: MainPageComponent,
         children: [
-            {path: 'users', canActivate: [AuthGuard], component: UsersPageComponent},
-            {path: 'user/new', canActivate: [AuthGuard], component: NewUserPageComponent},
-            {path: 'user/:id', canActivate: [AuthGuard], component: UserPageComponent},
-            {path: 'edit/:id', canActivate: [AuthGuard], component: EditUserPageComponent},
-            {path: 'not-found', canActivate: [AuthGuard], component: NotFoundPageComponent}
+            {path: 'users', component: UsersPageComponent},
+            {path: 'user/:id', component: UserPageComponent},
+            {path: 'edit/:id', component: EditUserPageComponent},
+            {path: 'not-found', component: NotFoundPageComponent}
         ]
     },
 

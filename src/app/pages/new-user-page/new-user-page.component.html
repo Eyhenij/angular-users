@@ -1,18 +1,21 @@
-<mat-card class="card__container">
+<div class="page__container">
+    <mat-card class="form__container">
 
-    <app-user-form [user]="newUser"></app-user-form>
+        <h1 class="form__title">Registration</h1>
 
-    <div class="btn__container">
+        <app-user-form [user]="newUser"></app-user-form>
+
+        <div class="btn__container">
         <span>
             <button
                 mat-flat-button
                 color="primary"
                 class="btn"
                 (click)="createNewUser(newUser)"
-            >Save</button>
+            >Register</button>
         </span>
 
-        <span>
+            <span>
             <button
                 mat-flat-button
                 color="primary"
@@ -20,6 +23,7 @@
                 (click)="redirectTo('home')"
             >Cancel</button>
         </span>
-    </div>
+        </div>
 
-</mat-card>
+    </mat-card>
+</div>
