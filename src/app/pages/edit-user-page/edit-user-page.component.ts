@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UsersService} from '../../services/users.service';
 import {IUser} from '../../interfaces/user.interface';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {IUserForPost} from '../../interfaces/user-for-post.interface';
 import {IServerResponse} from '../../interfaces/server-response.interface';
 import {SubscriptionLike} from 'rxjs';
@@ -26,24 +26,22 @@ export class EditUserPageComponent implements OnInit, OnDestroy {
         private readonly _usersService: UsersService,
         private readonly _router: Router,
         private readonly _route: ActivatedRoute
-    ) {}
+    ) {
+    }
 
     ngOnInit(): void {
         this._subscription.push(
-            this._route.params.subscribe((params) => {
+            this._route.params.subscribe((params: Params) => {
                 this.userId = params.id;
-                // this._getUserById(this.userId);
-                this._subscription.push(
-                    this._usersService.getUserById(params.id).subscribe((data: IUser) => {
-                        console.log(data);
-                        this.userDataForUpdate = {
-                            name: data.name,
-                            email: data.email,
-                            login: data.login,
-                            password: data.password
-                        };
-                    })
-                );
+                this._usersService.getUserById(params.id).subscribe((data: IUser) => {
+                    console.log(data);
+                    this.userDataForUpdate = {
+                        name: data.name,
+                        email: data.email,
+                        login: data.login,
+                        password: data.password
+                    };
+                });
             })
         );
     }
@@ -68,18 +66,18 @@ export class EditUserPageComponent implements OnInit, OnDestroy {
         this._router.navigateByUrl(url);
     }
 
-    private _getUserById(id: number): void {
-        this._subscription.push(
-            this._usersService.getUserById(id).subscribe((data: IUser) => {
-                console.log(data);
-                this.userDataForUpdate = {
-                    name: data.name,
-                    email: data.email,
-                    login: data.login,
-                    password: data.password
-                };
-            })
-        );
-    }
+    // private _getUserById(id: number): void {
+    //     this._subscription.push(
+    //         this._usersService.getUserById(id).subscribe((data: IUser) => {
+    //             console.log(data);
+    //             this.userDataForUpdate = {
+    //                 name: data.name,
+    //                 email: data.email,
+    //                 login: data.login,
+    //                 password: data.password
+    //             };
+    //         })
+    //     );
+    // }
 
 }
