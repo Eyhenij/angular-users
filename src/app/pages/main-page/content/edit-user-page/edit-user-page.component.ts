@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {UsersService} from '../../services/users.service';
-import {IUser} from '../../interfaces/user.interface';
+import {UsersService} from '../../../../services/users.service';
+import {IUser} from '../../../../interfaces/user.interface';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {IUserForPost} from '../../interfaces/user-for-post.interface';
-import {IServerResponse} from '../../interfaces/server-response.interface';
+import {IUserForPost} from '../../../../interfaces/user-for-post.interface';
+import {IServerResponse} from '../../../../interfaces/server-response.interface';
 import {SubscriptionLike} from 'rxjs';
 
 @Component({

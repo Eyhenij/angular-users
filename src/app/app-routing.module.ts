@@ -13,8 +13,7 @@ const routes: Routes = [
     {path: '', redirectTo: 'main', pathMatch: 'full'},
     {
         path: 'main',
-        canActivate: [AuthGuard],
-        canActivateChild: [AuthGuard],
+        canLoad: [AuthGuard],
         loadChildren: () => import('./pages/main-page/main-page.module').then((m) => m.MainPageModule)
     },
     {path: '**', redirectTo: 'not-found'}

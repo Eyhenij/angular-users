@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {IUser} from '../../interfaces/user.interface';
-import {UsersService} from '../../services/users.service';
+import {IUser} from '../../../../interfaces/user.interface';
+import {UsersService} from '../../../../services/users.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {IServerResponse} from '../../interfaces/server-response.interface';
+import {IServerResponse} from '../../../../interfaces/server-response.interface';
 import {SubscriptionLike} from 'rxjs';
 
 @Component({

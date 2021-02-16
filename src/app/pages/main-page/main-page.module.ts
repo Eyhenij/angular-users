@@ -4,15 +4,16 @@ import {HttpClientModule} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 
 import {MainPageComponent} from './main-page.component';
-import {UsersPageComponent} from '../users-page/users-page.component';
-import {UserPageComponent} from '../user-page/user-page.component';
-import {EditUserPageComponent} from '../edit-user-page/edit-user-page.component';
-import {SidebarComponent} from '../../sidebar/sidebar.component';
-import {ContentComponent} from '../../content/content.component';
+import {UsersPageComponent} from './content/users-page/users-page.component';
+import {UserPageComponent} from './content/user-page/user-page.component';
+import {EditUserPageComponent} from './content/edit-user-page/edit-user-page.component';
+import {SidebarComponent} from './sidebar/sidebar.component';
+import {ContentComponent} from './content/content.component';
 import {MaterialModule} from '../../material/material.module';
 
 import {UserFormComponent} from '../../forms/user-form/user-form.component';
 import {MainPageRoutingModule} from './main-page-routing.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import {MainPageRoutingModule} from './main-page-routing.module';
     imports: [
         FormsModule,
         ReactiveFormsModule,
+        BrowserAnimationsModule,
         MaterialModule,
         MainPageRoutingModule,
         HttpClientModule,
@@ -36,6 +38,7 @@ import {MainPageRoutingModule} from './main-page-routing.module';
         UserFormComponent,
         FormsModule,
         ReactiveFormsModule,
+        BrowserAnimationsModule,
         MaterialModule
     ]
 })
