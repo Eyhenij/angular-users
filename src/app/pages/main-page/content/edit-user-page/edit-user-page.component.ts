@@ -16,10 +16,10 @@ export class EditUserPageComponent implements OnInit, OnDestroy {
     private _subscription: SubscriptionLike[] = [];
     public userId: number;
     public userDataForUpdate: IUserForPost = {
-        name: 'John Doe111',
-        login: '@john',
-        email: 'john@email.com',
-        password: 'thePasswordOfJohnDoe'
+        name: '',
+        email: '',
+        login: '',
+        password: ''
     };
 
     constructor(
@@ -33,15 +33,7 @@ export class EditUserPageComponent implements OnInit, OnDestroy {
         this._subscription.push(
             this._route.params.subscribe((params: Params) => {
                 this.userId = params.id;
-                this._usersService.getUserById(params.id).subscribe((data: IUser) => {
-                    console.log(data);
-                    this.userDataForUpdate = {
-                        name: data.name,
-                        email: data.email,
-                        login: data.login,
-                        password: data.password
-                    };
-                });
+                this._getUserById(this.userId);
             })
         );
     }
@@ -66,18 +58,21 @@ export class EditUserPageComponent implements OnInit, OnDestroy {
         this._router.navigateByUrl(url);
     }
 
-    // private _getUserById(id: number): void {
-    //     this._subscription.push(
-    //         this._usersService.getUserById(id).subscribe((data: IUser) => {
-    //             console.log(data);
-    //             this.userDataForUpdate = {
-    //                 name: data.name,
-    //                 email: data.email,
-    //                 login: data.login,
-    //                 password: data.password
-    //             };
-    //         })
-    //     );
-    // }
+    private _getUserById(id: number): void {
+        this._subscription.push(
+            this._usersService.getUserById(id).subscribe((data: IUser) => {
+                this.userDataForUpdate = {
+                    name: data.name,
+                    email: data.email,
+                    login: data.login,
+                    password: data.password
+                };
+            })
+        );
+    }
+
+    public testMethod(changedUser: IUserForPost): void {
+        this.userDataForUpdate = changedUser;
+    }
 
 }

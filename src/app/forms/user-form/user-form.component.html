@@ -1,18 +1,18 @@
-<div class="form__container" [formGroup]="form">
+<div class="form__container" [formGroup]="form" (change)="onChange()">
 
 
     <div>
         <mat-form-field appearance="fill" class="input__container">
             <mat-label>Name</mat-label>
-            <input type="text" formControlName="nameControl" aria-label="label" matInput>
+            <input type="text" formControlName="name" aria-label="label" matInput>
 
-            <mat-error *ngIf="form.get('nameControl').invalid && form.get('nameControl').touched">
+            <mat-error *ngIf="form.get('name').invalid && form.get('name').touched">
 
-                <mat-error *ngIf="form.get('nameControl').hasError('required')">
+                <mat-error *ngIf="form.get('name').hasError('required')">
                     Name cannot be empty
                 </mat-error>
 
-                <mat-error *ngIf="form.get('nameControl').hasError('minlength')">
+                <mat-error *ngIf="form.get('name').hasError('minlength')">
                     Name must contain more then 3 symbols
                 </mat-error>
 
@@ -20,11 +20,11 @@
 
             <button
                 mat-button
-                *ngIf="form.get('nameControl').value"
+                *ngIf="form.get('name').value"
                 matSuffix
                 mat-icon-button
                 aria-label="Clear"
-                (click)="form.get('nameControl').setValue('')">
+                (click)="form.get('name').setValue('')">
                 <mat-icon>close</mat-icon>
             </button>
 
@@ -34,15 +34,15 @@
     <div>
         <mat-form-field appearance="fill" class="input__container">
             <mat-label>Login</mat-label>
-            <input type="text" formControlName="loginControl" aria-label="label" matInput>
+            <input type="text" formControlName="login" aria-label="label" matInput>
 
-            <mat-error *ngIf="form.get('loginControl').invalid && form.get('loginControl').touched">
+            <mat-error *ngIf="form.get('login').invalid && form.get('login').touched">
 
-                <mat-error *ngIf="form.get('loginControl').hasError('required')">
+                <mat-error *ngIf="form.get('login').hasError('required')">
                     Login cannot be empty
                 </mat-error>
 
-                <mat-error *ngIf="form.get('loginControl').hasError('minlength')">
+                <mat-error *ngIf="form.get('login').hasError('minlength')">
                     Login must contain more then 3 symbols
                 </mat-error>
 
@@ -50,11 +50,11 @@
 
             <button
                 mat-button
-                *ngIf="form.get('loginControl').value"
+                *ngIf="form.get('login').value"
                 matSuffix
                 mat-icon-button
                 aria-label="Clear"
-                (click)="form.get('loginControl').setValue('')">
+                (click)="form.get('login').setValue('')">
                 <mat-icon>close</mat-icon>
             </button>
 
@@ -64,15 +64,15 @@
     <div>
         <mat-form-field appearance="fill" class="input__container">
             <mat-label>Email</mat-label>
-            <input type="text" formControlName="emailControl" aria-label="label" matInput>
+            <input type="text" formControlName="email" aria-label="label" matInput>
 
-            <mat-error *ngIf="form.get('emailControl').invalid && form.get('emailControl').touched">
+            <mat-error *ngIf="form.get('email').invalid && form.get('email').touched">
 
-                <mat-error *ngIf="form.get('emailControl').hasError('required')">
+                <mat-error *ngIf="form.get('email').hasError('required')">
                     Email cannot be empty
                 </mat-error>
 
-                <mat-error *ngIf="form.get('emailControl').hasError('email')">
+                <mat-error *ngIf="form.get('email').hasError('email')">
                     Email must fit example@email.com
                 </mat-error>
 
@@ -80,11 +80,11 @@
 
             <button
                 mat-button
-                *ngIf="form.get('emailControl').value"
+                *ngIf="form.get('email').value"
                 matSuffix
                 mat-icon-button
                 aria-label="Clear"
-                (click)="form.get('emailControl').setValue('')">
+                (click)="form.get('email').setValue('')">
                 <mat-icon>close</mat-icon>
             </button>
 
@@ -94,15 +94,15 @@
     <div>
         <mat-form-field appearance="fill" class="input__container">
             <mat-label>Password</mat-label>
-            <input type="password" formControlName="passwordControl" aria-label="label" matInput>
+            <input type="password" formControlName="password" aria-label="label" matInput>
 
-            <mat-error *ngIf="form.get('passwordControl').invalid && form.get('passwordControl').touched">
+            <mat-error *ngIf="form.get('password').invalid && form.get('password').touched">
 
-                <mat-error *ngIf="form.get('passwordControl').hasError('required')">
+                <mat-error *ngIf="form.get('password').hasError('required')">
                     Password cannot be empty
                 </mat-error>
 
-                <mat-error *ngIf="form.get('passwordControl').hasError('minlength')">
+                <mat-error *ngIf="form.get('password').hasError('minlength')">
                     Password must contain more then 8 symbols
                 </mat-error>
 
@@ -110,11 +110,11 @@
 
             <button
                 mat-button
-                *ngIf="form.get('passwordControl').value"
+                *ngIf="form.get('password').value"
                 matSuffix
                 mat-icon-button
                 aria-label="Clear"
-                (click)="form.get('passwordControl').setValue('')">
+                (click)="form.get('password').setValue('')">
                 <mat-icon>close</mat-icon>
             </button>
 

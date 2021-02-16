@@ -9,7 +9,7 @@ import {AuthService} from './services/auth.service';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './pages/header/header.component';
 import {OnLoadingComponent} from './pages/on-loading/on-loading.component';
-import {NewUserPageComponent} from './pages/new-user-page/new-user-page.component';
+import {RegisterUserPageComponent} from './pages/register-user-page/register-user-page.component';
 import {NotFoundPageComponent} from './pages/not-found-page/not-found-page.component';
 import {LoginPageComponent} from './pages/login-page/login-page.component';
 
@@ -23,7 +23,7 @@ import {MainPageModule} from './pages/main-page/main-page.module';
         AppComponent,
         HeaderComponent,
         OnLoadingComponent,
-        NewUserPageComponent,
+        RegisterUserPageComponent,
         NotFoundPageComponent,
         LoginPageComponent
     ],

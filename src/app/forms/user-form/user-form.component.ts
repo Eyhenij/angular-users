@@ -1,14 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {IUserForPost} from '../../interfaces/user-for-post.interface';
-import {Observable, of} from 'rxjs';
 
 @Component({
     selector: 'app-user-form',
     templateUrl: './user-form.component.html',
     styleUrls: ['./user-form.component.scss']
 })
-export class UserFormComponent implements OnInit {
+export class UserFormComponent implements OnChanges {
 
     public form: FormGroup;
     public nameControl: FormControl;
@@ -19,28 +18,32 @@ export class UserFormComponent implements OnInit {
     @Input()
     public user: IUserForPost;
 
-    constructor() {
-    }
+    @Output()
+    public onChangeUser: EventEmitter<IUserForPost> = new EventEmitter<IUserForPost>();
 
-    ngOnInit(): void {
+    ngOnChanges(): void {
         this.form = new FormGroup({
-            nameControl: new FormControl(
+            name: new FormControl(
                 this.user.name,
-                [Validators.minLength(3), Validators.required]
+                [Validators.minLength(3), Validators.required, Validators.pattern(/[A-z]/)]
             ),
-            loginControl: new FormControl(
+            login: new FormControl(
                 this.user.login,
                 [Validators.minLength(3), Validators.required]
             ),
-            emailControl: new FormControl(
+            email: new FormControl(
                 this.user.email,
                 [Validators.email, Validators.required]
             ),
-            passwordControl: new FormControl(
+            password: new FormControl(
                 this.user.password,
                 [Validators.minLength(8), Validators.required]
             )
         });
+    }
+
+    public onChange(): void {
+        this.onChangeUser.emit(this.form.value);
     }
 
 }

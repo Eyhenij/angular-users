@@ -7,10 +7,10 @@ import {SubscriptionLike} from 'rxjs';
 
 @Component({
     selector: 'app-new-user-page',
-    templateUrl: './new-user-page.component.html',
-    styleUrls: ['./new-user-page.component.scss']
+    templateUrl: './register-user-page.component.html',
+    styleUrls: ['./register-user-page.component.scss']
 })
-export class NewUserPageComponent implements OnDestroy {
+export class RegisterUserPageComponent implements OnDestroy {
 
     private _subscription: SubscriptionLike[] = [];
     public newUser: IUserForPost = {
