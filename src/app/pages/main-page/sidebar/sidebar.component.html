@@ -1,19 +1,6 @@
 <div class="sidebar__container">
-
-    <button class="sidebar__card" routerLink="/">Home
-        <img
-            src="../../../../assets/buttons/home-button-blue.png"
-            alt="Back to home page"
-            class="sidebar__card_img"
-        />
-    </button>
-
-    <button class="sidebar__card" routerLink="/users">Users
-        <img
-            src="../../../../assets/buttons/user-button-green.png"
-            alt="Back to home page"
-            class="sidebar__card_img"
-        />
-    </button>
-
+    <div class="sidebar__card">
+        <button mat-flat-button color="primary" class="sidebar__item" routerLink="/">Home</button>
+        <button mat-flat-button color="primary" class="sidebar__item" routerLink="/users">Users</button>
+    </div>
 </div>
