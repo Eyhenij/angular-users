@@ -12,7 +12,7 @@ import {SubscriptionLike} from 'rxjs';
 })
 export class RegisterUserPageComponent implements OnDestroy {
 
-    private _subscription: SubscriptionLike[] = [];
+    private _subscription: SubscriptionLike = null;
     public newUser: IUserForPost = {
         name: 'John Doe',
         login: '@john',
@@ -26,19 +26,17 @@ export class RegisterUserPageComponent implements OnDestroy {
     ) {}
 
     ngOnDestroy(): void {
-        this._subscription.forEach(
-            (subscription: SubscriptionLike) => subscription.unsubscribe()
-        );
-        this._subscription = [];
+        if (this._subscription) {
+            this._subscription.unsubscribe();
+            this._subscription = null;
+        }
     }
 
     public createNewUser(newData: IUserForPost): void {
-        this._subscription.push(
-            this._usersService.postNewUserData(newData).subscribe((response: IServerResponse) => {
-                alert(response.message);
-                this._router.navigateByUrl('/');
-            })
-        );
+        this._subscription = this._usersService.postNewUserData(newData).subscribe((response: IServerResponse) => {
+            alert(response.message);
+            this._router.navigateByUrl('/');
+        });
     }
 
     public changeUserData(changedUser: IUserForPost): void {

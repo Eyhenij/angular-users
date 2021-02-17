@@ -6,10 +6,13 @@ import {EditUserPageComponent} from './content/edit-user-page/edit-user-page.com
 import {MainPageComponent} from './main-page.component';
 import {UserPageComponent} from './content/user-page/user-page.component';
 import {ProfileComponent} from './content/profile/profile.component';
+import {AuthGuard} from '../../guards/auth.guard';
 
 const routes: Routes = [
     {
         path: '',
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
         component: MainPageComponent,
         children: [
             {path: '', component: ProfileComponent},

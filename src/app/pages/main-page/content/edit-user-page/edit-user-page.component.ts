@@ -29,8 +29,10 @@ export class EditUserPageComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this._subscription.unsubscribe();
-        this._subscription = null;
+        if (this._subscription) {
+            this._subscription.unsubscribe();
+            this._subscription = null;
+        }
     }
 
     public updateUserData(): void {

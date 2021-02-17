@@ -10,7 +10,6 @@ const routes: Routes = [
     {path: 'login', component: LoginPageComponent},
     {path: 'register', component: RegisterUserPageComponent},
     {path: 'not-found', component: NotFoundPageComponent},
-    // {path: '', redirectTo: 'main', pathMatch: 'full'},
     {
         path: '',
         canLoad: [AuthGuard],

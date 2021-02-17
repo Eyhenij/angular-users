@@ -11,7 +11,7 @@ import {AuthService} from '../../services/auth.service';
 })
 export class LoginPageComponent implements OnInit, OnDestroy {
 
-    private _subscription: SubscriptionLike[] = [];
+    private _subscription: SubscriptionLike = null;
 
     public form: FormGroup;
     public loginControl: FormControl;
@@ -36,22 +36,18 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this._subscription.forEach((subscription: SubscriptionLike) => subscription.unsubscribe());
-        this._subscription = [];
+        if (this._subscription) {
+            this._subscription.unsubscribe();
+            this._subscription = null;
+        }
     }
 
     authorization(): void {
         const login = this.form.get('loginControl').value;
         const password = this.form.get('passwordControl').value;
-        this._subscription.push(
-            this._authService.logIn(login, password).subscribe(
-                () => this.redirectToUsersPage()
-            )
+        this._subscription = this._authService.logIn(login, password).subscribe(
+            () => this._router.navigateByUrl('users')
         );
-    }
-
-    public redirectToUsersPage(): void {
-        this._router.navigateByUrl('users');
     }
 
 }
