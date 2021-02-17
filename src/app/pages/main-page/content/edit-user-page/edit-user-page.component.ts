@@ -1,10 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UsersService} from '../../../../services/users.service';
-import {IUser} from '../../../../interfaces/user.interface';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {IUserForPost} from '../../../../interfaces/user-for-post.interface';
 import {IServerResponse} from '../../../../interfaces/server-response.interface';
-import {SubscriptionLike} from 'rxjs';
+import {Observable, SubscriptionLike} from 'rxjs';
 
 @Component({
     selector: 'app-edit-user-page',
@@ -13,14 +12,10 @@ import {SubscriptionLike} from 'rxjs';
 })
 export class EditUserPageComponent implements OnInit, OnDestroy {
 
-    private _subscription: SubscriptionLike[] = [];
+    private _subscription: SubscriptionLike = null;
     public userId: number;
-    public userDataForUpdate: IUserForPost = {
-        name: '',
-        email: '',
-        login: '',
-        password: ''
-    };
+    public userDataForUpdate: IUserForPost;
+    public userData: Observable<IUserForPost>;
 
     constructor(
         private readonly _usersService: UsersService,
@@ -29,45 +24,21 @@ export class EditUserPageComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        this._subscription.push(
-            this._route.params.subscribe((params: Params) => {
-                this.userId = params.id;
-                this._getUserById(this.userId);
-            })
-        );
+        this.userId = this._route.snapshot.params.id;
+        this.userData = this._usersService.getUserById(this.userId);
     }
 
     ngOnDestroy(): void {
-        this._subscription.forEach(
-            (subscription: SubscriptionLike) => subscription.unsubscribe()
-        );
-        this._subscription = [];
+        this._subscription.unsubscribe();
+        this._subscription = null;
     }
 
-    public updateUserData(newData: IUserForPost): void {
-        this._subscription.push(
-            this._usersService.putNewUserData(newData, this.userId).subscribe((response: IServerResponse) => {
+    public updateUserData(): void {
+        this._subscription = this._usersService.putNewUserData(this.userDataForUpdate, this.userId)
+            .subscribe((response: IServerResponse) => {
                 alert(response.message);
-                this.redirectTo();
-            })
-        );
-    }
-
-    public redirectTo(url: string = 'users'): void {
-        this._router.navigateByUrl(url);
-    }
-
-    private _getUserById(id: number): void {
-        this._subscription.push(
-            this._usersService.getUserById(id).subscribe((data: IUser) => {
-                this.userDataForUpdate = {
-                    name: data.name,
-                    email: data.email,
-                    login: data.login,
-                    password: data.password
-                };
-            })
-        );
+                this._router.navigateByUrl('users');
+            });
     }
 
     public changeUserData(changedUser: IUserForPost): void {

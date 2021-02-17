@@ -13,7 +13,7 @@ import {Observable, SubscriptionLike} from 'rxjs';
 export class UserPageComponent implements OnInit, OnDestroy {
 
     public user: Observable<IUser>;
-    private _userId: number = null;
+    public userId: number = null;
     private _subscription: SubscriptionLike = null;
 
     constructor(
@@ -23,8 +23,8 @@ export class UserPageComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        this._userId = this._route.snapshot.params.id;
-        this.user = this._usersService.getUserById(this._userId);
+        this.userId = this._route.snapshot.params.id;
+        this.user = this._usersService.getUserById(this.userId);
     }
 
     ngOnDestroy(): void {
@@ -32,14 +32,10 @@ export class UserPageComponent implements OnInit, OnDestroy {
         this._subscription = null;
     }
 
-    public redirectTo(url: string = `edit/${this._userId}`): void {
-        this._router.navigateByUrl(url);
-    }
-
     public deleteUserById(): void {
-        this._subscription = this._usersService.deleteUserById(this._userId).subscribe((response: IServerResponse) => {
+        this._subscription = this._usersService.deleteUserById(this.userId).subscribe((response: IServerResponse) => {
             alert(response.message);
-            this.redirectTo(`users`);
+            this._router.navigateByUrl('users');
         });
     }
 

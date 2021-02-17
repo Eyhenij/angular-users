@@ -3,7 +3,7 @@
     <app-user-card [user]="user | async"></app-user-card>
 
     <div class="btn__block">
-        <button class="card__btn" (click)="redirectTo()">
+        <button class="card__btn" [routerLink]="'/edit/' + userId">
             <img
                 src="../../../../../assets/buttons/edit-button-yellow.png"
                 alt="Edit User"

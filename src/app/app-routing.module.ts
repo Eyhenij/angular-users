@@ -10,9 +10,9 @@ const routes: Routes = [
     {path: 'login', component: LoginPageComponent},
     {path: 'register', component: RegisterUserPageComponent},
     {path: 'not-found', component: NotFoundPageComponent},
-    {path: '', redirectTo: 'main', pathMatch: 'full'},
+    // {path: '', redirectTo: 'main', pathMatch: 'full'},
     {
-        path: 'main',
+        path: '',
         canLoad: [AuthGuard],
         loadChildren: () => import('./pages/main-page/main-page.module').then((m) => m.MainPageModule)
     },

@@ -36,13 +36,9 @@ export class RegisterUserPageComponent implements OnDestroy {
         this._subscription.push(
             this._usersService.postNewUserData(newData).subscribe((response: IServerResponse) => {
                 alert(response.message);
-                this.redirectTo('/');
+                this._router.navigateByUrl('/');
             })
         );
-    }
-
-    public redirectTo(url: string): void {
-        this._router.navigateByUrl(url);
     }
 
     public changeUserData(changedUser: IUserForPost): void {

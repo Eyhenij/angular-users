@@ -15,6 +15,7 @@ import {UserFormComponent} from '../../forms/user-form/user-form.component';
 import {MainPageRoutingModule} from './main-page-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { UserCardComponent } from './content/user-card/user-card.component';
+import { ProfileComponent } from './content/profile/profile.component';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,8 @@ import { UserCardComponent } from './content/user-card/user-card.component';
         EditUserPageComponent,
         UserPageComponent,
         UserFormComponent,
-        UserCardComponent
+        UserCardComponent,
+        ProfileComponent
     ],
     imports: [
         FormsModule,
