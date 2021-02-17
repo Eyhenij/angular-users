@@ -9,8 +9,7 @@ export class AuthGuard implements CanLoad {
         private readonly _authService: AuthService,
         private readonly _serializer: UrlSerializer,
         private readonly _router: Router
-    ) {
-    }
+    ) {}
 
     public canLoad(route: Route): boolean |UrlTree {
         if (this._authService.isAuthorized()) {

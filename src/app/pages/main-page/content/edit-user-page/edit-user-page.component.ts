@@ -26,8 +26,7 @@ export class EditUserPageComponent implements OnInit, OnDestroy {
         private readonly _usersService: UsersService,
         private readonly _router: Router,
         private readonly _route: ActivatedRoute
-    ) {
-    }
+    ) {}
 
     ngOnInit(): void {
         this._subscription.push(
@@ -71,7 +70,7 @@ export class EditUserPageComponent implements OnInit, OnDestroy {
         );
     }
 
-    public testMethod(changedUser: IUserForPost): void {
+    public changeUserData(changedUser: IUserForPost): void {
         this.userDataForUpdate = changedUser;
     }
 

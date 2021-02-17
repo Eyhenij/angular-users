@@ -45,4 +45,8 @@ export class RegisterUserPageComponent implements OnDestroy {
         this._router.navigateByUrl(url);
     }
 
+    public changeUserData(changedUser: IUserForPost): void {
+        this.newUser = changedUser;
+    }
+
 }

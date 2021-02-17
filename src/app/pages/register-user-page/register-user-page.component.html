@@ -3,7 +3,7 @@
 
         <h1 class="form__title">Registration</h1>
 
-        <app-user-form [user]="newUser"></app-user-form>
+        <app-user-form [user]="newUser" (onChangeUser)="changeUserData($event)"></app-user-form>
 
         <div class="btn__container">
         <span>

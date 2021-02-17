@@ -1,62 +1,35 @@
 .user__card {
     position: relative;
     width: 95%;
-    margin-top: 5px;
     margin-left: auto;
     margin-right: auto;
     border-radius: 4px;
     border: 1px solid #eee;
-    background-color: coral;
-    color: white;
+    background-color: white;
 
-    &:hover {
-        box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
-    }
-
-    .card__title {
-        height: 15%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        color: black;
-        font-weight: 700;
-        font-size: large;
-    }
-
-    .card__content {
-        height: 85%;
-        padding-top: 5px;
-        padding-left: 10px;
-        background-color: dimgrey;
-    }
-
-    .card__btn_img {
-        width: 50px;
-        height: 50px;
-    }
-
-    .card__btn_delete {
+    .btn__block {
         position: absolute;
-        top: 38%;
-        right: 1%;
-        background-color: rgba(255, 255, 255, .0);
-        border: none;
+        top: 0;
+        right: 0;
+        height: 100%;
         display: flex;
-        justify-content: center;
+        flex-direction: row;
         align-items: center;
-        cursor: pointer;
-    }
+        justify-content: center;
 
-    .card__btn_edit {
-        position: absolute;
-        top: 38%;
-        right: 9%;
-        background-color: rgba(255, 255, 255, .0);
-        border: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
+        .card__btn {
+            margin-right: 20px;
+            background-color: rgba(255, 255, 255, .0);
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .card__btn_img {
+            width: 100px;
+            height: 100px;
+        }
     }
 }

@@ -1,44 +1,4 @@
-<div class="page__container">
-    <div *ngFor="let user of users">
-
-        <div class="user__card">
-
-            <div class="card__title">
-                <div>
-                    {{user?.name}}
-                </div>
-            </div>
-
-            <div class="card__content">
-                <div>Email: {{user?.email}}</div>
-                <div>Login: {{user?.login}}</div>
-                <div>User id: {{user?.id}}</div>
-
-                <button
-                    class="card__btn_delete"
-                    (click)="deleteUserById(user.id)"
-                >
-                    <img
-                        src="../../../../../assets/buttons/remove-button-red.png"
-                        alt="Remove User"
-                        class="card__btn_img"
-                    >
-                </button>
-
-                <button
-                    class="card__btn_edit"
-                    (click)="goToEditPage(user.id)"
-                >
-                    <img
-                        src="../../../../../assets/buttons/edit-button-yellow.png"
-                        alt="Edit User"
-                        class="card__btn_img"
-                    >
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
+<div *ngFor="let user of users | async" class="user__card" [routerLink]="'/user/' + user.id">
+    <app-user-card [user]="user"></app-user-card>
 </div>
+

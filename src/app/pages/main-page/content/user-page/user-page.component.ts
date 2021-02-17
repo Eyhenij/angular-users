@@ -3,7 +3,7 @@ import {IUser} from '../../../../interfaces/user.interface';
 import {UsersService} from '../../../../services/users.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IServerResponse} from '../../../../interfaces/server-response.interface';
-import {SubscriptionLike} from 'rxjs';
+import {Observable, SubscriptionLike} from 'rxjs';
 
 @Component({
     selector: 'app-user-page',
@@ -12,8 +12,9 @@ import {SubscriptionLike} from 'rxjs';
 })
 export class UserPageComponent implements OnInit, OnDestroy {
 
-    public user!: IUser;
-    private _subscription: SubscriptionLike[] = [];
+    public user: Observable<IUser>;
+    private _userId: number = null;
+    private _subscription: SubscriptionLike = null;
 
     constructor(
         private readonly _usersService: UsersService,
@@ -22,47 +23,24 @@ export class UserPageComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        this._routeWithUserId();
+        this._userId = this._route.snapshot.params.id;
+        this.user = this._usersService.getUserById(this._userId);
     }
 
     ngOnDestroy(): void {
-        this._subscription.forEach(
-            (subscription: SubscriptionLike) => subscription.unsubscribe()
-        );
-        this._subscription = [];
+        this._subscription.unsubscribe();
+        this._subscription = null;
     }
 
-    private _routeWithUserId(): void {
-        this._subscription.push(
-            this._route.params.subscribe((params) => {
-                this._getUserById(params.id);
-            })
-        );
-    }
-
-    private _getUserById(id: number): void {
-        this._subscription.push(
-            this._usersService.getUserById(id).subscribe((user: IUser) => {
-                if (user) {
-                    this.user = user;
-                } else {
-                    this.redirectTo('not-found');
-                }
-            })
-        );
-    }
-
-    public redirectTo(url: string = `edit/${this.user.id}`): void {
+    public redirectTo(url: string = `edit/${this._userId}`): void {
         this._router.navigateByUrl(url);
     }
 
-    public deleteUserById(id: number): void {
-        this._subscription.push(
-            this._usersService.deleteUserById(id).subscribe((response: IServerResponse) => {
-                alert(response.message);
-                this.redirectTo(`home`);
-            })
-        );
+    public deleteUserById(): void {
+        this._subscription = this._usersService.deleteUserById(this._userId).subscribe((response: IServerResponse) => {
+            alert(response.message);
+            this.redirectTo(`users`);
+        });
     }
 
 }

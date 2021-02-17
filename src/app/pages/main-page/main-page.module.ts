@@ -14,6 +14,7 @@ import {MaterialModule} from '../../material/material.module';
 import {UserFormComponent} from '../../forms/user-form/user-form.component';
 import {MainPageRoutingModule} from './main-page-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { UserCardComponent } from './content/user-card/user-card.component';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
         UsersPageComponent,
         EditUserPageComponent,
         UserPageComponent,
-        UserFormComponent
+        UserFormComponent,
+        UserCardComponent
     ],
     imports: [
         FormsModule,

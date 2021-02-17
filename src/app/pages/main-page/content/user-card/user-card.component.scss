@@ -1,0 +1,27 @@
+.user__card {
+    height: 150px;
+    width: 750px;
+
+    .card__title {
+        height: 25%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        font-weight: 700;
+        font-size: large;
+
+        .card__title_write {
+            margin-left: 25px;
+        }
+    }
+
+    .card__content {
+        height: 75%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-around;
+        padding-left: 50px;
+    }
+}
