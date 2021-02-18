@@ -1,6 +1,6 @@
 <mat-card class="card__container">
 
-    <app-user-form [user]="userData | async" (onChangeUser)="changeUserData($event)"></app-user-form>
+    <app-user-form [user]="userData$ | async" (onChangeUser)="changeUserData($event)"></app-user-form>
 
     <div class="btn__container">
         <span>

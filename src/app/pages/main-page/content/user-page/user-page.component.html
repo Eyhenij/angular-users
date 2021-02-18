@@ -1,6 +1,6 @@
 <div class="user__card">
 
-    <app-user-card [user]="user | async"></app-user-card>
+    <app-user-card [user]="user$ | async"></app-user-card>
 
     <div class="btn__block">
         <button class="card__btn" [routerLink]="'/edit/' + userId">

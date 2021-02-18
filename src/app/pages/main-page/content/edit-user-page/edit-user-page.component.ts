@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {UsersService} from '../../../../services/users.service';
+import {UsersService} from '../../../../store/services/users.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IUserForPost} from '../../../../interfaces/user-for-post.interface';
 import {IServerResponse} from '../../../../interfaces/server-response.interface';
@@ -15,7 +15,7 @@ export class EditUserPageComponent implements OnInit, OnDestroy {
     private _subscription: SubscriptionLike = null;
     public userId: number;
     public userDataForUpdate: IUserForPost;
-    public userData: Observable<IUserForPost>;
+    public userData$: Observable<IUserForPost>;
 
     constructor(
         private readonly _usersService: UsersService,
@@ -25,7 +25,7 @@ export class EditUserPageComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.userId = this._route.snapshot.params.id;
-        this.userData = this._usersService.getUserById(this.userId);
+        this.userData$ = this._usersService.getUserById(this.userId);
     }
 
     ngOnDestroy(): void {

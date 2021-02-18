@@ -1,6 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
 import {IUserForPost} from '../../interfaces/user-for-post.interface';
-import {UsersService} from '../../services/users.service';
+import {UsersService} from '../../store/services/users.service';
 import {Router} from '@angular/router';
 import {IServerResponse} from '../../interfaces/server-response.interface';
 import {SubscriptionLike} from 'rxjs';

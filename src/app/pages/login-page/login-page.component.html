@@ -68,7 +68,7 @@
 
             <button
                 class="btn"
-                [disabled]="form.invalid"
+                [disabled]="form.invalid || (isAuth$ | async)"
                 mat-flat-button
                 (click)="authorization()"
                 color="primary"

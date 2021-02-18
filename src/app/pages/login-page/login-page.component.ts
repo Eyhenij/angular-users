@@ -1,28 +1,31 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {SubscriptionLike} from 'rxjs';
-import {AuthService} from '../../services/auth.service';
+import {Observable} from 'rxjs';
+import {select, Store} from '@ngrx/store';
+import {login} from '../../store/actions/auth.actions';
+import {getIsAuthValue, getServerError} from '../../store/selectors/auth.selectors';
 
 @Component({
     selector: 'app-login-page',
     templateUrl: './login-page.component.html',
     styleUrls: ['./login-page.component.scss']
 })
-export class LoginPageComponent implements OnInit, OnDestroy {
+export class LoginPageComponent implements OnInit{
 
-    private _subscription: SubscriptionLike = null;
+    public isAuth$: Observable<boolean>;
 
     public form: FormGroup;
     public loginControl: FormControl;
     public passwordControl: FormControl;
 
     constructor(
-        private readonly _authService: AuthService,
+        private _store$: Store,
         private readonly _router: Router
     ) {}
 
     ngOnInit(): void {
+        this.isAuth$ = this._store$.pipe(select(getIsAuthValue));
         this.form = new FormGroup({
             loginControl: new FormControl(
                 '@mary',
@@ -35,19 +38,11 @@ export class LoginPageComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnDestroy(): void {
-        if (this._subscription) {
-            this._subscription.unsubscribe();
-            this._subscription = null;
-        }
-    }
-
     authorization(): void {
-        const login = this.form.get('loginControl').value;
+        const loginName = this.form.get('loginControl').value;
         const password = this.form.get('passwordControl').value;
-        this._subscription = this._authService.logIn(login, password).subscribe(
-            () => this._router.navigateByUrl('users')
-        );
+        this._store$.dispatch(login({loginName, password}));
+        // this._router.navigateByUrl('users');
     }
 
 }

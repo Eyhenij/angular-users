@@ -10,13 +10,13 @@ import {
     ActivatedRouteSnapshot,
     RouterStateSnapshot
 } from '@angular/router';
-import {AuthService} from '../services/auth.service';
+import {Store} from '@ngrx/store';
 
 @Injectable()
 export class AuthGuard implements CanLoad, CanActivate, CanActivateChild {
 
     constructor(
-        private readonly _authService: AuthService,
+        private readonly _store$: Store,
         private readonly _serializer: UrlSerializer,
         private readonly _router: Router
     ) {}
@@ -34,11 +34,7 @@ export class AuthGuard implements CanLoad, CanActivate, CanActivateChild {
     }
 
     private _guardCheck(): boolean | UrlTree {
-        if (this._authService.isAuthorized()) {
-            return true;
-        } else {
-            return this._serializer.parse('/login');
-        }
+        return true;
     }
 
 }

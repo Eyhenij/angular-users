@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../services/auth.service';
+import {AuthService} from '../../store/services/auth.service';
 import {Router} from '@angular/router';
+import {select, Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+import * as authData from '../../store/selectors/auth.selectors';
+import {logout} from '../../store/actions/auth.actions';
 
 @Component({
     selector: 'app-header',
@@ -9,24 +13,20 @@ import {Router} from '@angular/router';
 })
 export class HeaderComponent implements OnInit{
 
-    public isAuthorized = false;
+    public isAuth$: Observable<boolean>;
 
     constructor(
         private readonly _authService: AuthService,
-        private readonly _router: Router
+        private readonly _router: Router,
+        private _store$: Store
     ) {}
 
     ngOnInit(): void {
-        this.logIn();
-    }
-
-    public logIn(): void {
-        this.isAuthorized = this._authService.isAuthorized();
+        this.isAuth$ = this._store$.pipe(select(authData.getIsAuthValue));
     }
 
     public logOut(): void {
-        this._authService.logOut();
+        this._store$.dispatch(logout());
         this._router.navigateByUrl('login');
-        this.isAuthorized = false;
     }
 }

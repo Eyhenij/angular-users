@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {IUser} from '../../../../interfaces/user.interface';
-import {UsersService} from '../../../../services/users.service';
+import {UsersService} from '../../../../store/services/users.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IServerResponse} from '../../../../interfaces/server-response.interface';
 import {Observable, SubscriptionLike} from 'rxjs';
@@ -12,7 +12,7 @@ import {Observable, SubscriptionLike} from 'rxjs';
 })
 export class UserPageComponent implements OnInit, OnDestroy {
 
-    public user: Observable<IUser>;
+    public user$: Observable<IUser>;
     public userId: number = null;
     private _subscription: SubscriptionLike = null;
 
@@ -24,7 +24,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.userId = this._route.snapshot.params.id;
-        this.user = this._usersService.getUserById(this.userId);
+        this.user$ = this._usersService.getUserById(this.userId);
     }
 
     ngOnDestroy(): void {

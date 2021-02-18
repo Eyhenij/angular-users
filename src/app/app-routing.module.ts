@@ -5,6 +5,8 @@ import {RegisterUserPageComponent} from './pages/register-user-page/register-use
 import {NotFoundPageComponent} from './pages/not-found-page/not-found-page.component';
 import {AuthGuard} from './guards/auth.guard';
 import {LoginPageComponent} from './pages/login-page/login-page.component';
+import {StoreModule} from '@ngrx/store';
+import {DEFAULT_ROUTER_FEATURENAME, routerReducer} from '@ngrx/router-store';
 
 const routes: Routes = [
     {path: 'login', component: LoginPageComponent},
@@ -19,7 +21,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [
+        StoreModule.forFeature(DEFAULT_ROUTER_FEATURENAME, routerReducer),
+        RouterModule.forRoot(routes)
+    ],
     exports: [RouterModule]
 })
 export class AppRoutingModule {
