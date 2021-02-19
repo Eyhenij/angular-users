@@ -22,4 +22,4 @@ export const getToken = createSelector<IAuthState, IAuthState, string>(
 export const getOnloadingValue = createSelector<IAuthState, IAuthState, boolean>(
     _authFeatureSelector,
     (state: IAuthState): boolean => state.onLoading
-)
+);

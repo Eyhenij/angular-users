@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthService} from '../../store/services/auth.service';
 import {Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
@@ -11,19 +11,15 @@ import {logout} from '../../store/authorization/auth.actions';
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent {
 
-    public isAuth$: Observable<boolean>;
+    public isAuth$: Observable<boolean> = this._store$.pipe(select(authData.getIsAuthValue));
 
     constructor(
         private readonly _authService: AuthService,
         private readonly _router: Router,
         private _store$: Store
     ) {}
-
-    ngOnInit(): void {
-        this.isAuth$ = this._store$.pipe(select(authData.getIsAuthValue));
-    }
 
     public logOut(): void {
         this._store$.dispatch(logout());

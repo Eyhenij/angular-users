@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {getOnloadingValue} from './store/authorization/auth.selectors';
@@ -8,13 +8,7 @@ import {getOnloadingValue} from './store/authorization/auth.selectors';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
-
-    public onLoading$: Observable<boolean>;
-
+export class AppComponent{
+    public onLoading$: Observable<boolean> = this._store.pipe(select(getOnloadingValue));
     constructor(private readonly _store: Store) {}
-
-    ngOnInit(): void {
-        this.onLoading$ = this._store.pipe(select(getOnloadingValue));
-    }
 }

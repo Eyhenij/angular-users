@@ -13,8 +13,7 @@ import {getIsAuthValue} from '../../store/authorization/auth.selectors';
 })
 export class LoginPageComponent implements OnInit{
 
-    public isAuth$: Observable<boolean>;
-
+    public isAuth$: Observable<boolean> = this._store$.pipe(select(getIsAuthValue));
     public form: FormGroup;
     public loginControl: FormControl;
     public passwordControl: FormControl;
@@ -25,7 +24,6 @@ export class LoginPageComponent implements OnInit{
     ) {}
 
     ngOnInit(): void {
-        this.isAuth$ = this._store$.pipe(select(getIsAuthValue));
         this.form = new FormGroup({
             loginControl: new FormControl(
                 '@mary',

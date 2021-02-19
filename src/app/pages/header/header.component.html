@@ -5,8 +5,7 @@
         class="header__item"
         color="primary"
         routerLink="/login"
-    >Login
-    </button>
+    >Login</button>
 
     <button
         *ngIf="!(isAuth$ | async)"
@@ -14,8 +13,7 @@
         class="header__item"
         color="primary"
         routerLink="/register"
-    >Register
-    </button>
+    >Register</button>
 
     <button
         *ngIf="isAuth$ | async"
