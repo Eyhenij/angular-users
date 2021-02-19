@@ -1,44 +1,36 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IUser} from '../../../../interfaces/user.interface';
-import {UsersService} from '../../../../store/services/users.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {IServerResponse} from '../../../../interfaces/server-response.interface';
-import {Observable, SubscriptionLike} from 'rxjs';
+import {Observable} from 'rxjs';
+import {select, Store} from '@ngrx/store';
+import {getUserByIdSelector} from '../../../../store/users/users.selectors';
+import {deleteUserByIdAction, getUserByIdAction} from '../../../../store/users/users.actions';
 
 @Component({
     selector: 'app-user-page',
     templateUrl: './user-page.component.html',
     styleUrls: ['./user-page.component.scss']
 })
-export class UserPageComponent implements OnInit, OnDestroy {
+export class UserPageComponent implements OnInit {
 
-    public user$: Observable<IUser>;
+    public user$: Observable<IUser> = this._store$.pipe(select(getUserByIdSelector));
     public userId: number = null;
-    private _subscription: SubscriptionLike = null;
 
     constructor(
-        private readonly _usersService: UsersService,
+        private readonly _store$: Store,
         private readonly _router: Router,
         private readonly _route: ActivatedRoute
     ) {}
 
     ngOnInit(): void {
         this.userId = this._route.snapshot.params.id;
-        this.user$ = this._usersService.getUserById(this.userId);
-    }
-
-    ngOnDestroy(): void {
-        if (this._subscription) {
-            this._subscription.unsubscribe();
-            this._subscription = null;
-        }
+        this._store$.dispatch(getUserByIdAction({id: this.userId}));
     }
 
     public deleteUserById(): void {
-        this._subscription = this._usersService.deleteUserById(this.userId).subscribe((response: IServerResponse) => {
-            alert(response.message);
-            this._router.navigateByUrl('users');
-        });
+        this._store$.dispatch(deleteUserByIdAction({id: this.userId}));
+        alert('you just have deleted user');
+        this._router.navigateByUrl('users');
     }
 
 }

@@ -19,3 +19,8 @@ export const getUsersSelector = createSelector<IUsersState, IUsersState, IUser[]
     _usersFeatureSelector,
     (state: IUsersState): IUser[] => state.users
 );
+
+export const getUserByIdSelector = createSelector<IUsersState, IUsersState, IUser>(
+    _usersFeatureSelector,
+    (state: IUsersState): IUser => state.selectedUser
+);

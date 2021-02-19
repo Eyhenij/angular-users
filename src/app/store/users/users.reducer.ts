@@ -8,11 +8,13 @@ export const USERS_FEATURE_NODE = 'users';
 export interface IUsersState {
     onLoading: boolean;
     users: IUser[];
+    selectedUser: IUser;
     serverError?: string;
 }
 const initialState: IUsersState = {
     onLoading: false,
     users: [],
+    selectedUser: null,
     serverError: null
 };
 
@@ -34,6 +36,46 @@ const _usersReducer = createReducer(
     on(usersActions.getUsersActionFailure,
         (state: IUsersState, serverResponse: IServerResponse) => ({
             ...state,
+            onLoading: false,
+            serverError: serverResponse.message
+        })
+    ),
+    on(usersActions.getUserByIdAction,
+        (state: IUsersState) => ({
+            ...state,
+            onLoading: true,
+        })
+    ),
+    on(usersActions.getUserByIdActionSuccess,
+        (state: IUsersState, {user}) => ({
+            ...state,
+            onLoading: false,
+            selectedUser: user
+        })
+    ),
+    on(usersActions.getUserByIdActionFailure,
+        (state: IUsersState, serverResponse: IServerResponse) => ({
+            ...state,
+            onLoading: false,
+            serverError: serverResponse.message
+        })
+    ),
+    on(usersActions.deleteUserByIdAction,
+        (state: IUsersState) => ({
+            ...state,
+            onLoading: true,
+        })
+    ),
+    on(usersActions.deleteUserByIdActionSuccess,
+        (state: IUsersState) => ({
+            ...state,
+            onLoading: false
+        })
+    ),
+    on(usersActions.deleteUserByIdActionFailure,
+        (state: IUsersState, serverResponse: IServerResponse) => ({
+            ...state,
+            onLoading: false,
             serverError: serverResponse.message
         })
     )
