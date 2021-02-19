@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {AuthService} from '../../store/services/auth.service';
 import {Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
@@ -16,7 +15,6 @@ export class HeaderComponent {
     public isAuth$: Observable<boolean> = this._store$.pipe(select(authData.getIsAuthValue));
 
     constructor(
-        private readonly _authService: AuthService,
         private readonly _router: Router,
         private _store$: Store
     ) {}

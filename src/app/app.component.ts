@@ -11,6 +11,6 @@ import {getOnLoadingValueSelector} from './store/users/users.selectors';
 })
 export class AppComponent{
     public onAuthLoading$: Observable<boolean> = this._store.pipe(select(getOnloadingValue));
-    public onUsersLoading$: Observable<boolean> = this._store.pipe(select(getOnLoadingValueSelector));
+    // public onUsersLoading$: Observable<boolean> = this._store.pipe(select(getOnLoadingValueSelector));
     constructor(private readonly _store: Store) {}
 }

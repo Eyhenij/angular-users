@@ -20,6 +20,7 @@ const initialState: IUsersState = {
 
 const _usersReducer = createReducer(
     initialState,
+// ===================  GET ALL USERS  ===================
     on(usersActions.getUsersAction,
         (state: IUsersState) => ({
             ...state,
@@ -40,6 +41,8 @@ const _usersReducer = createReducer(
             serverError: serverResponse.message
         })
     ),
+
+// ===================  GET USER BY ID  ===================
     on(usersActions.getUserByIdAction,
         (state: IUsersState) => ({
             ...state,
@@ -60,6 +63,8 @@ const _usersReducer = createReducer(
             serverError: serverResponse.message
         })
     ),
+
+// ===================  DELETE USER BY ID  ===================
     on(usersActions.deleteUserByIdAction,
         (state: IUsersState) => ({
             ...state,
@@ -79,6 +84,8 @@ const _usersReducer = createReducer(
             serverError: serverResponse.message
         })
     ),
+
+// ===================  UPDATE USER DATA BY ID  ===================
     on(usersActions.updateUserDataAction,
         (state: IUsersState) => ({
             ...state,
@@ -98,6 +105,8 @@ const _usersReducer = createReducer(
             serverError: serverResponse.message
         })
     ),
+
+// ===================  CREATE NEW USER  ===================
     on(usersActions.createUserAction,
         (state: IUsersState) => ({
             ...state,
