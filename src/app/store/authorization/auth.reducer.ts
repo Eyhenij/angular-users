@@ -1,5 +1,5 @@
 import {createReducer, on} from '@ngrx/store';
-import {login, loginSuccess, loginFailure, logout, logoutSuccess, logoutFailure} from './auth.actions';
+import * as authActions from './auth.actions';
 import {IServerResponse} from '../../interfaces/server-response.interface';
 
 export const AUTH_FEATURE_NODE = 'Authorization';
@@ -20,15 +20,15 @@ const initialSate: IAuthState = {
 
 const _authReducer = createReducer(
     initialSate,
-    on(login,
-        (state) => ({
+    on(authActions.login,
+        (state: IAuthState) => ({
             ...state,
             isAuth: false,
             onLoading: true
         })
     ),
-    on(loginSuccess,
-        (state, serverResponse: IServerResponse) => ({
+    on(authActions.loginSuccess,
+        (state: IAuthState, serverResponse: IServerResponse) => ({
             ...state,
             isAuth: true,
             onLoading: false,
@@ -36,8 +36,8 @@ const _authReducer = createReducer(
             serverError: null
         })
     ),
-    on(loginFailure,
-        (state, serverResponse: IServerResponse) => ({
+    on(authActions.loginFailure,
+        (state: IAuthState, serverResponse: IServerResponse) => ({
             ...state,
             isAuth: false,
             onLoading: false,
@@ -45,16 +45,16 @@ const _authReducer = createReducer(
             serverError: serverResponse.message
         })
     ),
-    on(logout,
-        (state) => ({
+    on(authActions.logout,
+        (state: IAuthState) => ({
             ...state,
             isAuth: false,
             onLoading: true,
             accessToken: null
         })
     ),
-    on(logoutSuccess,
-        (state) => ({
+    on(authActions.logoutSuccess,
+        (state: IAuthState) => ({
             ...state,
             isAuth: false,
             onLoading: false,
@@ -62,13 +62,13 @@ const _authReducer = createReducer(
             serverError: null
         })
     ),
-    on(logoutFailure,
-        (state, {message = 'there is an error with logOit process...'}) => ({
+    on(authActions.logoutFailure,
+        (state: IAuthState, serverResponse: IServerResponse) => ({
             ...state,
             isAuth: false,
             onLoading: false,
             accessToken: null,
-            serverError: message
+            serverError: serverResponse.message
         })
     )
 );

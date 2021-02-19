@@ -24,6 +24,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {StoreRouterConnectingModule} from '@ngrx/router-store';
 
 import {AuthStoreModule} from './store/authorization/auth-store.module';
+import {UsersStoreModule} from './store/users/users-store.module';
 
 @NgModule({
     declarations: [
@@ -43,7 +44,8 @@ import {AuthStoreModule} from './store/authorization/auth-store.module';
         StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
         EffectsModule.forRoot([]),
         StoreRouterConnectingModule.forRoot(),
-        AuthStoreModule
+        AuthStoreModule,
+        UsersStoreModule
     ],
     providers: [
         {
