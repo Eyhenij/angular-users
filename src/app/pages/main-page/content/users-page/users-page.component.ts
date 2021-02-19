@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {IUser} from '../../../../interfaces/user.interface';
 import {Observable} from 'rxjs';
-import {UsersService} from '../../../../store/services/users.service';
+import {select, Store} from '@ngrx/store';
+import {getUsersSelector} from '../../../../store/users/users.selectors';
+import {getUsersAction} from '../../../../store/users/users.actions';
 
 @Component({
     selector: 'app-users-page',
@@ -10,12 +12,12 @@ import {UsersService} from '../../../../store/services/users.service';
 })
 export class UsersPageComponent implements OnInit {
 
-    public users$: Observable<IUser[]>;
+    public users$: Observable<IUser[]> = this._store$.pipe(select(getUsersSelector));
 
-    constructor(private readonly _usersService: UsersService) {}
+    constructor(private readonly _store$: Store) {}
 
     ngOnInit(): void {
-        this.users$ = this._usersService.getUsersData();
+        this._store$.dispatch(getUsersAction());
     }
 
 }

@@ -18,20 +18,20 @@ const initialState: IUsersState = {
 
 const _usersReducer = createReducer(
     initialState,
-    on(usersActions.getUsers,
+    on(usersActions.getUsersAction,
         (state: IUsersState) => ({
             ...state,
             onLoading: true
         })
     ),
-    on(usersActions.getUsersSuccess,
+    on(usersActions.getUsersActionSuccess,
         (state: IUsersState, {users}) => ({
             ...state,
             onLoading: false,
             users: [...users]
         })
     ),
-    on(usersActions.getUsersFailure,
+    on(usersActions.getUsersActionFailure,
         (state: IUsersState, serverResponse: IServerResponse) => ({
             ...state,
             serverError: serverResponse.message
