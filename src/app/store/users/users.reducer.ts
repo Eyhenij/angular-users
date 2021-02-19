@@ -78,6 +78,44 @@ const _usersReducer = createReducer(
             onLoading: false,
             serverError: serverResponse.message
         })
+    ),
+    on(usersActions.updateUserDataAction,
+        (state: IUsersState) => ({
+            ...state,
+            onLoading: true,
+        })
+    ),
+    on(usersActions.updateUserDataActionSuccess,
+        (state: IUsersState) => ({
+            ...state,
+            onLoading: false
+        })
+    ),
+    on(usersActions.updateUserDataActionFailure,
+        (state: IUsersState, serverResponse: IServerResponse) => ({
+            ...state,
+            onLoading: false,
+            serverError: serverResponse.message
+        })
+    ),
+    on(usersActions.createUserAction,
+        (state: IUsersState) => ({
+            ...state,
+            onLoading: true,
+        })
+    ),
+    on(usersActions.createUserActionSuccess,
+        (state: IUsersState) => ({
+            ...state,
+            onLoading: false
+        })
+    ),
+    on(usersActions.createUserActionFailure,
+        (state: IUsersState, serverResponse: IServerResponse) => ({
+            ...state,
+            onLoading: false,
+            serverError: serverResponse.message
+        })
     )
 );
 

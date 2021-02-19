@@ -1,18 +1,16 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component} from '@angular/core';
 import {IUserForPost} from '../../interfaces/user-for-post.interface';
-import {UsersService} from '../../store/services/users.service';
 import {Router} from '@angular/router';
-import {IServerResponse} from '../../interfaces/server-response.interface';
-import {SubscriptionLike} from 'rxjs';
+import {Store} from '@ngrx/store';
+import {createUserAction} from '../../store/users/users.actions';
 
 @Component({
     selector: 'app-new-user-page',
     templateUrl: './register-user-page.component.html',
     styleUrls: ['./register-user-page.component.scss']
 })
-export class RegisterUserPageComponent implements OnDestroy {
+export class RegisterUserPageComponent {
 
-    private _subscription: SubscriptionLike = null;
     public newUser: IUserForPost = {
         name: 'John Doe',
         login: '@john',
@@ -21,22 +19,14 @@ export class RegisterUserPageComponent implements OnDestroy {
     };
 
     constructor(
-        private readonly _usersService: UsersService,
+        private readonly _store$: Store,
         private readonly _router: Router
     ) {}
 
-    ngOnDestroy(): void {
-        if (this._subscription) {
-            this._subscription.unsubscribe();
-            this._subscription = null;
-        }
-    }
-
     public createNewUser(newData: IUserForPost): void {
-        this._subscription = this._usersService.postNewUserData(newData).subscribe((response: IServerResponse) => {
-            alert(response.message);
-            this._router.navigateByUrl('/');
-        });
+        this._store$.dispatch(createUserAction({newUserData: newData}));
+        alert('you just have created new user');
+        this._router.navigateByUrl('/users');
     }
 
     public changeUserData(changedUser: IUserForPost): void {

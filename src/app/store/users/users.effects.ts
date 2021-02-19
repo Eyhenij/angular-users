@@ -38,6 +38,24 @@ export class UsersEffects {
         )
     );
 
+    updateUserData$ =  createEffect(() => this._actions$
+        .pipe(
+            ofType(usersActions.updateUserDataAction),
+            switchMap(({newUserData, id}) => this._usersService.putNewUserData(newUserData, id)),
+            map((serverResponse: IServerResponse) => usersActions.updateUserDataActionSuccess()),
+            catchError((err: Error) => of(usersActions.updateUserDataActionFailure({message: err.message})))
+        )
+    );
+
+    createUserData$ =  createEffect(() => this._actions$
+        .pipe(
+            ofType(usersActions.createUserAction),
+            switchMap(({newUserData}) => this._usersService.postNewUserData(newUserData)),
+            map((serverResponse: IServerResponse) => usersActions.createUserActionSuccess()),
+            catchError((err: Error) => of(usersActions.createUserActionFailure({message: err.message})))
+        )
+    );
+
     constructor(
         private readonly _actions$: Actions,
         private readonly _usersService: UsersService
