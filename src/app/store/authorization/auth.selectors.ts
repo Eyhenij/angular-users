@@ -14,7 +14,7 @@ export const getServerError = createSelector<IAuthState, IAuthState, string>(
     (state: IAuthState): string => state.serverError
 );
 
-export const getToken = createSelector<IAuthState, IAuthState, string>(
+export const getAuthToken = createSelector<IAuthState, IAuthState, string>(
     _authFeatureSelector,
     (state: IAuthState): string => state.accessToken
 );
