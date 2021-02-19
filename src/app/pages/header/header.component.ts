@@ -3,8 +3,8 @@ import {AuthService} from '../../store/services/auth.service';
 import {Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import * as authData from '../../store/selectors/auth.selectors';
-import {logout} from '../../store/actions/auth.actions';
+import * as authData from '../../store/authorization/auth.selectors';
+import {logout} from '../../store/authorization/auth.actions';
 
 @Component({
     selector: 'app-header',

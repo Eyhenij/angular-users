@@ -14,15 +14,14 @@ export class AuthService {
     public logIn(login: string, password: string): Observable<IServerResponse> {
         return this._http.post<IServerResponse>(this._authUrl, {login, password})
             .pipe(
-                tap(({message}): void => {
-                    localStorage.setItem('auth-token', message);
+                tap((serverResponse: IServerResponse): void => {
+                    localStorage.setItem('auth-token', serverResponse.message);
                     }
                 )
             );
     }
 
     public logOut(): void {
-        console.log('hello from authService!');
         localStorage.removeItem('auth-token');
     }
 }

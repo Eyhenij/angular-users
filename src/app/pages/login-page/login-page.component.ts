@@ -3,8 +3,8 @@ import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
-import {login} from '../../store/actions/auth.actions';
-import {getIsAuthValue, getServerError} from '../../store/selectors/auth.selectors';
+import {login} from '../../store/authorization/auth.actions';
+import {getIsAuthValue} from '../../store/authorization/auth.selectors';
 
 @Component({
     selector: 'app-login-page',

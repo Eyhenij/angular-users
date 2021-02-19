@@ -8,4 +8,8 @@
         <router-outlet></router-outlet>
     </div>
 
+    <div class="onLoading" *ngIf="onLoading$ | async">
+        <app-on-loading></app-on-loading>
+    </div>
+
 </div>
