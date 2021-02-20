@@ -1,16 +1,9 @@
-import {IUser} from '../../interfaces/user.interface';
 import {createReducer, on} from '@ngrx/store';
 import * as usersActions from './users.actions';
 import {IServerResponse} from '../../interfaces/server-response.interface';
+import {IUsersState} from '../app.store';
 
 
-export const USERS_FEATURE_NODE = 'users';
-export interface IUsersState {
-    onLoading: boolean;
-    users: IUser[];
-    selectedUser: IUser;
-    serverError?: string;
-}
 const initialState: IUsersState = {
     onLoading: false,
     users: [],

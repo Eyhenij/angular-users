@@ -1,7 +1,8 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {StoreModule} from '@ngrx/store';
-import {AUTH_FEATURE_NODE, authReducer} from './auth.reducer';
+import {authReducer} from './auth.reducer';
+import {AUTH_FEATURE_NODE} from '../app.store';
 import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from './auth.effects';
 

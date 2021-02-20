@@ -1,15 +1,8 @@
 import {createReducer, on} from '@ngrx/store';
 import * as authActions from './auth.actions';
 import {IServerResponse} from '../../interfaces/server-response.interface';
+import {IAuthState} from '../app.store';
 
-export const AUTH_FEATURE_NODE = 'Authorization';
-
-export interface IAuthState {
-    isAuth: boolean;
-    onLoading: boolean;
-    accessToken?: string;
-    serverError?: string;
-}
 
 const initialSate: IAuthState = {
     isAuth: !!localStorage.getItem('auth-token'),
@@ -20,14 +13,14 @@ const initialSate: IAuthState = {
 
 const _authReducer = createReducer(
     initialSate,
-    on(authActions.login,
+    on(authActions.loginAction,
         (state: IAuthState) => ({
             ...state,
             isAuth: false,
             onLoading: true
         })
     ),
-    on(authActions.loginSuccess,
+    on(authActions.loginActionSuccess,
         (state: IAuthState, serverResponse: IServerResponse) => ({
             ...state,
             isAuth: true,
@@ -36,7 +29,7 @@ const _authReducer = createReducer(
             serverError: null
         })
     ),
-    on(authActions.loginFailure,
+    on(authActions.loginActionFailure,
         (state: IAuthState, serverResponse: IServerResponse) => ({
             ...state,
             isAuth: false,
@@ -45,7 +38,7 @@ const _authReducer = createReducer(
             serverError: serverResponse.message
         })
     ),
-    on(authActions.logout,
+    on(authActions.logoutAction,
         (state: IAuthState) => ({
             ...state,
             isAuth: false,
@@ -53,7 +46,7 @@ const _authReducer = createReducer(
             accessToken: null
         })
     ),
-    on(authActions.logoutSuccess,
+    on(authActions.logoutActionSuccess,
         (state: IAuthState) => ({
             ...state,
             isAuth: false,
@@ -62,7 +55,7 @@ const _authReducer = createReducer(
             serverError: null
         })
     ),
-    on(authActions.logoutFailure,
+    on(authActions.logoutActionFailure,
         (state: IAuthState, serverResponse: IServerResponse) => ({
             ...state,
             isAuth: false,

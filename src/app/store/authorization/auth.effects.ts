@@ -12,19 +12,19 @@ export class AuthEffects {
 
     login$ = createEffect(() => this._actions$
         .pipe(
-            ofType(authActions.login),
+            ofType(authActions.loginAction),
             switchMap(({loginName, password}) => this._authService.logIn(loginName, password)),
-            map((serverResponse: IServerResponse) => authActions.loginSuccess(serverResponse)),
-            catchError((err: Error) => of(authActions.loginFailure({message: err.message})))
+            map((serverResponse: IServerResponse) => authActions.loginActionSuccess(serverResponse)),
+            catchError((err: Error) => of(authActions.loginActionFailure({message: err.message})))
         )
     );
 
     logout$ = createEffect(() => this._actions$
         .pipe(
-            ofType(authActions.logout),
+            ofType(authActions.logoutAction),
             switchMap(() => of(this._authService.logOut())),
-            map(() => authActions.logoutSuccess()),
-            catchError((err: Error) => of(authActions.logoutFailure({message: err.message})))
+            map(() => authActions.logoutActionSuccess()),
+            catchError((err: Error) => of(authActions.logoutActionFailure({message: err.message})))
         )
     );
 

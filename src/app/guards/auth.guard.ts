@@ -4,7 +4,7 @@ import {
     CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot
 } from '@angular/router';
 import {select, Store} from '@ngrx/store';
-import {getIsAuthValue} from '../store/authorization/auth.selectors';
+import {getIsAuthValueSelector} from '../store/authorization/auth.selectors';
 import {Observable} from 'rxjs';
 import {first, map} from 'rxjs/operators';
 
@@ -29,7 +29,7 @@ export class AuthGuard implements CanLoad, CanActivate, CanActivateChild {
     }
 
     private _guardCheck(): Observable<boolean | UrlTree> {
-        return this._store$.pipe(select(getIsAuthValue))
+        return this._store$.pipe(select(getIsAuthValueSelector))
             .pipe(
                 first(),
                 map((isAuth: boolean) => isAuth === true ? isAuth : this._serializer.parse('login'))

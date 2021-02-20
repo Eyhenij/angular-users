@@ -3,8 +3,8 @@ import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
-import {login} from '../../store/authorization/auth.actions';
-import {getIsAuthValue} from '../../store/authorization/auth.selectors';
+import {loginAction} from '../../store/authorization/auth.actions';
+import {getIsAuthValueSelector} from '../../store/authorization/auth.selectors';
 
 @Component({
     selector: 'app-login-page',
@@ -13,7 +13,7 @@ import {getIsAuthValue} from '../../store/authorization/auth.selectors';
 })
 export class LoginPageComponent implements OnInit{
 
-    public isAuth$: Observable<boolean> = this._store$.pipe(select(getIsAuthValue));
+    public isAuth$: Observable<boolean> = this._store$.pipe(select(getIsAuthValueSelector));
     public form: FormGroup;
     public loginControl: FormControl;
     public passwordControl: FormControl;
@@ -39,7 +39,7 @@ export class LoginPageComponent implements OnInit{
     authorization(): void {
         const loginName = this.form.get('loginControl').value;
         const password = this.form.get('passwordControl').value;
-        this._store$.dispatch(login({loginName, password}));
+        this._store$.dispatch(loginAction({loginName, password}));
         // this._router.navigateByUrl('users');
     }
 
