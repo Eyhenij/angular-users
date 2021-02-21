@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {getOnLoadingValueSelector} from './store/app.selectors';
@@ -6,9 +6,10 @@ import {getOnLoadingValueSelector} from './store/app.selectors';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent{
+export class AppComponent {
 
     public onLoading$: Observable<boolean>;
 
