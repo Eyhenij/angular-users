@@ -46,5 +46,4 @@ import { ProfileComponent } from './content/profile/profile.component';
         MaterialModule
     ]
 })
-export class MainPageModule {
-}
+export class MainPageModule {}

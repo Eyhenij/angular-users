@@ -1,10 +1,24 @@
-.user__card {
-    width: 98%;
-    margin-bottom: 25px;
-    margin-right: auto;
-    margin-left: auto;
-    border-radius: 4px;
-    border: 1px solid #000;
-    background-color: white;
-    cursor: pointer;
+.paginator {
+    position: absolute;
+    height: 50px;
+    width: 100%;
+    top: 0;
 }
+
+.user__card_container {
+    padding-top: 10%;
+    height: 90%;
+
+    .user__card {
+        width: 98%;
+        margin-bottom: 25px;
+        margin-right: auto;
+        margin-left: auto;
+        border-radius: 4px;
+        border: 1px solid #000;
+        background-color: white;
+        cursor: pointer;
+    }
+}
+
+

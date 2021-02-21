@@ -7,6 +7,7 @@ import {MatOptionModule} from '@angular/material/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 
 const MaterialComponents = [
@@ -17,7 +18,8 @@ const MaterialComponents = [
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
-    MatIconModule
+    MatIconModule,
+    MatPaginatorModule
 ];
 
 @NgModule({
