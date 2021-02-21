@@ -19,7 +19,7 @@ export class UsersPageComponent implements OnInit {
     public totalUsersCount$: Observable<number> = this.allUsers$.pipe(
         map((users: IUser[]): number => users.length)
     );
-    public users$ = this.allUsers$.pipe(
+    public users$: Observable<IUser[]> = this.allUsers$.pipe(
         map((users: IUser[]) => users.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize))
     );
     public pageSize = 2;
