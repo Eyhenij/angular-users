@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {select, Store} from '@ngrx/store';
+import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {logoutAction} from '../../store/authorization/auth.actions';
 import {getIsAuthValueSelector} from '../../store/authorization/auth.selectors';
@@ -12,7 +12,7 @@ import {getIsAuthValueSelector} from '../../store/authorization/auth.selectors';
 })
 export class HeaderComponent {
 
-    public isAuth$: Observable<boolean> = this._store$.pipe(select(getIsAuthValueSelector));
+    public isAuth$: Observable<boolean> = this._store$.select(getIsAuthValueSelector);
 
     constructor(
         private readonly _router: Router,

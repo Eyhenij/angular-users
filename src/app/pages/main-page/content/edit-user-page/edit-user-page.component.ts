@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IUserForPost} from '../../../../interfaces/user-for-post.interface';
 import {Observable} from 'rxjs';
-import {select, Store} from '@ngrx/store';
+import {Store} from '@ngrx/store';
 import {getUserByIdSelector} from '../../../../store/users/users.selectors';
 import {getUserByIdAction, updateUserDataAction} from '../../../../store/users/users.actions';
 
@@ -15,7 +15,7 @@ export class EditUserPageComponent implements OnInit {
 
     public userId: number = null;
     public userDataForUpdate: IUserForPost;
-    public userData$: Observable<IUserForPost> = this._store$.pipe(select(getUserByIdSelector));
+    public userData$: Observable<IUserForPost> = this._store$.select(getUserByIdSelector);
 
     constructor(
         private readonly _store$: Store,

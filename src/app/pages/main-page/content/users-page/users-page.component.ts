@@ -4,7 +4,7 @@ import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {select, Store} from '@ngrx/store';
+import {Store} from '@ngrx/store';
 import {getUsersSelector} from '../../../../store/users/users.selectors';
 import {getUsersAction} from '../../../../store/users/users.actions';
 
@@ -15,7 +15,7 @@ import {getUsersAction} from '../../../../store/users/users.actions';
 })
 export class UsersPageComponent implements OnInit {
 
-    public allUsers$: Observable<IUser[]> = this._store$.pipe(select(getUsersSelector));
+    public allUsers$: Observable<IUser[]> = this._store$.select(getUsersSelector);
     public totalUsersCount$: Observable<number> = this.allUsers$.pipe(
         map((users: IUser[]): number => users.length)
     );

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {IUser} from '../../../../interfaces/user.interface';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import {select, Store} from '@ngrx/store';
+import {Store} from '@ngrx/store';
 import {getUserByIdSelector} from '../../../../store/users/users.selectors';
 import {deleteUserByIdAction, getUserByIdAction} from '../../../../store/users/users.actions';
 
@@ -13,7 +13,7 @@ import {deleteUserByIdAction, getUserByIdAction} from '../../../../store/users/u
 })
 export class UserPageComponent implements OnInit {
 
-    public user$: Observable<IUser> = this._store$.pipe(select(getUserByIdSelector));
+    public user$: Observable<IUser> = this._store$.select(getUserByIdSelector);
     public userId: number = null;
 
     constructor(

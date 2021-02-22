@@ -79,7 +79,7 @@
             >Login</button>
 
             <button
-                *ngIf="!(isAuth$ | async)"
+                [disabled]="isAuth$ | async"
                 mat-flat-button
                 class="btn"
                 color="warn"
