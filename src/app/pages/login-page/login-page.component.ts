@@ -17,6 +17,7 @@ export class LoginPageComponent implements OnInit{
     public form: FormGroup;
     public loginControl: FormControl;
     public passwordControl: FormControl;
+    public hide = true;
 
     constructor(
         private _store$: Store,

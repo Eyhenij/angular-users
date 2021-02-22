@@ -3,6 +3,7 @@ import {IUserForPost} from '../../interfaces/user-for-post.interface';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {createUserAction} from '../../store/users/users.actions';
+import {loginAction} from '../../store/authorization/auth.actions';
 
 @Component({
     selector: 'app-new-user-page',
@@ -23,10 +24,10 @@ export class RegisterUserPageComponent {
         private readonly _router: Router
     ) {}
 
-    public createNewUser(newData: IUserForPost): void {
-        this._store$.dispatch(createUserAction({newUserData: newData}));
-        alert('you just have created new user');
-        this._router.navigateByUrl('/users');
+    public createNewUser(): void {
+        this._store$.dispatch(createUserAction({newUserData: this.newUser}));
+        this._store$.dispatch(loginAction({loginName: this.newUser.name, password: this.newUser.password}));
+        this._router.navigateByUrl('/');
     }
 
     public changeUserData(changedUser: IUserForPost): void {
