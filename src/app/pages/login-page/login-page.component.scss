@@ -9,7 +9,7 @@
 
     .form__container {
         height: 350px;
-        width: 50%;
+        width: 350px;
         margin-right: auto;
         margin-left: auto;
 
@@ -23,14 +23,15 @@
         }
 
         .btn__container {
-            height: 35%;
+            margin-top: 10%;
+            height: 30%;
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             justify-content: space-around;
             align-items: center;
 
             .btn {
-                width: 200px;
+                width: 100%;
             }
         }
     }

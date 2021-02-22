@@ -14,6 +14,8 @@ export class UserFormComponent implements OnChanges {
     public loginControl: FormControl;
     public emailControl: FormControl;
     public passwordControl: FormControl;
+    public inputTypeText = 'text';
+    public inputTypePassword = 'password';
 
     @Input()
     public user: IUserForPost;

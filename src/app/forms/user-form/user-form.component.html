@@ -4,7 +4,7 @@
     <div>
         <mat-form-field appearance="fill" class="input__container">
             <mat-label>Name</mat-label>
-            <input type="text" formControlName="name" aria-label="label" matInput>
+            <input [type]="inputTypeText" formControlName="name" aria-label="label" matInput>
 
             <mat-error *ngIf="form.get('name').invalid && form.get('name').touched">
 
@@ -94,7 +94,7 @@
     <div>
         <mat-form-field appearance="fill" class="input__container">
             <mat-label>Password</mat-label>
-            <input type="password" formControlName="password" aria-label="label" matInput>
+            <input [type]="inputTypePassword" formControlName="password" aria-label="label" matInput>
 
             <mat-error *ngIf="form.get('password').invalid && form.get('password').touched">
 

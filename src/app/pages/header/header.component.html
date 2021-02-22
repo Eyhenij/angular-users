@@ -1,19 +1,5 @@
 <div class="header__container">
-    <button
-        *ngIf="!(isAuth$ | async)"
-        mat-flat-button
-        class="header__item"
-        color="primary"
-        routerLink="/login"
-    >Login</button>
-
-    <button
-        *ngIf="!(isAuth$ | async)"
-        mat-flat-button
-        class="header__item"
-        color="primary"
-        routerLink="/register"
-    >Register</button>
+        <div *ngIf="!(isAuth$ | async)" class="header__item_greet">Welcome !</div>
 
     <button
         *ngIf="isAuth$ | async"

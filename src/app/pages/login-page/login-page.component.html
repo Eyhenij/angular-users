@@ -1,9 +1,6 @@
 <div class="page__container">
-
     <mat-card class="form__container" [formGroup]="form">
-
-        <h1 class="form__title">Login</h1>
-
+<!--        <h1 class="form__title">Login</h1>-->
         <div>
             <mat-form-field appearance="fill" class="input__container">
                 <mat-label>Login</mat-label>
@@ -65,7 +62,6 @@
         </div>
 
         <div class="btn__container">
-
             <button
                 class="btn"
                 [disabled]="form.invalid || (isAuth$ | async)"
@@ -74,8 +70,16 @@
                 color="primary"
             >Login</button>
 
+            <br>
+            <br>
+
+            <button
+                *ngIf="!(isAuth$ | async)"
+                mat-flat-button
+                class="btn"
+                color="warn"
+                routerLink="/register"
+            >Register</button>
         </div>
-
     </mat-card>
-
 </div>
