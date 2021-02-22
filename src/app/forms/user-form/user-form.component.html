@@ -4,7 +4,7 @@
     <div>
         <mat-form-field appearance="fill" class="input__container">
             <mat-label>Name</mat-label>
-            <input [type]="inputTypeText" formControlName="name" aria-label="label" matInput>
+            <input type="text" formControlName="name" aria-label="label" matInput>
 
             <mat-error *ngIf="form.get('name').invalid && form.get('name').touched">
 
@@ -37,7 +37,6 @@
             <input type="text" formControlName="login" aria-label="label" matInput>
 
             <mat-error *ngIf="form.get('login').invalid && form.get('login').touched">
-
                 <mat-error *ngIf="form.get('login').hasError('required')">
                     Login cannot be empty
                 </mat-error>
@@ -45,7 +44,6 @@
                 <mat-error *ngIf="form.get('login').hasError('minlength')">
                     Login must contain more then 3 symbols
                 </mat-error>
-
             </mat-error>
 
             <button
@@ -67,7 +65,6 @@
             <input type="text" formControlName="email" aria-label="label" matInput>
 
             <mat-error *ngIf="form.get('email').invalid && form.get('email').touched">
-
                 <mat-error *ngIf="form.get('email').hasError('required')">
                     Email cannot be empty
                 </mat-error>
@@ -75,7 +72,6 @@
                 <mat-error *ngIf="form.get('email').hasError('email')">
                     Email must fit example@email.com
                 </mat-error>
-
             </mat-error>
 
             <button
@@ -94,10 +90,9 @@
     <div>
         <mat-form-field appearance="fill" class="input__container">
             <mat-label>Password</mat-label>
-            <input [type]="inputTypePassword" formControlName="password" aria-label="label" matInput>
+            <input [type]="hide ? 'password' : 'text'" formControlName="password" aria-label="label" matInput>
 
             <mat-error *ngIf="form.get('password').invalid && form.get('password').touched">
-
                 <mat-error *ngIf="form.get('password').hasError('required')">
                     Password cannot be empty
                 </mat-error>
@@ -105,8 +100,15 @@
                 <mat-error *ngIf="form.get('password').hasError('minlength')">
                     Password must contain more then 8 symbols
                 </mat-error>
-
             </mat-error>
+
+            <button
+                mat-button
+                matSuffix
+                mat-icon-button
+                (click)="hide = !hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
 
             <button
                 mat-button

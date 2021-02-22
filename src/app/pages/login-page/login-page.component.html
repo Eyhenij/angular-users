@@ -34,7 +34,7 @@
         <div>
             <mat-form-field appearance="fill" class="input__container">
                 <mat-label>Password</mat-label>
-                <input type="password" formControlName="passwordControl" aria-label="label" matInput>
+                <input [type]="hide ? 'password' : 'text'" formControlName="passwordControl" aria-label="label" matInput>
 
                 <mat-error *ngIf="form.get('passwordControl').invalid && form.get('passwordControl').touched">
 
@@ -47,6 +47,14 @@
                     </mat-error>
 
                 </mat-error>
+
+                <button
+                    mat-button
+                    matSuffix
+                    mat-icon-button
+                    (click)="hide = !hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
 
                 <button
                     mat-button
@@ -69,9 +77,6 @@
                 (click)="authorization()"
                 color="primary"
             >Login</button>
-
-            <br>
-            <br>
 
             <button
                 *ngIf="!(isAuth$ | async)"
