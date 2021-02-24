@@ -1,4 +1,4 @@
-<div class="header__container">
+<mat-toolbar class="header__container">
         <div *ngIf="!(isAuth$ | async)" class="header__item_greet">Welcome !</div>
 
     <button
@@ -8,4 +8,4 @@
         color="warn"
         (click)="logOut()"
     >Logout</button>
-</div>
+</mat-toolbar>

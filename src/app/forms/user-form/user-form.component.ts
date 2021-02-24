@@ -10,10 +10,6 @@ import {IUserForPost} from '../../interfaces/user-for-post.interface';
 export class UserFormComponent implements OnChanges {
 
     public form: FormGroup;
-    public nameControl: FormControl;
-    public loginControl: FormControl;
-    public emailControl: FormControl;
-    public passwordControl: FormControl;
     public hide = true;
 
     @Input()

@@ -9,6 +9,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 const MaterialComponents = [
     MatButtonToggleModule,
@@ -19,7 +20,8 @@ const MaterialComponents = [
     MatInputModule,
     MatFormFieldModule,
     MatIconModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatToolbarModule
 ];
 
 @NgModule({

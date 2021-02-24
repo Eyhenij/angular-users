@@ -15,8 +15,6 @@ export class LoginPageComponent implements OnInit {
 
     public isAuth$: Observable<boolean> = this._store$.select(getIsAuthValueSelector);
     public form: FormGroup;
-    public loginControl: FormControl;
-    public passwordControl: FormControl;
     public hide = true;
 
     constructor(
