@@ -1,4 +1,5 @@
 import {IUser} from '../interfaces/user.interface';
+import {IFollower} from '../interfaces/follower.interface';
 
 export const AUTH_FEATURE_NODE = 'Authorization';
 export const USERS_FEATURE_NODE = 'users';
@@ -24,6 +25,7 @@ export interface IProfileState {
     login: string;
     email: string;
     role: string;
-    friends: IUser[];
+    followers: IFollower[];
+    posts: string[];
     serverError?: string;
 }

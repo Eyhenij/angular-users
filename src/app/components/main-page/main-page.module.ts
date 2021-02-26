@@ -14,9 +14,10 @@ import {MaterialModule} from '../../material/material.module';
 import {UserFormComponent} from '../../forms/user-form/user-form.component';
 import {MainPageRoutingModule} from './main-page-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {UserCardComponent} from '../user-card/user-card.component';
-import {ProfileComponent} from '../profile/profile.component';
-import {ProfileContainerComponent} from '../profile/profile.container.component';
+import {UserCardComponent} from '../../forms/user-card/user-card.component';
+import {ProfileComponent} from '../profile-page/profile.component';
+import {ProfileContainerComponent} from '../profile-page/profile.container.component';
+import {PostCardComponent} from '../../forms/post-card/post-card.component';
 
 @NgModule({
     declarations: [
@@ -29,7 +30,8 @@ import {ProfileContainerComponent} from '../profile/profile.container.component'
         UserFormComponent,
         UserCardComponent,
         ProfileComponent,
-        ProfileContainerComponent
+        ProfileContainerComponent,
+        PostCardComponent
     ],
     imports: [
         FormsModule,

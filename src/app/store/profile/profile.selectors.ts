@@ -1,7 +1,7 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import {IProfileState, PROFILE_FEATURE_NODE} from '../app.store';
 import {IProfile} from '../../interfaces/profile.interface';
-import {IFriend} from '../../interfaces/friend.interface';
+import {IFollower} from '../../interfaces/follower.interface';
 
 
 const _profileFeatureSelector = createFeatureSelector<IProfileState>(PROFILE_FEATURE_NODE);
@@ -18,12 +18,22 @@ export const getProfileDataSelector = createSelector<IProfileState, IProfileStat
     }
 );
 
-export const getFriendsSelector = createSelector<IProfileState, IProfileState, IFriend[]>(
+export const getProfileLoginSelector = createSelector<IProfileState, IProfileState, string>(
     _profileFeatureSelector,
-    (state: IProfileState): IFriend[] => state.friends
+    (state: IProfileState): string => state.login
+);
+
+export const getFriendsSelector = createSelector<IProfileState, IProfileState, IFollower[]>(
+    _profileFeatureSelector,
+    (state: IProfileState): IFollower[] => state.followers
 );
 
 export const getRoleSelector = createSelector<IProfileState, IProfileState, string>(
     _profileFeatureSelector,
     (state: IProfileState): string => state.role
+);
+
+export const getPostsSelector = createSelector<IProfileState, IProfileState, string[]>(
+    _profileFeatureSelector,
+    (state: IProfileState): string[] => state.posts
 );

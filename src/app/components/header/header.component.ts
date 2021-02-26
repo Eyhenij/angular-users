@@ -10,7 +10,7 @@ export class HeaderComponent {
     @Input()
     public isAuth: boolean;
     @Input()
-    public profile: IProfile;
+    public login: IProfile;
 
     @Output()
     public onLogOut: EventEmitter<any> = new EventEmitter<any>();

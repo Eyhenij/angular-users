@@ -9,4 +9,6 @@ import {IProfile} from '../../interfaces/profile.interface';
 export class ProfileComponent {
     @Input()
     public profile: IProfile;
+    @Input()
+    public posts: string[];
 }

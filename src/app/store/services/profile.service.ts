@@ -9,7 +9,6 @@ export class ProfileService {
   constructor() {}
 
   public setProfileData(profile: IUser): void {
-      console.log(profile);
       localStorage.setItem('profileName', profile.name);
       localStorage.setItem('profileLogin', profile.login);
       localStorage.setItem('profileEmail', profile.email);

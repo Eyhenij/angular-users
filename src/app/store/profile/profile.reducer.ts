@@ -9,7 +9,8 @@ const initialState: IProfileState = {
     login: localStorage.getItem('profileLogin'),
     email: localStorage.getItem('profileEmail'),
     role: '',
-    friends: [],
+    followers: [],
+    posts: [],
     serverError: ''
 };
 

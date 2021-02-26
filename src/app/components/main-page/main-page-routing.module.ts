@@ -6,7 +6,7 @@ import {MainPageComponent} from './main-page.component';
 import {UserPageComponent} from '../user-page/user-page.component';
 import {AuthGuard} from '../../guards/auth.guard';
 import {UsersPageComponent} from '../users-page/users-page.component';
-import {ProfileContainerComponent} from '../profile/profile.container.component';
+import {ProfileContainerComponent} from '../profile-page/profile.container.component';
 
 const routes: Routes = [
     {

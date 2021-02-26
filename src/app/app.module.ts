@@ -27,6 +27,7 @@ import {AuthStoreModule} from './store/authorization/auth-store.module';
 import {UsersStoreModule} from './store/users/users-store.module';
 import {ProfileStoreModule} from './store/profile/profile-store.module';
 import {HeaderContainerComponent} from './components/header/header.container.component';
+import { PostCardComponent } from './forms/post-card/post-card.component';
 
 @NgModule({
     declarations: [
@@ -62,6 +63,7 @@ import {HeaderContainerComponent} from './components/header/header.container.com
         RoleGuard,
         AuthGuard
     ],
+    exports: [],
     bootstrap: [AppComponent]
 })
 export class AppModule {

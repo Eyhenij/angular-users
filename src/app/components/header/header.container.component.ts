@@ -5,20 +5,20 @@ import {Observable} from 'rxjs';
 import {logoutAction} from '../../store/authorization/auth.actions';
 import {getIsAuthValueSelector} from '../../store/authorization/auth.selectors';
 import {IProfile} from '../../interfaces/profile.interface';
-import {getProfileDataSelector} from '../../store/profile/profile.selectors';
+import {getProfileLoginSelector} from '../../store/profile/profile.selectors';
 
 @Component({
     selector: 'app-header-container',
     template: `<app-header
         [isAuth]="isAuth$ | async"
-        [profile]="profile$ | async"
+        [login]="login$ | async"
         (onLogOut)="logOut()"
     ></app-header>`
 })
 export class HeaderContainerComponent {
 
     public isAuth$: Observable<boolean> = this._store$.select(getIsAuthValueSelector);
-    public profile$: Observable<IProfile> = this._store$.select(getProfileDataSelector);
+    public login$: Observable<string> = this._store$.select(getProfileLoginSelector);
 
     constructor(
         private readonly _router: Router,
