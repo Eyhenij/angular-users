@@ -5,7 +5,7 @@ import * as usersActions from './users.actions';
 import {catchError, map, switchMap} from 'rxjs/operators';
 import {IUser} from '../../interfaces/user.interface';
 import {of} from 'rxjs';
-import {IServerResponse} from '../../interfaces/server-response.interface';
+import {IServerResponse} from '../../interfaces/server-responses.interface';
 
 
 @Injectable()

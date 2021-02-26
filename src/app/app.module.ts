@@ -25,6 +25,7 @@ import {StoreRouterConnectingModule} from '@ngrx/router-store';
 
 import {AuthStoreModule} from './store/authorization/auth-store.module';
 import {UsersStoreModule} from './store/users/users-store.module';
+import {ProfileStoreModule} from './store/profile/profile-store.module';
 
 @NgModule({
     declarations: [
@@ -45,7 +46,8 @@ import {UsersStoreModule} from './store/users/users-store.module';
         EffectsModule.forRoot([]),
         StoreRouterConnectingModule.forRoot(),
         AuthStoreModule,
-        UsersStoreModule
+        UsersStoreModule,
+        ProfileStoreModule
     ],
     providers: [
         {

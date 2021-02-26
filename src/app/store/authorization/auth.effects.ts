@@ -1,11 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {catchError, map, switchMap, tap} from 'rxjs/operators';
-import * as authActions from './auth.actions';
+import {catchError, map, mergeMap, switchMap, tap} from 'rxjs/operators';
 import {AuthService} from '../services/auth.service';
-import {of} from 'rxjs';
-import {IServerResponse} from '../../interfaces/server-response.interface';
+import {Observable, of} from 'rxjs';
 import {Router} from '@angular/router';
+import * as authActions from './auth.actions';
+import {setProfileDataAction} from '../profile/profile.actions';
+import {Action} from '@ngrx/store';
+import {IServerAuthResponse} from '../../interfaces/server-responses.interface';
 
 
 @Injectable()
@@ -14,19 +16,23 @@ export class AuthEffects {
     login$ = createEffect(() => this._actions$
         .pipe(
             ofType(authActions.loginAction),
-            switchMap(({loginName, password}) => this._authService.logIn(loginName, password)),
-            map((serverResponse: IServerResponse) => authActions.loginActionSuccess(serverResponse)),
-            catchError((err: Error) => of(authActions.loginActionFailure({message: err.message})))
+            switchMap(({loginName, password}): Observable<IServerAuthResponse> => this._authService.logIn(loginName, password)),
+            mergeMap((serverResponse: IServerAuthResponse): Action[] => {
+                return [
+                    authActions.loginActionSuccess({token: serverResponse.token}),
+                    setProfileDataAction({profile: serverResponse.profile})
+                ];
+            }),
+            catchError((err: Error): Observable<Action> => of(
+                authActions.loginActionFailure({message: err.message}))
+            )
         )
     );
 
     loginSuccess$ = createEffect(() => this._actions$
         .pipe(
             ofType(authActions.loginActionSuccess),
-            tap(({message}): void => {
-                // localStorage.setItem('auth-token', message);
-                this._router.navigateByUrl('users');
-            })
+            tap((): Promise<boolean> => this._router.navigateByUrl(''))
         ),
         {dispatch: false}
     );
@@ -34,9 +40,11 @@ export class AuthEffects {
     logout$ = createEffect(() => this._actions$
         .pipe(
             ofType(authActions.logoutAction),
-            switchMap(() => of(this._authService.logOut())),
-            map(() => authActions.logoutActionSuccess()),
-            catchError((err: Error) => of(authActions.logoutActionFailure({message: err.message})))
+            switchMap((): Observable<void> => of(this._authService.logOut())),
+            map((): Action => authActions.logoutActionSuccess()),
+            catchError((err: Error): Observable<Action> => of(
+                authActions.logoutActionFailure({message: err.message}))
+            )
         )
     );
 

@@ -1,15 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {Store} from '@ngrx/store';
+import {Component, Input} from '@angular/core';
+import {IProfile} from '../../../../interfaces/profile.interface';
 
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit{
-
-    constructor(private readonly _store$: Store) {}
-
-    ngOnInit(): void {
-    }
+export class ProfileComponent {
+    @Input()
+    public profile: IProfile;
 }

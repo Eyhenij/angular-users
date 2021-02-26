@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IUser} from '../../interfaces/user.interface';
 import {IUserForPost} from '../../interfaces/user-for-post.interface';
-import {IServerResponse} from '../../interfaces/server-response.interface';
+import {IServerResponse} from '../../interfaces/server-responses.interface';
 import {AuthService} from './auth.service';
 
 @Injectable()

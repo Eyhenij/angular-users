@@ -1,6 +1,6 @@
-import {createReducer, on} from '@ngrx/store';
+import {Action, createReducer, on} from '@ngrx/store';
 import * as authActions from './auth.actions';
-import {IServerResponse} from '../../interfaces/server-response.interface';
+import {IServerResponse} from '../../interfaces/server-responses.interface';
 import {IAuthState} from '../app.store';
 
 
@@ -21,11 +21,11 @@ const _authReducer = createReducer(
         })
     ),
     on(authActions.loginActionSuccess,
-        (state: IAuthState, serverResponse: IServerResponse) => ({
+        (state: IAuthState, {token}) => ({
             ...state,
             isAuth: true,
             onLoading: false,
-            accessToken: serverResponse.message,
+            accessToken: token,
             serverError: null
         })
     ),
@@ -66,6 +66,6 @@ const _authReducer = createReducer(
     )
 );
 
-export const authReducer = (state, action) => {
+export const authReducer = (state: IAuthState, action: Action) => {
     return _authReducer(state, action);
 };

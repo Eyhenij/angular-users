@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {IServerResponse} from '../../interfaces/server-response.interface';
+import {IServerAuthResponse} from '../../interfaces/server-responses.interface';
 import {tap} from 'rxjs/operators';
 
 @Injectable()
@@ -11,17 +11,17 @@ export class AuthService {
 
     constructor(private readonly _http: HttpClient) {}
 
-    public logIn(login: string, password: string): Observable<IServerResponse> {
-        return this._http.post<IServerResponse>(this._authUrl, {login, password})
+    public logIn(login: string, password: string): Observable<IServerAuthResponse> {
+        return this._http.post<IServerAuthResponse>(this._authUrl, {login, password})
             .pipe(
-                tap((serverResponse: IServerResponse): void => {
-                    localStorage.setItem('auth-token', serverResponse.message);
+                tap((serverResponse: IServerAuthResponse): void => {
+                    localStorage.setItem('auth-token', serverResponse.token);
                     }
                 )
             );
     }
 
     public logOut(): void {
-        localStorage.removeItem('auth-token');
+        localStorage.clear();
     }
 }

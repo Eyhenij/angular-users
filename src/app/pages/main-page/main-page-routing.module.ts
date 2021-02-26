@@ -4,9 +4,9 @@ import {RouterModule, Routes} from '@angular/router';
 import {EditUserPageComponent} from './content/edit-user-page/edit-user-page.component';
 import {MainPageComponent} from './main-page.component';
 import {UserPageComponent} from './content/user-page/user-page.component';
-import {ProfileComponent} from './content/profile/profile.component';
 import {AuthGuard} from '../../guards/auth.guard';
 import {UsersPageComponent} from './content/users-page/users-page.component';
+import {ProfileContainerComponent} from './content/profile/profile.container.component';
 
 const routes: Routes = [
     {
@@ -15,7 +15,7 @@ const routes: Routes = [
         canActivateChild: [AuthGuard],
         component: MainPageComponent,
         children: [
-            {path: '', component: ProfileComponent},
+            {path: '', component: ProfileContainerComponent},
             {path: 'users', component: UsersPageComponent},
             {path: 'user/:id', component: UserPageComponent},
             {path: 'edit/:id', component: EditUserPageComponent}

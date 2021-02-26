@@ -1,6 +1,6 @@
-import {createReducer, on} from '@ngrx/store';
+import {Action, createReducer, on} from '@ngrx/store';
 import * as usersActions from './users.actions';
-import {IServerResponse} from '../../interfaces/server-response.interface';
+import {IServerResponse} from '../../interfaces/server-responses.interface';
 import {IUsersState} from '../app.store';
 
 
@@ -121,6 +121,6 @@ const _usersReducer = createReducer(
     )
 );
 
-export const usersReducer = (state, action) => {
+export const usersReducer = (state: IUsersState, action: Action) => {
     return _usersReducer(state, action);
 };
