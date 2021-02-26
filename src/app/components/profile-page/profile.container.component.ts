@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {IProfile} from '../../interfaces/profile.interface';
+import {IProfile} from '../../interfaces/user.interfaces';
 import {getPostsSelector, getProfileDataSelector} from '../../store/profile/profile.selectors';
 import {Observable} from 'rxjs';
 

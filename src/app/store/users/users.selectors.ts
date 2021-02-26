@@ -1,6 +1,6 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import {IUsersState, USERS_FEATURE_NODE} from '../app.store';
-import {IUser} from '../../interfaces/user.interface';
+import {IUser} from '../../interfaces/user.interfaces';
 
 
 const _usersFeatureSelector = createFeatureSelector<IUsersState>(USERS_FEATURE_NODE);

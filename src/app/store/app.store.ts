@@ -1,5 +1,5 @@
-import {IUser} from '../interfaces/user.interface';
-import {IFollower} from '../interfaces/follower.interface';
+import {IUser} from '../interfaces/user.interfaces';
+import {IFollower} from '../interfaces/user.interfaces';
 
 export const AUTH_FEATURE_NODE = 'Authorization';
 export const USERS_FEATURE_NODE = 'users';

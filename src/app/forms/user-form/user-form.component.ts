@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {IUserForPost} from '../../interfaces/user-for-post.interface';
+import {IUserForPost} from '../../interfaces/user.interfaces';
 
 @Component({
     selector: 'app-user-form',

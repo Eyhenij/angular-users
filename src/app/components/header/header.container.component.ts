@@ -4,7 +4,6 @@ import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {logoutAction} from '../../store/authorization/auth.actions';
 import {getIsAuthValueSelector} from '../../store/authorization/auth.selectors';
-import {IProfile} from '../../interfaces/profile.interface';
 import {getProfileLoginSelector} from '../../store/profile/profile.selectors';
 
 @Component({

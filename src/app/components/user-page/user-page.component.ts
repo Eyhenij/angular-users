@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {IUser} from '../../interfaces/user.interface';
+import {IUser} from '../../interfaces/user.interfaces';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';

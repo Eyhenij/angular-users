@@ -1,7 +1,6 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import {IProfileState, PROFILE_FEATURE_NODE} from '../app.store';
-import {IProfile} from '../../interfaces/profile.interface';
-import {IFollower} from '../../interfaces/follower.interface';
+import {IFollower, IProfile} from '../../interfaces/user.interfaces';
 
 
 const _profileFeatureSelector = createFeatureSelector<IProfileState>(PROFILE_FEATURE_NODE);
@@ -9,7 +8,6 @@ const _profileFeatureSelector = createFeatureSelector<IProfileState>(PROFILE_FEA
 export const getProfileDataSelector = createSelector<IProfileState, IProfileState, IProfile>(
     _profileFeatureSelector,
     (state: IProfileState): IProfile => {
-        console.log(state);
         return {
             name: state.name,
             login: state.login,

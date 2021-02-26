@@ -1,6 +1,6 @@
 import {createAction, props} from '@ngrx/store';
-import {IUser} from '../../interfaces/user.interface';
-import {IUserForPost} from '../../interfaces/user-for-post.interface';
+import {IUser} from '../../interfaces/user.interfaces';
+import {IUserForPost} from '../../interfaces/user.interfaces';
 
 export const getUsersAction = createAction('[Users] get all users');
 export const getUsersActionSuccess = createAction('[Users] get all users Success', props<{users: IUser[]}>());

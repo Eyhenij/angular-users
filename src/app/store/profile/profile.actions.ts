@@ -1,5 +1,5 @@
 import {createAction, props} from '@ngrx/store';
-import {IUser} from '../../interfaces/user.interface';
+import {IUser} from '../../interfaces/user.interfaces';
 
 export const setProfileDataAction = createAction('[Profile] set profile data', props<{profile: IUser}>());
 export const setProfileDataActionSuccess = createAction('[Profile] set profile data success', props<{profile: IUser}>());

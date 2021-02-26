@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {IUser} from '../../interfaces/user.interface';
-import {IUserForPost} from '../../interfaces/user-for-post.interface';
+import {IUser} from '../../interfaces/user.interfaces';
+import {IUserForPost} from '../../interfaces/user.interfaces';
 import {IServerResponse} from '../../interfaces/server-responses.interface';
 import {AuthService} from './auth.service';
 

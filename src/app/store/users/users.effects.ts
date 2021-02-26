@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {UsersService} from '../services/users.service';
 import * as usersActions from './users.actions';
-import {catchError, map, switchMap} from 'rxjs/operators';
-import {IUser} from '../../interfaces/user.interface';
+import {catchError, map, switchMap, tap} from 'rxjs/operators';
+import {IUser} from '../../interfaces/user.interfaces';
 import {of} from 'rxjs';
-import {IServerResponse} from '../../interfaces/server-responses.interface';
+import {Router} from '@angular/router';
 
 
 @Injectable()
@@ -33,7 +33,7 @@ export class UsersEffects {
         .pipe(
             ofType(usersActions.deleteUserByIdAction),
             switchMap(({id}) => this._usersService.deleteUserById(id)),
-            map((serverResponse: IServerResponse) => usersActions.deleteUserByIdActionSuccess()),
+            map(() => usersActions.deleteUserByIdActionSuccess()),
             catchError((err: Error) => of(usersActions.deleteUserByIdActionFailure({message: err.message})))
         )
     );
@@ -42,22 +42,31 @@ export class UsersEffects {
         .pipe(
             ofType(usersActions.updateUserDataAction),
             switchMap(({newUserData, id}) => this._usersService.putNewUserData(newUserData, id)),
-            map((serverResponse: IServerResponse) => usersActions.updateUserDataActionSuccess()),
+            map(() => usersActions.updateUserDataActionSuccess()),
             catchError((err: Error) => of(usersActions.updateUserDataActionFailure({message: err.message})))
         )
     );
 
-    createUserData$ =  createEffect(() => this._actions$
+    createNewUser$ =  createEffect(() => this._actions$
         .pipe(
             ofType(usersActions.createUserAction),
             switchMap(({newUserData}) => this._usersService.postNewUserData(newUserData)),
-            map((serverResponse: IServerResponse) => usersActions.createUserActionSuccess()),
+            map(() => usersActions.createUserActionSuccess()),
             catchError((err: Error) => of(usersActions.createUserActionFailure({message: err.message})))
         )
     );
 
+    createNewUserSuccess$ = createEffect(() => this._actions$
+        .pipe(
+            ofType(usersActions.createUserActionSuccess),
+            tap(() => this._router.navigateByUrl('login'))
+        ),
+        {dispatch: false}
+    );
+
     constructor(
         private readonly _actions$: Actions,
-        private readonly _usersService: UsersService
+        private readonly _usersService: UsersService,
+        private readonly _router: Router
     ) {}
 }

@@ -1,9 +1,8 @@
 import {Component} from '@angular/core';
-import {IUserForPost} from '../../interfaces/user-for-post.interface';
+import {IUserForPost} from '../../interfaces/user.interfaces';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {createUserAction} from '../../store/users/users.actions';
-import {loginAction} from '../../store/authorization/auth.actions';
 
 @Component({
     selector: 'app-new-user-page',
@@ -26,8 +25,6 @@ export class RegisterUserPageComponent {
 
     public createNewUser(): void {
         this._store$.dispatch(createUserAction({newUserData: this.newUser}));
-        this._store$.dispatch(loginAction({loginName: this.newUser.name, password: this.newUser.password}));
-        this._router.navigateByUrl('/');
     }
 
     public changeUserData(changedUser: IUserForPost): void {

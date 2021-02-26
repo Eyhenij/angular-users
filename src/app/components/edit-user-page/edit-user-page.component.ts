@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {IUserForPost} from '../../interfaces/user-for-post.interface';
+import {IUserForPost} from '../../interfaces/user.interfaces';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {getUserByIdSelector} from '../../store/users/users.selectors';

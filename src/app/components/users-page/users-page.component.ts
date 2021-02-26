@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {IUser} from '../../interfaces/user.interface';
+import {IUser} from '../../interfaces/user.interfaces';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {Observable} from 'rxjs';
