@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {EditUserPageComponent} from './content/edit-user-page/edit-user-page.component';
+import {EditUserPageComponent} from '../edit-user-page/edit-user-page.component';
 import {MainPageComponent} from './main-page.component';
-import {UserPageComponent} from './content/user-page/user-page.component';
+import {UserPageComponent} from '../user-page/user-page.component';
 import {AuthGuard} from '../../guards/auth.guard';
-import {UsersPageComponent} from './content/users-page/users-page.component';
-import {ProfileContainerComponent} from './content/profile/profile.container.component';
+import {UsersPageComponent} from '../users-page/users-page.component';
+import {ProfileContainerComponent} from '../profile/profile.container.component';
 
 const routes: Routes = [
     {

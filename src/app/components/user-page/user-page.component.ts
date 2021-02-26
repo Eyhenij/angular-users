@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {IUser} from '../../../../interfaces/user.interface';
+import {IUser} from '../../interfaces/user.interface';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {getUserByIdSelector} from '../../../../store/users/users.selectors';
-import {deleteUserByIdAction, getUserByIdAction} from '../../../../store/users/users.actions';
+import {getUserByIdSelector} from '../../store/users/users.selectors';
+import {deleteUserByIdAction, getUserByIdAction} from '../../store/users/users.actions';
 
 @Component({
     selector: 'app-user-page',

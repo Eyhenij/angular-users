@@ -1,12 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {IUser} from '../../../../interfaces/user.interface';
+import {IUser} from '../../interfaces/user.interface';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
-import {getUsersSelector} from '../../../../store/users/users.selectors';
-import {getUsersAction} from '../../../../store/users/users.actions';
+import {getUsersSelector} from '../../store/users/users.selectors';
+import {getUsersAction} from '../../store/users/users.actions';
 
 @Component({
     selector: 'app-users-page',
