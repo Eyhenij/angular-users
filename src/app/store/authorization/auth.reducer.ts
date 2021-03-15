@@ -35,7 +35,7 @@ const _authReducer = createReducer(
             isAuth: false,
             onLoading: false,
             accessToken: null,
-            serverError: serverResponse.message
+            serverError: serverResponse
         })
     ),
     on(authActions.logoutAction,
@@ -61,7 +61,7 @@ const _authReducer = createReducer(
             isAuth: false,
             onLoading: false,
             accessToken: null,
-            serverError: serverResponse.message
+            serverError: serverResponse
         })
     )
 );

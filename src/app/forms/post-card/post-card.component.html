@@ -1,1 +1,53 @@
-<div>{{post}}</div>
+<div class="post__container">
+    <div class="post__title">
+        <span class="post__title_text">
+            {{post.title}}
+        </span>
+
+        <span class="post__title_createdAt">
+            {{post.createdAt | date:'MMMM d, y, HH:mm'}}
+        </span>
+    </div>
+    <div class="post__content">
+        {{post.content}}
+        {{wasLiked}}
+
+        <div class="btn__block">
+            <div class="btn__block_reactions">
+                <button
+                    mat-button
+                    aria-label="Like"
+                    (click)="makeLike()"
+                >
+                        <mat-icon color="{{wasLiked === 'like' ? 'warn' : 'primary'}}">thumb_up</mat-icon>
+                        {{post.countOfLikes}}
+                </button>
+
+                <button
+                    mat-button
+                    aria-label="Dislike"
+                    (click)="makeDislike()"
+                >
+                    <mat-icon color="{{wasLiked === 'dislike' ? 'warn' : 'primary'}}">thumb_down</mat-icon>
+                    {{post.countOfDislikes}}
+                </button>
+            </div>
+
+            <div class="btn__block_edit">
+                <button
+                    mat-button
+                    mat-icon-button
+                    aria-label="Edit">
+                    <mat-icon color="primary">edit</mat-icon>
+                </button>
+
+                <button
+                    mat-button
+                    mat-icon-button
+                    aria-label="Remove">
+                    <mat-icon color="primary">delete</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

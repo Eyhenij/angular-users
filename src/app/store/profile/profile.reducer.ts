@@ -1,17 +1,22 @@
 import {IProfileState} from '../app.store';
 import {Action, createReducer, on} from '@ngrx/store';
 import * as profileActions from './profile.actions';
+import {IServerResponse} from '../../interfaces/server-responses.interface';
 
 
-const initialState: IProfileState = {
+export const initialState: IProfileState = {
     onLoading: false,
     name: localStorage.getItem('profileName'),
     login: localStorage.getItem('profileLogin'),
     email: localStorage.getItem('profileEmail'),
-    role: '',
+    role: localStorage.getItem('profileRole'),
+    userUUID: localStorage.getItem('profileUUID'),
+    status: 'offline',
     followers: [],
-    posts: [],
-    serverError: ''
+    serverError: {
+        message: '',
+        success: true
+    }
 };
 
 const _profileReducer = createReducer(
@@ -25,18 +30,16 @@ const _profileReducer = createReducer(
     on(profileActions.setProfileDataActionSuccess,
         (state: IProfileState, {profile}) => ({
             ...state,
+            ...profile,
             onLoading: false,
-            name: profile.name,
-            login: profile.login,
-            email: profile.email,
-            role: profile.role
+            status: 'online'
         })
     ),
     on(profileActions.setProfileDataActionFailure,
-        (state: IProfileState, {message}) => ({
+        (state: IProfileState, serverResponse: IServerResponse) => ({
             ...state,
             onLoading: false,
-            serverError: message
+            serverError: serverResponse
         })
     )
 );

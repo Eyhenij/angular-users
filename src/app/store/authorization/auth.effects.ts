@@ -24,7 +24,7 @@ export class AuthEffects {
                 ];
             }),
             catchError((err: Error): Observable<Action> => of(
-                authActions.loginActionFailure({message: err.message}))
+                authActions.loginActionFailure({message: err.message, success: false}))
             )
         )
     );
@@ -32,7 +32,7 @@ export class AuthEffects {
     loginSuccess$ = createEffect(() => this._actions$
         .pipe(
             ofType(authActions.loginActionSuccess),
-            tap((): Promise<boolean> => this._router.navigateByUrl(''))
+            tap(async (): Promise<boolean> => await this._router.navigateByUrl(''))
         ),
         {dispatch: false}
     );
@@ -43,7 +43,7 @@ export class AuthEffects {
             switchMap((): Observable<void> => of(this._authService.logOut())),
             map((): Action => authActions.logoutActionSuccess()),
             catchError((err: Error): Observable<Action> => of(
-                authActions.logoutActionFailure({message: err.message}))
+                authActions.logoutActionFailure({message: err.message, success: false}))
             )
         )
     );

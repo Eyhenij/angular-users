@@ -1,0 +1,40 @@
+.post__container {
+    width: 100%;
+    height: 100%;
+
+    .post__title {
+        position: relative;
+        min-height: 30px;
+        background-color: #bdbbbf;
+
+        .post__title_text {
+            margin-left: 10px;
+        }
+
+        .post__title_createdAt {
+            position: absolute;
+            right: 10px;
+        }
+    }
+
+    .post__content {
+        position: relative;
+        min-height: 100px;
+        background-color: lightgrey;
+
+        .btn__block {
+
+            .btn__block_reactions {
+                position: absolute;
+                left: 10px;
+                bottom: 0;
+            }
+
+            .btn__block_edit {
+                position: absolute;
+                right: 10px;
+                bottom: 0;
+            }
+        }
+    }
+}

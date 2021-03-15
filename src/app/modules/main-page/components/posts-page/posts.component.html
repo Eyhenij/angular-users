@@ -1,0 +1,27 @@
+<div class="posts__container">
+    <div class="paginator__container">
+        <button
+            class="new-post"
+            mat-button
+            color="primary"
+        >
+            <mat-icon>library_add</mat-icon>
+        </button>
+
+        <mat-paginator
+            class="paginator"
+            showFirstLastButtons="true"
+            [length]="totalPostsCount$ | async"
+            [pageSizeOptions]="[1, 2, 3]"
+            [pageSize]="pageSize"
+            (page)="onPageChange($event)"
+        ></mat-paginator>
+    </div>
+
+    <div
+        class="post__card"
+        *ngFor="let post of (posts$ | async)"
+    >
+        <app-post-card [post]="post"></app-post-card>
+    </div>
+</div>

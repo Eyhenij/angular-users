@@ -24,16 +24,15 @@ export class UsersService {
         return this._http.get<IUser>(`${this._usersUrl}/${id}`);
     }
 
-    public postNewUserData(newData: IUserForPost): Observable<IServerResponse> {
+    public createUser(newData: IUserForPost): Observable<IServerResponse> {
         return this._http.post<IServerResponse>(this._usersUrl, newData);
     }
 
-    public putNewUserData(newData: IUserForPost, id: number): Observable<IServerResponse> {
+    public updateUserById(newData: IUserForPost, id: number): Observable<IServerResponse> {
         return this._http.put<IServerResponse>(`${this._usersUrl}/${id}`, newData);
     }
 
     public deleteUserById(id: number): Observable<IServerResponse> {
         return this._http.delete<IServerResponse>(`${this._usersUrl}/${id}`);
     }
-
 }

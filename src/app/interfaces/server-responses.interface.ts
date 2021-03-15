@@ -1,11 +1,12 @@
-import {IUser} from './user.interfaces';
+import {IProfile} from './profile.interface';
 
 export interface IServerResponse {
     message: string;
+    success: boolean;
 }
 
 export interface IServerAuthResponse {
-    profile: IUser;
+    profile: IProfile;
     token: string;
 }
 

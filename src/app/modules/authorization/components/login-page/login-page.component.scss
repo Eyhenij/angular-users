@@ -1,0 +1,42 @@
+.page__container {
+    width: 1200px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #bdbbbf;
+
+    .form__container {
+        height: 350px;
+        width: 350px;
+        margin-right: auto;
+        margin-left: auto;
+
+        .prefix-icon {
+            margin-right: 10px;
+        }
+
+        .form__title {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .input__container {
+            width: 100%;
+        }
+
+        .btn__container {
+            margin-top: 10%;
+            height: 30%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+
+            .btn {
+                width: 100%;
+            }
+        }
+    }
+}

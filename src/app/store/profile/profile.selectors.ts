@@ -1,6 +1,7 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import {IProfileState, PROFILE_FEATURE_NODE} from '../app.store';
-import {IFollower, IProfile} from '../../interfaces/user.interfaces';
+import {IProfile} from '../../interfaces/profile.interface';
+import {IFollower} from '../../interfaces/follower.interface';
 
 
 const _profileFeatureSelector = createFeatureSelector<IProfileState>(PROFILE_FEATURE_NODE);
@@ -12,6 +13,10 @@ export const getProfileDataSelector = createSelector<IProfileState, IProfileStat
             name: state.name,
             login: state.login,
             email: state.email,
+            role: state.role,
+            userUUID: state.userUUID,
+            status: state.status,
+            followers: state.followers
         };
     }
 );
@@ -31,7 +36,12 @@ export const getRoleSelector = createSelector<IProfileState, IProfileState, stri
     (state: IProfileState): string => state.role
 );
 
-export const getPostsSelector = createSelector<IProfileState, IProfileState, string[]>(
+export const getUserUUIDSelector = createSelector<IProfileState, IProfileState, string>(
     _profileFeatureSelector,
-    (state: IProfileState): string[] => state.posts
+    (state: IProfileState): string => state.userUUID
+);
+
+export const getIsAdminSelector = createSelector<IProfileState, IProfileState, boolean>(
+    _profileFeatureSelector,
+    (state: IProfileState): boolean => state.role === 'admin'
 );

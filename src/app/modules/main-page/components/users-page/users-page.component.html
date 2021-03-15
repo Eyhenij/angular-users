@@ -1,0 +1,18 @@
+<div class="user__card_container">
+    <mat-paginator
+        class="paginator"
+        showFirstLastButtons="true"
+        [length]="totalUsersCount$ | async"
+        [pageSizeOptions]="[1, 2, 3]"
+        [pageSize]="pageSize"
+        (page)="onPageChange($event)"
+    ></mat-paginator>
+
+    <div
+        *ngFor="let user of users$ | async"
+        class="user__card"
+        [routerLink]="'/user/' + user.userUUID"
+    >
+        <app-user-card [user]="user"></app-user-card>
+    </div>
+</div>

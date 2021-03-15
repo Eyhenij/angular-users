@@ -17,7 +17,7 @@ export const getServerErrorSelector = createSelector(
     _usersFeatureSelector,
     _authFeatureSelector,
     (userSate: IUsersState, authState: IAuthState): IServerErrors => ({
-            authServerError: authState.serverError,
-            usersServerError: userSate.serverError
+            authServerError: authState.serverError.message,
+            usersServerError: userSate.serverError.message
         })
 );
