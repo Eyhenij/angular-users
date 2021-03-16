@@ -8,9 +8,9 @@
             {{post.createdAt | date:'MMMM d, y, HH:mm'}}
         </span>
     </div>
+
     <div class="post__content">
         {{post.content}}
-        {{wasLiked}}
 
         <div class="btn__block">
             <div class="btn__block_reactions">
@@ -19,8 +19,8 @@
                     aria-label="Like"
                     (click)="makeLike()"
                 >
-                        <mat-icon color="{{wasLiked === 'like' ? 'warn' : 'primary'}}">thumb_up</mat-icon>
-                        {{post.countOfLikes}}
+                    <mat-icon color="{{wasLiked ? 'warn' : 'primary'}}">thumb_up</mat-icon>
+                    {{post.countOfLikes}}
                 </button>
 
                 <button
@@ -28,7 +28,7 @@
                     aria-label="Dislike"
                     (click)="makeDislike()"
                 >
-                    <mat-icon color="{{wasLiked === 'dislike' ? 'warn' : 'primary'}}">thumb_down</mat-icon>
+                    <mat-icon color="{{wasDisLiked ? 'warn' : 'primary'}}">thumb_down</mat-icon>
                     {{post.countOfDislikes}}
                 </button>
             </div>

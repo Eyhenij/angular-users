@@ -6,7 +6,7 @@ import {IPost} from '../../interfaces/post.interface';
 
 const initialState: IPostsState = {
     onLoading: false,
-    posts: JSON.parse(localStorage.getItem('profilePosts')),
+    posts: [],
     serverError: null
 };
 
@@ -23,7 +23,7 @@ const _postsReducer = createReducer(
         (state: IPostsState, {posts}) => ({
             ...state,
             onLoading: false,
-            posts: { ...posts }
+            posts: [...posts]
         })
     ),
     on(postsActions.getPostsActionFailure,
@@ -36,12 +36,17 @@ const _postsReducer = createReducer(
 
 // ===================  LIKE  ===================
     on(postsActions.likeAction,
-        (state: IPostsState, {postUUID}) => {
+        (state: IPostsState, {postUUID, rollback}) => {
             return {
                 ...state,
                 posts: state.posts.map((post: IPost) => {
                     if (post.postUUID === postUUID) {
-                        const newCountOfLikes = post.countOfLikes + 1;
+                        let newCountOfLikes = post.countOfLikes;
+                        if (rollback) {
+                            newCountOfLikes--;
+                        } else {
+                            newCountOfLikes++;
+                        }
                         return {...post, countOfLikes: newCountOfLikes};
                     }
                     return post;
@@ -61,41 +66,19 @@ const _postsReducer = createReducer(
         })
     ),
 
-// ===================  ROLLBACK LIKE  ===================
-    on(postsActions.rollbackLikeAction,
-        (state: IPostsState, {postUUID}) => {
-            return {
-                ...state,
-                posts: state.posts.map((post: IPost) => {
-                    if (post.postUUID === postUUID) {
-                        const newCountOfLikes = post.countOfLikes - 1;
-                        return {...post, countOfLikes: newCountOfLikes};
-                    }
-                    return post;
-                })
-            };
-        }
-    ),
-    on(postsActions.rollbackLikeActionSuccess,
-        (state: IPostsState) => ({
-            ...state
-        })
-    ),
-    on(postsActions.rollbackLikeActionFailure,
-        (state: IPostsState, serverResponse: IServerResponse) => ({
-            ...state,
-            serverError: serverResponse
-        })
-    ),
-
 // ===================  DISLIKE  ===================
     on(postsActions.disLikeAction,
-        (state: IPostsState, {postUUID}) => {
+        (state: IPostsState, {postUUID, rollback}) => {
             return {
                 ...state,
                 posts: state.posts.map((post: IPost) => {
                     if (post.postUUID === postUUID) {
-                        const newCountOfDisLikes = post.countOfDislikes + 1;
+                        let newCountOfDisLikes = post.countOfDislikes;
+                        if (rollback) {
+                            newCountOfDisLikes--;
+                        } else {
+                            newCountOfDisLikes++;
+                        }
                         return {...post, countOfDislikes: newCountOfDisLikes};
                     }
                     return post;
@@ -109,33 +92,6 @@ const _postsReducer = createReducer(
         })
     ),
     on(postsActions.disLikeActionFailure,
-        (state: IPostsState, serverResponse: IServerResponse) => ({
-            ...state,
-            serverError: serverResponse
-        })
-    ),
-
-// ===================  ROLLBACK DISLIKE  ===================
-    on(postsActions.rollbackDisLikeAction,
-        (state: IPostsState, {postUUID}) => {
-            return {
-                ...state,
-                posts: state.posts.map((post: IPost) => {
-                    if (post.postUUID === postUUID) {
-                        const newCountOfDisLikes = post.countOfDislikes - 1;
-                        return {...post, countOfDislikes: newCountOfDisLikes};
-                    }
-                    return post;
-                })
-            };
-        }
-    ),
-    on(postsActions.rollbackDisLikeActionSuccess,
-        (state: IPostsState) => ({
-            ...state
-        })
-    ),
-    on(postsActions.rollbackDisLikeActionFailure,
         (state: IPostsState, serverResponse: IServerResponse) => ({
             ...state,
             serverError: serverResponse

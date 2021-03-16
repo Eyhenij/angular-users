@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IServerResponse} from '../../interfaces/server-responses.interface';
 import {AuthService} from './auth.service';
@@ -23,10 +23,12 @@ export class PostsService {
         return this._http.put<IServerResponse>(`${this._postsUrl}/${postUUID}`, newData);
     }
 
-    public makeLike(postUUID: string): Observable<IServerResponse> {
-        const params: HttpParams = new HttpParams();
-        params.append('rollback', 'false');
-        return this._http.get<IServerResponse>(`${this._postsUrl}/${postUUID}`, { observe: 'body', params });
+    public makeLike(postUUID: string, rollback: boolean): Observable<IServerResponse> {
+        return this._http.put<IServerResponse>(`${this._postsUrl}/like/${postUUID}?rollback=${rollback}`, null);
+    }
+
+    public makeDisLike(postUUID: string, rollback: boolean): Observable<IServerResponse> {
+        return this._http.put<IServerResponse>(`${this._postsUrl}/dislike/${postUUID}?rollback=${rollback}`, null);
     }
 
     public setProfilePostsData(posts: IPost[]): void {

@@ -13,5 +13,6 @@ export class ProfileService {
       localStorage.setItem('profileLogin', profile.login);
       localStorage.setItem('profileEmail', profile.email);
       localStorage.setItem('profileRole', profile.role);
+      localStorage.setItem('profileUUID', profile.userUUID);
   }
 }

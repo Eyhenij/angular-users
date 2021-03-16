@@ -13,4 +13,5 @@ export interface IServerAuthResponse {
 export interface IServerErrors {
     authServerError: string;
     usersServerError: string;
+    postsServerError: string;
 }
