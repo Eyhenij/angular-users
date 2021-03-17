@@ -6,7 +6,6 @@ import {MainPageComponent} from './main-page.component';
 import {UserPageComponent} from './components/user-page/user-page.component';
 import {AuthGuard} from '../../guards/auth.guard';
 import {UsersPageComponent} from './components/users-page/users-page.component';
-import {PostsComponent} from './components/posts-page/posts.component';
 
 const routes: Routes = [
     {
@@ -15,10 +14,14 @@ const routes: Routes = [
         canActivateChild: [AuthGuard],
         component: MainPageComponent,
         children: [
-            {path: '', component: PostsComponent},
+            {path: '', redirectTo: 'posts', pathMatch: 'full'},
             {path: 'users', component: UsersPageComponent},
             {path: 'user/:id', component: UserPageComponent},
-            {path: 'edit/:id', component: EditUserPageComponent}
+            {path: 'edit/:id', component: EditUserPageComponent},
+            {
+                path: 'posts',
+                loadChildren: () => import('../posts/posts.module').then((m) => m.PostsModule)
+            }
         ]
     }
 ];

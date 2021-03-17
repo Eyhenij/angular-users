@@ -12,10 +12,10 @@ import {IPost} from '../../interfaces/post.interface';
 @Injectable()
 export class PostsEffects {
 
-    setPostsData$ = createEffect(() => this._actions
+    getAllPosts$ = createEffect(() => this._actions
         .pipe(
             ofType(postsActions.getPostsAction),
-            switchMap(({ userUUID }): Observable<IPost[]> => this._postsService.getPostsData(userUUID)),
+            switchMap(({ userUUID }): Observable<IPost[]> => this._postsService.getAllProfilePosts(userUUID)),
             tap((posts: IPost[]): void => this._postsService.setProfilePostsData(posts)),
             map((posts: IPost[]): Action => postsActions.getPostsActionSuccess({ posts })),
             catchError((err: Error): Observable<Action> => of(
@@ -24,15 +24,52 @@ export class PostsEffects {
         )
     );
 
+    getOnePost$ = createEffect(() => this._actions
+        .pipe(
+            ofType(postsActions.getOnePostAction),
+            switchMap(({ userUUID, postUUID}): Observable<IPost> => this._postsService.getOneProfilePost(userUUID, postUUID)),
+            map((post: IPost): Action => postsActions.getOnePostActionSuccess({ post })),
+            catchError((err: Error): Observable<Action> => of(
+                postsActions.getOnePostActionFailure({ message: err.message, success: false }))
+            )
+        )
+    );
+
     createNewPost$ = createEffect(() => this._actions
         .pipe(
             ofType(postsActions.createPostAction),
+            switchMap(({newData}): Observable<IPost> => {
+                return this._postsService.createNewPost(newData);
+            }),
+            map((newPost: IPost): Action => postsActions.createPostActionSuccess({ newPost })),
+            catchError((err: Error): Observable<Action> => of(
+                postsActions.createPostActionFailure({ message: err.message, success: false }))
+            )
+        )
+    );
+
+    updatePost$ = createEffect(() => this._actions
+        .pipe(
+            ofType(postsActions.updatePostAction),
             switchMap(({newData, postUUID}): Observable<IServerResponse> => {
                 return this._postsService.updatePostData(newData, postUUID);
             }),
-            map((): Action => postsActions.createPostActionSuccess()),
+            map((): Action => postsActions.updatePostActionSuccess()),
             catchError((err: Error): Observable<Action> => of(
-                postsActions.createPostActionFailure({ message: err.message, success: false }))
+                postsActions.updatePostActionFailure({ message: err.message, success: false }))
+            )
+        )
+    );
+
+    deletePost$ = createEffect(() => this._actions
+        .pipe(
+            ofType(postsActions.deletePostAction),
+            switchMap(({postUUID}): Observable<IServerResponse> => {
+                return this._postsService.deletePost(postUUID);
+            }),
+            map((): Action => postsActions.deletePostActionSuccess()),
+            catchError((err: Error): Observable<Action> => of(
+                postsActions.deletePostActionFailure({ message: err.message, success: false }))
             )
         )
     );

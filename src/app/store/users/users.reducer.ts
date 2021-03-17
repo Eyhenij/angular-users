@@ -1,7 +1,7 @@
-import {Action, createReducer, on} from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
 import * as usersActions from './users.actions';
-import {IServerResponse} from '../../interfaces/server-responses.interface';
-import {IUsersState} from '../app.store';
+import { IServerResponse } from '../../interfaces/server-responses.interface';
+import { IUsersState } from '../app.store';
 
 
 const initialState: IUsersState = {
@@ -21,7 +21,7 @@ const _usersReducer = createReducer(
         })
     ),
     on(usersActions.getUsersActionSuccess,
-        (state: IUsersState, {users}) => ({
+        (state: IUsersState, { users }) => ({
             ...state,
             onLoading: false,
             users: [...users]
@@ -43,7 +43,7 @@ const _usersReducer = createReducer(
         })
     ),
     on(usersActions.getUserByIdActionSuccess,
-        (state: IUsersState, {user}) => ({
+        (state: IUsersState, { user }) => ({
             ...state,
             onLoading: false,
             selectedUser: user

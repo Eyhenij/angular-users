@@ -11,12 +11,11 @@ import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {ContentComponent} from './components/content/content.component';
 import {MaterialModule} from '../material/material.module';
 
-import {UserFormComponent} from '../../forms/user-form/user-form.component';
+import {UserFormComponent} from '../../forms/user/user-form/user-form.component';
 import {MainPageRoutingModule} from './main-page-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {UserCardComponent} from '../../forms/user-card/user-card.component';
-import {PostsComponent} from './components/posts-page/posts.component';
-import {PostCardComponent} from '../../forms/post-card/post-card.component';
+import {UserCardComponent} from '../../forms/user/user-card/user-card.component';
+import {PostsModule} from '../posts/posts.module';
 
 @NgModule({
     declarations: [
@@ -27,9 +26,7 @@ import {PostCardComponent} from '../../forms/post-card/post-card.component';
         EditUserPageComponent,
         UserPageComponent,
         UserFormComponent,
-        UserCardComponent,
-        PostsComponent,
-        PostCardComponent
+        UserCardComponent
     ],
     imports: [
         FormsModule,
@@ -38,7 +35,8 @@ import {PostCardComponent} from '../../forms/post-card/post-card.component';
         MaterialModule,
         MainPageRoutingModule,
         HttpClientModule,
-        CommonModule
+        CommonModule,
+        PostsModule
     ],
     exports: [
         UserFormComponent,

@@ -28,10 +28,10 @@ export class EditUserPageComponent implements OnInit {
         this._store$.dispatch(getUserByIdAction({id: this.userId}));
     }
 
-    public updateUserData(): void {
+    public async updateUserData(): Promise<void> {
         this._store$.dispatch(updateUserDataAction({newUserData: this.userDataForUpdate, id: this.userId}));
         alert('you just have updated user data');
-        this._router.navigateByUrl('users');
+        await this._router.navigateByUrl('users');
     }
 
     public changeUserData(changedUser: IUserForPost): void {

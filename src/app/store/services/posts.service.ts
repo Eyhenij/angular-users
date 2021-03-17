@@ -15,12 +15,24 @@ export class PostsService {
         private readonly _authService: AuthService
     ) {}
 
-    public getPostsData(userUUID: string): Observable<IPost[]> {
+    public getAllProfilePosts(userUUID: string): Observable<IPost[]> {
         return this._http.get<IPost[]>(`${this._postsUrl}?userUUID=${userUUID}`);
+    }
+
+    public getOneProfilePost(userUUID: string, postUUID: string): Observable<IPost> {
+        return this._http.get<IPost>(`${this._postsUrl}/${userUUID}?postUUID=${postUUID}`);
+    }
+
+    public createNewPost(newData: ICreatePostData): Observable<IPost> {
+        return this._http.post<IPost>(`${this._postsUrl}`, newData);
     }
 
     public updatePostData(newData: ICreatePostData, postUUID: string): Observable<IServerResponse> {
         return this._http.put<IServerResponse>(`${this._postsUrl}/${postUUID}`, newData);
+    }
+
+    public deletePost(postUUID: string): Observable<IServerResponse> {
+        return this._http.delete<IServerResponse>(`${this._postsUrl}/${postUUID}`);
     }
 
     public makeLike(postUUID: string, rollback: boolean): Observable<IServerResponse> {

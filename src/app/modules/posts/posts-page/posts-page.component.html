@@ -4,6 +4,7 @@
             class="new-post"
             mat-button
             color="primary"
+            (click)="isCreateMode = true"
         >
             <mat-icon>library_add</mat-icon>
         </button>
@@ -17,6 +18,12 @@
             (page)="onPageChange($event)"
         ></mat-paginator>
     </div>
+
+    <app-new-post-form
+        *ngIf="isCreateMode"
+        (onCreatePost)="createNewPost($event)"
+        (closeCreatePostMode)="isCreateMode = false"
+    ></app-new-post-form>
 
     <div
         class="post__card"
