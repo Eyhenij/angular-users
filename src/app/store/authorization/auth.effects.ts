@@ -8,6 +8,7 @@ import * as authActions from './auth.actions';
 import {setProfileDataAction} from '../profile/profile.actions';
 import {Action} from '@ngrx/store';
 import {IServerAuthResponse} from '../../interfaces/server-responses.interface';
+import {IUser} from '../../interfaces/user.interfaces';
 
 
 @Injectable()
@@ -44,6 +45,25 @@ export class AuthEffects {
             map((): Action => authActions.logoutActionSuccess()),
             catchError((err: Error): Observable<Action> => of(
                 authActions.logoutActionFailure({message: err.message, success: false}))
+            )
+        )
+    );
+
+    registerSuccess$ = createEffect(() => this._actions$
+            .pipe(
+                ofType(authActions.registerActionSuccess),
+                tap(async (): Promise<boolean> => await this._router.navigateByUrl('login'))
+            ),
+        {dispatch: false}
+    );
+
+    register$ = createEffect(() => this._actions$
+        .pipe(
+            ofType(authActions.registerAction),
+            switchMap(({ newUserData }): Observable<IUser> => this._authService.register(newUserData)),
+            map((): Action => authActions.registerActionSuccess()),
+            catchError((err: Error): Observable<Action> => of(
+                authActions.registerActionFailure({message: err.message, success: false}))
             )
         )
     );

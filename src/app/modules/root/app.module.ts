@@ -68,5 +68,4 @@ import {PostsService} from '../../store/services/posts.service';
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}

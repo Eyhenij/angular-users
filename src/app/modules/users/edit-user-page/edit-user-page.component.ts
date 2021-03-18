@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {IUser, IUserForPost} from '../../../../interfaces/user.interfaces';
+import {IUser, IUserForPost} from '../../../interfaces/user.interfaces';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {getUserByIdSelector} from '../../../../store/users/users.selectors';
-import {getUserByIdAction, updateUserDataAction} from '../../../../store/users/users.actions';
+import {getUserByIdSelector} from '../../../store/users/users.selectors';
+import {getUserByIdAction, updateUserDataAction} from '../../../store/users/users.actions';
 
 @Component({
     selector: 'app-edit-user-page',

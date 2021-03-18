@@ -77,10 +77,10 @@ export class PostsEffects {
     makeLike$ = createEffect(() => this._actions
         .pipe(
             ofType(postsActions.likeAction),
-            switchMap(({postUUID, rollback}): Observable<IServerResponse> => {
-                return this._postsService.makeLike(postUUID, rollback);
+            switchMap(({ userUUID, postUUID, rollback }): Observable<IServerResponse> => {
+                return this._postsService.makeLike(userUUID, postUUID, rollback);
             }),
-            map((): Action => postsActions.likeActionSuccess()),
+            map((serverResponse: IServerResponse): Action => postsActions.likeActionSuccess(serverResponse)),
             catchError((err: Error): Observable<Action> => of(
                 postsActions.likeActionFailure({ message: err.message, success: false }))
             )
@@ -90,10 +90,10 @@ export class PostsEffects {
     makeDisLike$ = createEffect(() => this._actions
         .pipe(
             ofType(postsActions.disLikeAction),
-            switchMap(({postUUID, rollback}): Observable<IServerResponse> => {
-                return this._postsService.makeDisLike(postUUID, rollback);
+            switchMap(({ userUUID, postUUID, rollback }): Observable<IServerResponse> => {
+                return this._postsService.makeDisLike(userUUID, postUUID, rollback);
             }),
-            map((): Action => postsActions.disLikeActionSuccess()),
+            map((serverResponse: IServerResponse): Action => postsActions.disLikeActionSuccess(serverResponse)),
             catchError((err: Error): Observable<Action> => of(
                 postsActions.disLikeActionFailure({ message: err.message, success: false }))
             )

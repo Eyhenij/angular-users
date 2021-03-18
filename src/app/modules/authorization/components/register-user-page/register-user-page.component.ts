@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {IUserForPost} from '../../../../interfaces/user.interfaces';
 import {Store} from '@ngrx/store';
-import {createUserAction} from '../../../../store/users/users.actions';
+import {registerAction} from '../../../../store/authorization/auth.actions';
 
 @Component({
     selector: 'app-new-user-page',
@@ -20,7 +20,7 @@ export class RegisterUserPageComponent {
     constructor(private readonly _store$: Store) {}
 
     public createNewUser(): void {
-        this._store$.dispatch(createUserAction({newUserData: this.newUser}));
+        this._store$.dispatch(registerAction({newUserData: this.newUser}));
     }
 
     public changeUserData(changedUser: IUserForPost): void {

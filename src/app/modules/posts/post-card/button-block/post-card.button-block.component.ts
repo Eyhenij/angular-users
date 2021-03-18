@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {deletePostAction, disLikeAction, likeAction} from '../../../../store/posts/posts.actions';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { deletePostAction, disLikeAction, likeAction } from '../../../../store/posts/posts.actions';
+import {IPost} from '../../../../interfaces/post.interface';
 
 @Component({
     selector: 'app-post-card-button-block',
@@ -10,11 +11,7 @@ import {deletePostAction, disLikeAction, likeAction} from '../../../../store/pos
 export class PostCardButtonBlockComponent {
 
     @Input()
-    public countOfLikes: number;
-    @Input()
-    public countOfDisLikes: number;
-    @Input()
-    private readonly _postUUID: string;
+    public post: IPost;
 
     @Output()
     public onEditModeChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -22,27 +19,31 @@ export class PostCardButtonBlockComponent {
     public makePostChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     public isEditMode = false;
-    public wasLiked = false;
-    public wasDisLiked = false;
 
     constructor(private readonly _store$: Store) {}
 
     public makeLike(): void {
-        if (!this.wasDisLiked) {
-            this._store$.dispatch(likeAction({postUUID: this._postUUID, rollback: this.wasLiked}));
-            this.wasLiked = !this.wasLiked;
+        if (!this.post.disliked) {
+            this._store$.dispatch(likeAction({
+                userUUID: this.post.userUUID,
+                postUUID: this.post.postUUID,
+                rollback: !!this.post.liked
+            }));
         }
     }
 
     public makeDislike(): void {
-        if (!this.wasLiked) {
-            this._store$.dispatch(disLikeAction({postUUID: this._postUUID, rollback: this.wasDisLiked}));
-            this.wasDisLiked = !this.wasDisLiked;
+        if (!this.post.liked) {
+            this._store$.dispatch(disLikeAction({
+                userUUID: this.post.userUUID,
+                postUUID: this.post.postUUID,
+                rollback: !!this.post.disliked
+            }));
         }
     }
 
     public deletePost(): void {
-        this._store$.dispatch(deletePostAction({ postUUID: this._postUUID }));
+        this._store$.dispatch(deletePostAction({ postUUID: this.post.postUUID }));
     }
 
     public goEditMode(): void {

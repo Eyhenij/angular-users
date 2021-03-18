@@ -21,11 +21,13 @@ const _postsReducer = createReducer(
         })
     ),
     on(postsActions.getPostsActionSuccess,
-        (state: IPostsState, {posts}) => ({
-            ...state,
-            onLoading: false,
-            posts: [...posts]
-        })
+        (state: IPostsState, {posts}) => {
+            return {
+                ...state,
+                onLoading: false,
+                posts: [...posts]
+            };
+        }
     ),
     on(postsActions.getPostsActionFailure,
         (state: IPostsState, serverResponse: IServerResponse) => ({
@@ -130,7 +132,7 @@ const _postsReducer = createReducer(
 
 // ===================  LIKE  ===================
     on(postsActions.likeAction,
-        (state: IPostsState, {postUUID, rollback}) => {
+        (state: IPostsState, { postUUID, rollback }) => {
             return {
                 ...state,
                 posts: state.posts.map((post: IPost) => {
@@ -141,7 +143,7 @@ const _postsReducer = createReducer(
                         } else {
                             newCountOfLikes++;
                         }
-                        return {...post, countOfLikes: newCountOfLikes};
+                        return { ...post, countOfLikes: newCountOfLikes, liked: !rollback };
                     }
                     return post;
                 })
@@ -162,7 +164,7 @@ const _postsReducer = createReducer(
 
 // ===================  DISLIKE  ===================
     on(postsActions.disLikeAction,
-        (state: IPostsState, {postUUID, rollback}) => {
+        (state: IPostsState, { postUUID, rollback }) => {
             return {
                 ...state,
                 posts: state.posts.map((post: IPost) => {
@@ -173,7 +175,7 @@ const _postsReducer = createReducer(
                         } else {
                             newCountOfDisLikes++;
                         }
-                        return {...post, countOfDislikes: newCountOfDisLikes};
+                        return { ...post, countOfDislikes: newCountOfDisLikes, disliked: !rollback };
                     }
                     return post;
                 })

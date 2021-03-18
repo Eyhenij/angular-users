@@ -7,12 +7,13 @@
             (click)="isCreateMode = true"
         >
             <mat-icon>library_add</mat-icon>
+            Add post
         </button>
 
         <mat-paginator
             class="paginator"
             showFirstLastButtons="true"
-            [length]="totalPostsCount$ | async"
+            [length]="totalPostsCount"
             [pageSizeOptions]="[1, 2, 3]"
             [pageSize]="pageSize"
             (page)="onPageChange($event)"
@@ -27,7 +28,7 @@
 
     <div
         class="post__card"
-        *ngFor="let post of (posts$ | async)"
+        *ngFor="let post of currentPosts"
     >
         <app-post-card [post]="post"></app-post-card>
     </div>

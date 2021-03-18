@@ -13,6 +13,7 @@ const initialSate: IAuthState = {
 
 const _authReducer = createReducer(
     initialSate,
+// ===================  LOGIN  ===================
     on(authActions.loginAction,
         (state: IAuthState) => ({
             ...state,
@@ -38,6 +39,8 @@ const _authReducer = createReducer(
             serverError: serverResponse
         })
     ),
+
+// ===================  LOGOUT  ===================
     on(authActions.logoutAction,
         (state: IAuthState) => ({
             ...state,
@@ -61,6 +64,28 @@ const _authReducer = createReducer(
             isAuth: false,
             onLoading: false,
             accessToken: null,
+            serverError: serverResponse
+        })
+    ),
+
+// ===================  LOGIN  ===================
+    on(authActions.registerAction,
+        (state: IAuthState) => ({
+            ...state,
+            onLoading: true
+        })
+    ),
+    on(authActions.registerActionSuccess,
+        (state: IAuthState) => ({
+            ...state,
+            onLoading: false,
+            serverError: null
+        })
+    ),
+    on(authActions.registerActionFailure,
+        (state: IAuthState, serverResponse: IServerResponse) => ({
+            ...state,
+            onLoading: false,
             serverError: serverResponse
         })
     )

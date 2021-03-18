@@ -35,12 +35,18 @@ export class PostsService {
         return this._http.delete<IServerResponse>(`${this._postsUrl}/${postUUID}`);
     }
 
-    public makeLike(postUUID: string, rollback: boolean): Observable<IServerResponse> {
-        return this._http.put<IServerResponse>(`${this._postsUrl}/like/${postUUID}?rollback=${rollback}`, null);
+    public makeLike(userUUID: string, postUUID: string, rollback: boolean): Observable<IServerResponse> {
+        return this._http.put<IServerResponse>(
+            `${this._postsUrl}/like/${postUUID}?userUUID=${userUUID}&rollback=${rollback}`,
+            null
+        );
     }
 
-    public makeDisLike(postUUID: string, rollback: boolean): Observable<IServerResponse> {
-        return this._http.put<IServerResponse>(`${this._postsUrl}/dislike/${postUUID}?rollback=${rollback}`, null);
+    public makeDisLike(userUUID: string, postUUID: string, rollback: boolean): Observable<IServerResponse> {
+        return this._http.put<IServerResponse>(
+            `${this._postsUrl}/dislike/${postUUID}?userUUID=${userUUID}&rollback=${rollback}`,
+            null
+        );
     }
 
     public setProfilePostsData(posts: IPost[]): void {

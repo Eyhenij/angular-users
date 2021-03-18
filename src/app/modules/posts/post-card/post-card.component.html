@@ -18,9 +18,7 @@
 
     <div class="btn__block">
         <app-post-card-button-block
-            [_postUUID]="post.postUUID"
-            [countOfLikes]="post.countOfLikes"
-            [countOfDisLikes]="post.countOfDislikes"
+            [post]="post"
             (onEditModeChange)="toggleEditMode($event)"
             (makePostChange)="makeDispatch($event)"
         ></app-post-card-button-block>

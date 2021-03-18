@@ -11,7 +11,7 @@
     <div
         *ngFor="let user of users$ | async"
         class="user__card"
-        [routerLink]="'/user/' + user.userUUID"
+        [routerLink]="'/users/user/' + user.userUUID"
     >
         <app-user-card [user]="user"></app-user-card>
     </div>

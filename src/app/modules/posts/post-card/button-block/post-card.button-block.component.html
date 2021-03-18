@@ -5,8 +5,8 @@
             aria-label="Like"
             (click)="makeLike()"
         >
-            <mat-icon color="{{wasLiked ? 'warn' : 'primary'}}">thumb_up</mat-icon>
-            {{countOfLikes}}
+            <mat-icon color="{{post.liked ? 'warn' : 'primary'}}">thumb_up</mat-icon>
+            {{post.countOfLikes}}
         </button>
 
         <button
@@ -14,8 +14,8 @@
             aria-label="Dislike"
             (click)="makeDislike()"
         >
-            <mat-icon color="{{wasDisLiked ? 'warn' : 'primary'}}">thumb_down</mat-icon>
-            {{countOfDisLikes}}
+            <mat-icon color="{{post.disliked ? 'warn' : 'primary'}}">thumb_down</mat-icon>
+            {{post.countOfDislikes}}
         </button>
     </div>
 

@@ -8,6 +8,8 @@ export interface IPost {
     createdAt: string;
     updatedAt: string;
     deletedAt: string;
+    liked?: boolean;
+    disliked?: boolean;
 }
 
 export interface ICreatePostData {
