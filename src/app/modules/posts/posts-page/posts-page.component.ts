@@ -3,10 +3,11 @@ import {ICreatePostData, IPost} from '../../../interfaces/post.interface';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {Store} from '@ngrx/store';
-import {SubscriptionLike} from 'rxjs';
+import {Observable, SubscriptionLike} from 'rxjs';
 import {getProfilePostsSelector} from '../../../store/posts/posts.selectors';
 import {createPostAction, getPostsAction} from '../../../store/posts/posts.actions';
 import {getUserUUIDSelector} from '../../../store/profile/profile.selectors';
+import {map} from 'rxjs/operators';
 
 @Component({
     selector: 'app-posts-page',
@@ -21,10 +22,21 @@ export class PostsPageComponent implements OnInit, OnDestroy {
     private _subscription: SubscriptionLike[] = [];
     private _userUUID: string = null;
     private _allPosts: IPost[] = [];
+    private _allPosts$: Observable<IPost[]> = this._store$.select(getProfilePostsSelector);
 
     public totalPostsCount: number = null;
+    public totalPostsCount$: Observable<number> = this._allPosts$
+        .pipe(
+            map((posts: IPost[]): number => posts.length)
+        );
     public currentPosts: IPost[] = [];
-    public pageSize = 2;
+    public currentPosts$: Observable<IPost[]> = this._allPosts$
+        .pipe(
+            map((posts: IPost[]): IPost[] => {
+                return posts.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize);
+            })
+        );
+    public pageSize = 5;
     public currentPage = 1;
     public isCreateMode = false;
 
@@ -53,6 +65,12 @@ export class PostsPageComponent implements OnInit, OnDestroy {
         this.pageSize = event.pageSize;
         this.currentPage = event.pageIndex + 1;
         this.currentPosts = this._allPosts.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize);
+        this.currentPosts$ = this._allPosts$
+            .pipe(
+                map((posts: IPost[]): IPost[] => {
+                    return posts.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize);
+                })
+            );
     }
 
     public async createNewPost(newPostData): Promise<void> {

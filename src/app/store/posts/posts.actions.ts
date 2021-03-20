@@ -25,6 +25,14 @@ export const likeAction = createAction('[POSTS_LIKE]', props<{userUUID: string, 
 export const likeActionSuccess = createAction('[POSTS_LIKE_SUCCESS]', props<{message: string, success: boolean}>());
 export const likeActionFailure = createAction('[POSTS_LIKE_FAILURE]', props<{message: string, success: boolean}>());
 
+export const wasLikedAction = createAction('[POSTS_WAS_LIKED]', props<{userUUID: string, postUUID: string}>());
+export const wasLikedActionSuccess = createAction('[POSTS_WAS_LIKED_SUCCESS]', props<{postUUID: string, value: boolean}>());
+export const wasLikedActionFailure = createAction('[POSTS_WAS_LIKED_FAILURE]', props<{message: string, success: boolean}>());
+
 export const disLikeAction = createAction('[POSTS_DISLIKE]', props<{userUUID: string, postUUID: string, rollback: boolean}>());
 export const disLikeActionSuccess = createAction('[POSTS_DISLIKE_SUCCESS]', props<{message: string, success: boolean}>());
 export const disLikeActionFailure = createAction('[POSTS_DISLIKE_FAILURE]', props<{message: string, success: boolean}>());
+
+export const wasDislikedAction = createAction('[POSTS_WAS_DISLIKED]', props<{userUUID: string, postUUID: string}>());
+export const wasDislikedActionSuccess = createAction('[POSTS_WAS_DISLIKED_SUCCESS]', props<{postUUID: string, value: boolean}>());
+export const wasDislikedActionFailure = createAction('[POSTS_WAS_DISLIKED_FAILURE]', props<{message: string, success: boolean}>());

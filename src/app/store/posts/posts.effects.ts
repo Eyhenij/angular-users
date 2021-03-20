@@ -1,18 +1,18 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import * as postsActions from './posts.actions';
-import {catchError, map, switchMap, tap} from 'rxjs/operators';
-import {Observable, of} from 'rxjs';
+import {catchError, map, mergeMap, switchMap, tap} from 'rxjs/operators';
+import {from, Observable, of} from 'rxjs';
 import {Action} from '@ngrx/store';
 import {PostsService} from '../services/posts.service';
 import {IServerResponse} from '../../interfaces/server-responses.interface';
-import {IPost} from '../../interfaces/post.interface';
+import {IPost, IWasPostLiked} from '../../interfaces/post.interface';
 
 
 @Injectable()
 export class PostsEffects {
 
-    getAllPosts$ = createEffect(() => this._actions
+    getAllPosts$ = createEffect((): Observable<Action> => this._actions
         .pipe(
             ofType(postsActions.getPostsAction),
             switchMap(({ userUUID }): Observable<IPost[]> => this._postsService.getAllProfilePosts(userUUID)),
@@ -24,7 +24,21 @@ export class PostsEffects {
         )
     );
 
-    getOnePost$ = createEffect(() => this._actions
+    getAllPostsSuccess$ = createEffect((): Observable<Action> => this._actions
+        .pipe(
+            ofType(postsActions.getPostsActionSuccess),
+            switchMap(({ posts }): Observable<Action> => from(posts).pipe(
+                mergeMap((post: IPost): Action[] => {
+                    return [
+                        postsActions.wasLikedAction({ userUUID: post.userUUID, postUUID: post.postUUID }),
+                        postsActions.wasDislikedAction({ userUUID: post.userUUID, postUUID: post.postUUID })
+                    ];
+                })
+            ))
+        )
+    );
+
+    getOnePost$ = createEffect((): Observable<Action> => this._actions
         .pipe(
             ofType(postsActions.getOnePostAction),
             switchMap(({ userUUID, postUUID}): Observable<IPost> => this._postsService.getOneProfilePost(userUUID, postUUID)),
@@ -35,7 +49,7 @@ export class PostsEffects {
         )
     );
 
-    createNewPost$ = createEffect(() => this._actions
+    createNewPost$ = createEffect((): Observable<Action> => this._actions
         .pipe(
             ofType(postsActions.createPostAction),
             switchMap(({newData}): Observable<IPost> => {
@@ -48,7 +62,7 @@ export class PostsEffects {
         )
     );
 
-    updatePost$ = createEffect(() => this._actions
+    updatePost$ = createEffect((): Observable<Action> => this._actions
         .pipe(
             ofType(postsActions.updatePostAction),
             switchMap(({newData, postUUID}): Observable<IServerResponse> => {
@@ -61,7 +75,7 @@ export class PostsEffects {
         )
     );
 
-    deletePost$ = createEffect(() => this._actions
+    deletePost$ = createEffect((): Observable<Action> => this._actions
         .pipe(
             ofType(postsActions.deletePostAction),
             switchMap(({postUUID}): Observable<IServerResponse> => {
@@ -74,7 +88,7 @@ export class PostsEffects {
         )
     );
 
-    makeLike$ = createEffect(() => this._actions
+    makeLike$ = createEffect((): Observable<Action> => this._actions
         .pipe(
             ofType(postsActions.likeAction),
             switchMap(({ userUUID, postUUID, rollback }): Observable<IServerResponse> => {
@@ -87,7 +101,23 @@ export class PostsEffects {
         )
     );
 
-    makeDisLike$ = createEffect(() => this._actions
+
+    wasPostLiked$ = createEffect((): Observable<Action> => this._actions
+        .pipe(
+            ofType(postsActions.wasLikedAction),
+            mergeMap(({ userUUID, postUUID }): Observable<IWasPostLiked> => {
+                return this._postsService.wasPostLiked(userUUID, postUUID);
+            }),
+            map((serverResponse: IWasPostLiked): Action => {
+                return postsActions.wasLikedActionSuccess({ ...serverResponse });
+            }),
+            catchError((err: Error): Observable<Action> => of(
+                postsActions.wasLikedActionFailure({ message: err.message, success: false }))
+            )
+        )
+    );
+
+    makeDisLike$ = createEffect((): Observable<Action> => this._actions
         .pipe(
             ofType(postsActions.disLikeAction),
             switchMap(({ userUUID, postUUID, rollback }): Observable<IServerResponse> => {
@@ -96,6 +126,19 @@ export class PostsEffects {
             map((serverResponse: IServerResponse): Action => postsActions.disLikeActionSuccess(serverResponse)),
             catchError((err: Error): Observable<Action> => of(
                 postsActions.disLikeActionFailure({ message: err.message, success: false }))
+            )
+        )
+    );
+
+    wasPostDisliked$ = createEffect((): Observable<Action> => this._actions
+        .pipe(
+            ofType(postsActions.wasDislikedAction),
+            mergeMap(({ userUUID, postUUID }): Observable<IWasPostLiked> => {
+                return this._postsService.wasPostDisliked(userUUID, postUUID);
+            }),
+            map((serverResponse: IWasPostLiked): Action => postsActions.wasDislikedActionSuccess({ ...serverResponse })),
+            catchError((err: Error): Observable<Action> => of(
+                postsActions.wasDislikedActionFailure({ message: err.message, success: false }))
             )
         )
     );

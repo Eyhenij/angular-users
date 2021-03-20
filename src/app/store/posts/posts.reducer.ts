@@ -24,8 +24,8 @@ const _postsReducer = createReducer(
         (state: IPostsState, {posts}) => {
             return {
                 ...state,
-                onLoading: false,
-                posts: [...posts]
+                posts: [...posts],
+                onLoading: false
             };
         }
     ),
@@ -132,27 +132,20 @@ const _postsReducer = createReducer(
 
 // ===================  LIKE  ===================
     on(postsActions.likeAction,
-        (state: IPostsState, { postUUID, rollback }) => {
-            return {
-                ...state,
-                posts: state.posts.map((post: IPost) => {
-                    if (post.postUUID === postUUID) {
-                        let newCountOfLikes = post.countOfLikes;
-                        if (rollback) {
-                            newCountOfLikes--;
-                        } else {
-                            newCountOfLikes++;
-                        }
-                        return { ...post, countOfLikes: newCountOfLikes, liked: !rollback };
+        (state: IPostsState, { postUUID, rollback }) => ({
+            ...state,
+            posts: state.posts.map((post: IPost) => {
+                if (post.postUUID === postUUID) {
+                    let newCountOfLikes = post.countOfLikes;
+                    if (rollback) {
+                        newCountOfLikes--;
+                    } else {
+                        newCountOfLikes++;
                     }
-                    return post;
-                })
-            };
-        }
-    ),
-    on(postsActions.likeActionSuccess,
-        (state: IPostsState) => ({
-            ...state
+                    return { ...post, countOfLikes: newCountOfLikes, liked: !rollback };
+                }
+                return post;
+            })
         })
     ),
     on(postsActions.likeActionFailure,
@@ -162,29 +155,41 @@ const _postsReducer = createReducer(
         })
     ),
 
+// ===================  WAS LIKED  ===================
+    on(postsActions.wasLikedActionSuccess,
+        (state: IPostsState, { postUUID, value }) => ({
+            ...state,
+            posts: state.posts.map((post: IPost) => {
+                if (post.postUUID === postUUID) {
+                    return { ...post, liked: value };
+                }
+                return post;
+            })
+        })
+    ),
+    on(postsActions.wasLikedActionFailure,
+        (state: IPostsState, serverResponse: IServerResponse) => ({
+            ...state,
+            serverError: serverResponse
+        })
+    ),
+
 // ===================  DISLIKE  ===================
     on(postsActions.disLikeAction,
-        (state: IPostsState, { postUUID, rollback }) => {
-            return {
-                ...state,
-                posts: state.posts.map((post: IPost) => {
-                    if (post.postUUID === postUUID) {
-                        let newCountOfDisLikes = post.countOfDislikes;
-                        if (rollback) {
-                            newCountOfDisLikes--;
-                        } else {
-                            newCountOfDisLikes++;
-                        }
-                        return { ...post, countOfDislikes: newCountOfDisLikes, disliked: !rollback };
+        (state: IPostsState, { postUUID, rollback }) => ({
+            ...state,
+            posts: state.posts.map((post: IPost) => {
+                if (post.postUUID === postUUID) {
+                    let newCountOfDisLikes = post.countOfDislikes;
+                    if (rollback) {
+                        newCountOfDisLikes--;
+                    } else {
+                        newCountOfDisLikes++;
                     }
-                    return post;
-                })
-            };
-        }
-    ),
-    on(postsActions.disLikeActionSuccess,
-        (state: IPostsState) => ({
-            ...state
+                    return { ...post, countOfDislikes: newCountOfDisLikes, disliked: !rollback };
+                }
+                return post;
+            })
         })
     ),
     on(postsActions.disLikeActionFailure,
@@ -192,7 +197,26 @@ const _postsReducer = createReducer(
             ...state,
             serverError: serverResponse
         })
-    )
+    ),
+
+// ===================  WAS DISLIKED  ===================
+    on(postsActions.wasDislikedActionSuccess,
+        (state: IPostsState, { postUUID, value }) => ({
+            ...state,
+            posts: state.posts.map((post: IPost) => {
+                if (post.postUUID === postUUID) {
+                    return { ...post, disliked: value };
+                }
+                return post;
+            })
+        })
+    ),
+    on(postsActions.wasDislikedActionFailure,
+        (state: IPostsState, serverResponse: IServerResponse) => ({
+            ...state,
+            serverError: serverResponse
+        })
+    ),
 );
 
 export const postsReducer = (state: IPostsState, action: Action) => {

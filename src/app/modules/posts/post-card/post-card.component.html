@@ -19,6 +19,7 @@
     <div class="btn__block">
         <app-post-card-button-block
             [post]="post"
+            [isEditMode]="isEditMode"
             (onEditModeChange)="toggleEditMode($event)"
             (makePostChange)="makeDispatch($event)"
         ></app-post-card-button-block>

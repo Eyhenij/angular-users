@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ICreatePostData, IPost} from '../../../interfaces/post.interface';
-import {Store} from '@ngrx/store';
-import {updatePostAction} from '../../../store/posts/posts.actions';
+import { Component, Input, OnInit } from '@angular/core';
+import { ICreatePostData, IPost } from '../../../interfaces/post.interface';
+import { Store } from '@ngrx/store';
+import { updatePostAction } from '../../../store/posts/posts.actions';
 
 @Component({
     selector: 'app-post-card',

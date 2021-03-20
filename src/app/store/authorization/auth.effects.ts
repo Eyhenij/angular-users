@@ -14,7 +14,7 @@ import {IUser} from '../../interfaces/user.interfaces';
 @Injectable()
 export class AuthEffects {
 
-    login$ = createEffect(() => this._actions$
+    login$ = createEffect((): Observable<Action> => this._actions$
         .pipe(
             ofType(authActions.loginAction),
             switchMap(({loginName, password}): Observable<IServerAuthResponse> => this._authService.logIn(loginName, password)),
@@ -30,7 +30,7 @@ export class AuthEffects {
         )
     );
 
-    loginSuccess$ = createEffect(() => this._actions$
+    loginSuccess$ = createEffect((): Observable<Action> => this._actions$
         .pipe(
             ofType(authActions.loginActionSuccess),
             tap(async (): Promise<boolean> => await this._router.navigateByUrl(''))
@@ -38,7 +38,7 @@ export class AuthEffects {
         {dispatch: false}
     );
 
-    logout$ = createEffect(() => this._actions$
+    logout$ = createEffect((): Observable<Action> => this._actions$
         .pipe(
             ofType(authActions.logoutAction),
             switchMap((): Observable<void> => of(this._authService.logOut())),
@@ -49,7 +49,7 @@ export class AuthEffects {
         )
     );
 
-    registerSuccess$ = createEffect(() => this._actions$
+    registerSuccess$ = createEffect((): Observable<Action> => this._actions$
             .pipe(
                 ofType(authActions.registerActionSuccess),
                 tap(async (): Promise<boolean> => await this._router.navigateByUrl('login'))
@@ -57,7 +57,7 @@ export class AuthEffects {
         {dispatch: false}
     );
 
-    register$ = createEffect(() => this._actions$
+    register$ = createEffect((): Observable<Action> => this._actions$
         .pipe(
             ofType(authActions.registerAction),
             switchMap(({ newUserData }): Observable<IUser> => this._authService.register(newUserData)),

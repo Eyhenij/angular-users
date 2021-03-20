@@ -9,6 +9,8 @@ import {PostsRoutingModule} from './posts-routing.module';
 import {PostCardButtonBlockComponent} from './post-card/button-block/post-card.button-block.component';
 import {PostCardContentComponent} from './post-card/content/post-card.content.component';
 import {PostCardComponent} from './post-card/post-card.component';
+import {EffectsModule} from '@ngrx/effects';
+import {PostsEffects} from '../../store/posts/posts.effects';
 
 @NgModule({
     declarations: [
@@ -20,6 +22,7 @@ import {PostCardComponent} from './post-card/post-card.component';
         PostCardContentComponent
     ],
     imports: [
+        EffectsModule.forFeature([PostsEffects]),
         ReactiveFormsModule,
         MaterialModule,
         PostsRoutingModule,

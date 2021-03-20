@@ -13,8 +13,8 @@
         <mat-paginator
             class="paginator"
             showFirstLastButtons="true"
-            [length]="totalPostsCount"
-            [pageSizeOptions]="[1, 2, 3]"
+            [length]="totalPostsCount$ | async"
+            [pageSizeOptions]="[1, 2, 3, 5]"
             [pageSize]="pageSize"
             (page)="onPageChange($event)"
         ></mat-paginator>
@@ -28,7 +28,7 @@
 
     <div
         class="post__card"
-        *ngFor="let post of currentPosts"
+        *ngFor="let post of (currentPosts$ | async)"
     >
         <app-post-card [post]="post"></app-post-card>
     </div>

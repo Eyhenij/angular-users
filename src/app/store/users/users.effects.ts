@@ -13,7 +13,7 @@ import {IServerResponse} from '../../interfaces/server-responses.interface';
 @Injectable()
 export class UsersEffects {
 
-    getUsers$ = createEffect(() => this._actions$
+    getUsers$ = createEffect((): Observable<Action> => this._actions$
         .pipe(
             ofType(usersActions.getUsersAction),
             switchMap((): Observable<IUser[]> => this._usersService.getUsersData()),
@@ -24,7 +24,7 @@ export class UsersEffects {
         )
     );
 
-    getUserById$ = createEffect(() => this._actions$
+    getUserById$ = createEffect((): Observable<Action> => this._actions$
         .pipe(
             ofType(usersActions.getUserByIdAction),
             switchMap(({id}): Observable<IUser> => this._usersService.getUserById(id)),
@@ -35,7 +35,7 @@ export class UsersEffects {
         )
     );
 
-    deleteUserById$ = createEffect(() => this._actions$
+    deleteUserById$ = createEffect((): Observable<Action> => this._actions$
         .pipe(
             ofType(usersActions.deleteUserByIdAction),
             switchMap(({id}): Observable<IServerResponse> => this._usersService.deleteUserById(id)),
@@ -46,7 +46,7 @@ export class UsersEffects {
         )
     );
 
-    updateUserData$ =  createEffect(() => this._actions$
+    updateUserData$ =  createEffect((): Observable<Action> => this._actions$
         .pipe(
             ofType(usersActions.updateUserDataAction),
             switchMap(({newUserData, id}): Observable<IServerResponse> => this._usersService.updateUserById(newUserData, id)),
@@ -57,7 +57,7 @@ export class UsersEffects {
         )
     );
 
-    createNewUser$ =  createEffect(() => this._actions$
+    createNewUser$ =  createEffect((): Observable<Action> => this._actions$
         .pipe(
             ofType(usersActions.createUserAction),
             switchMap(({newUserData}): Observable<IServerResponse> => this._usersService.createUser(newUserData)),
@@ -68,7 +68,7 @@ export class UsersEffects {
         )
     );
 
-    createNewUserSuccess$ = createEffect(() => this._actions$
+    createNewUserSuccess$ = createEffect((): Observable<Action> => this._actions$
         .pipe(
             ofType(usersActions.createUserActionSuccess),
             tap((): Promise<boolean> => this._router.navigateByUrl('login'))

@@ -17,3 +17,8 @@ export interface ICreatePostData {
     title: string;
     content: string;
 }
+
+export interface IWasPostLiked {
+    postUUID: string;
+    value: boolean;
+}

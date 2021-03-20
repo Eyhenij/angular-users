@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { deletePostAction, disLikeAction, likeAction } from '../../../../store/posts/posts.actions';
-import {IPost} from '../../../../interfaces/post.interface';
+import { IPost } from '../../../../interfaces/post.interface';
 
 @Component({
     selector: 'app-post-card-button-block',
@@ -12,13 +12,13 @@ export class PostCardButtonBlockComponent {
 
     @Input()
     public post: IPost;
+    @Input()
+    public isEditMode: boolean;
 
     @Output()
     public onEditModeChange: EventEmitter<boolean> = new EventEmitter<boolean>();
     @Output()
     public makePostChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-    public isEditMode = false;
 
     constructor(private readonly _store$: Store) {}
 
@@ -47,18 +47,15 @@ export class PostCardButtonBlockComponent {
     }
 
     public goEditMode(): void {
-        this.isEditMode = true;
-        this.onEditModeChange.emit(this.isEditMode);
+        this.onEditModeChange.emit(true);
     }
 
     public leaveEditMode(): void {
-        this.isEditMode = false;
-        this.onEditModeChange.emit(this.isEditMode);
+        this.onEditModeChange.emit(false);
     }
 
     public done(): void {
-        this.isEditMode = false;
-        this.onEditModeChange.emit(this.isEditMode);
+        this.onEditModeChange.emit(false);
         this.makePostChange.emit(true);
     }
 }

@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IServerResponse} from '../../interfaces/server-responses.interface';
 import {AuthService} from './auth.service';
-import {ICreatePostData, IPost} from '../../interfaces/post.interface';
+import {ICreatePostData, IPost, IWasPostLiked} from '../../interfaces/post.interface';
 
 @Injectable()
 export class PostsService {
@@ -42,11 +42,19 @@ export class PostsService {
         );
     }
 
+    public wasPostLiked(userUUID: string, postUUID: string): Observable<IWasPostLiked> {
+        return this._http.get<IWasPostLiked>(`${this._postsUrl}/like/${postUUID}?userUUID=${userUUID}`);
+    }
+
     public makeDisLike(userUUID: string, postUUID: string, rollback: boolean): Observable<IServerResponse> {
         return this._http.put<IServerResponse>(
             `${this._postsUrl}/dislike/${postUUID}?userUUID=${userUUID}&rollback=${rollback}`,
             null
         );
+    }
+
+    public wasPostDisliked(userUUID: string, postUUID: string): Observable<IWasPostLiked> {
+        return this._http.get<IWasPostLiked>(`${this._postsUrl}/dislike/${postUUID}?userUUID=${userUUID}`);
     }
 
     public setProfilePostsData(posts: IPost[]): void {
