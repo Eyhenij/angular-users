@@ -31,5 +31,4 @@ import {UsersRoutingModule} from './users-routing.module';
         UserFormComponent
     ]
 })
-export class UsersModule {
-}
+export class UsersModule {}

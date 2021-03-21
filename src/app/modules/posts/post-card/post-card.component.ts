@@ -13,7 +13,8 @@ export class PostCardComponent implements OnInit {
     @Input()
     public post: IPost;
 
-    public isEditMode = false;
+    public editPostMode = false;
+    public showCommentsMode = false;
     public newPostTitle: string = null;
     public newPostContent: string = null;
 
@@ -33,7 +34,11 @@ export class PostCardComponent implements OnInit {
     }
 
     public toggleEditMode(value: boolean): void {
-        this.isEditMode = value;
+        this.editPostMode = value;
+    }
+
+    public toggleShowCommentsMode(value: boolean): void {
+        this.showCommentsMode = value;
     }
 
     public makeDispatch(marker: boolean): void {

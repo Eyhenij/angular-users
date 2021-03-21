@@ -1,4 +1,4 @@
-<div *ngIf="!isEditMode" class="post__title">
+<div *ngIf="!editPostMode" class="post__title">
     <span class="post__title_text">
         {{title}}
     </span>
@@ -9,7 +9,7 @@
 </div>
 
 <div
-    *ngIf="isEditMode"
+    *ngIf="editPostMode"
     class="post__title_edit"
     (change)="onChange()"
 >

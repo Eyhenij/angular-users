@@ -13,6 +13,7 @@ import {MainPageRoutingModule} from './main-page-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {PostsModule} from '../posts/posts.module';
 import {UsersModule} from '../users/users.module';
+import {CommentsModule} from '../comments/comments.module';
 
 @NgModule({
     declarations: [
@@ -29,7 +30,8 @@ import {UsersModule} from '../users/users.module';
         HttpClientModule,
         CommonModule,
         UsersModule,
-        PostsModule
+        PostsModule,
+        CommentsModule
     ],
     exports: [
         UserFormComponent,

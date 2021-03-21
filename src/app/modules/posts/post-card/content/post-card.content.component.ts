@@ -10,7 +10,7 @@ export class PostCardContentComponent implements OnChanges {
     @Input()
     public content: string;
     @Input()
-    public isEditMode: boolean;
+    public editPostMode: boolean;
 
     public newContentControl: FormControl;
 

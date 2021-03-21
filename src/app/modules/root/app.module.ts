@@ -3,8 +3,6 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {UsersService} from '../../store/services/users.service';
-import {AuthService} from '../../store/services/auth.service';
 
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './components/header/header.component';
@@ -28,10 +26,7 @@ import {UsersStoreModule} from '../../store/users/users-store.module';
 import {ProfileStoreModule} from '../../store/profile/profile-store.module';
 import {HeaderContainerComponent} from './components/header/header.container.component';
 import {PostsStoreModule} from '../../store/posts/posts-store.module';
-import {PostsService} from '../../store/services/posts.service';
-import {AuthEffects} from '../../store/authorization/auth.effects';
-import {UsersEffects} from '../../store/users/users.effects';
-import {ProfileEffects} from '../../store/profile/profile.effects';
+import {CommentsStoreModule} from '../../store/comments/comments-store.module';
 
 @NgModule({
     declarations: [
@@ -50,12 +45,13 @@ import {ProfileEffects} from '../../store/profile/profile.effects';
         HttpClientModule,
         StoreModule.forRoot({}, {}),
         StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-        EffectsModule.forRoot([AuthEffects, UsersEffects, ProfileEffects]),
+        EffectsModule.forRoot(),
         StoreRouterConnectingModule.forRoot(),
         AuthStoreModule,
         UsersStoreModule,
         ProfileStoreModule,
-        PostsStoreModule
+        PostsStoreModule,
+        CommentsStoreModule
     ],
     providers: [
         {
@@ -63,9 +59,6 @@ import {ProfileEffects} from '../../store/profile/profile.effects';
             useClass: AuthInterceptor,
             multi: true
         },
-        UsersService,
-        AuthService,
-        PostsService,
         RoleGuard,
         AuthGuard
     ],

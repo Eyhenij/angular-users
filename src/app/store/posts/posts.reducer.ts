@@ -21,7 +21,7 @@ const _postsReducer = createReducer(
         })
     ),
     on(postsActions.getPostsActionSuccess,
-        (state: IPostsState, {posts}) => {
+        (state: IPostsState, { posts }) => {
             return {
                 ...state,
                 posts: [...posts],
@@ -59,7 +59,7 @@ const _postsReducer = createReducer(
         })
     ),
 
-// ===================  CREATE NEW POSTS  ===================
+// ===================  CREATE POSTS  ===================
     on(postsActions.createPostAction,
         (state: IPostsState) => ({
             ...state,
@@ -67,9 +67,9 @@ const _postsReducer = createReducer(
         })
     ),
     on(postsActions.createPostActionSuccess,
-        (state: IPostsState, {newPost}) => ({
+        (state: IPostsState, { newPost }) => ({
             ...state,
-            posts: [...state.posts, newPost],
+            posts: [newPost, ...state.posts],
             onLoading: false
         })
     ),
@@ -83,11 +83,11 @@ const _postsReducer = createReducer(
 
 // ===================  UPDATE POST  ===================
     on(postsActions.updatePostAction,
-        (state: IPostsState, {newData, postUUID}) => ({
+        (state: IPostsState, { newData, postUUID }) => ({
             ...state,
-            posts: state.posts.map((post: IPost) => {
+            posts: state.posts.map((post: IPost): IPost => {
                 if (post.postUUID === postUUID) {
-                    return {...post, ...newData};
+                    return { ...post, ...newData };
                 }
                 return post;
             }),
@@ -110,9 +110,9 @@ const _postsReducer = createReducer(
 
 // ===================  DELETE POST  ===================
     on(postsActions.deletePostAction,
-        (state: IPostsState, {postUUID}) => ({
+        (state: IPostsState, { postUUID }) => ({
             ...state,
-            posts: state.posts.filter((post: IPost) => post.postUUID !== postUUID),
+            posts: state.posts.filter((post: IPost): boolean => post.postUUID !== postUUID),
             onLoading: true
         })
     ),
@@ -134,7 +134,7 @@ const _postsReducer = createReducer(
     on(postsActions.likeAction,
         (state: IPostsState, { postUUID, rollback }) => ({
             ...state,
-            posts: state.posts.map((post: IPost) => {
+            posts: state.posts.map((post: IPost): IPost => {
                 if (post.postUUID === postUUID) {
                     let newCountOfLikes = post.countOfLikes;
                     if (rollback) {
@@ -159,7 +159,7 @@ const _postsReducer = createReducer(
     on(postsActions.wasLikedActionSuccess,
         (state: IPostsState, { postUUID, value }) => ({
             ...state,
-            posts: state.posts.map((post: IPost) => {
+            posts: state.posts.map((post: IPost): IPost => {
                 if (post.postUUID === postUUID) {
                     return { ...post, liked: value };
                 }
@@ -178,7 +178,7 @@ const _postsReducer = createReducer(
     on(postsActions.disLikeAction,
         (state: IPostsState, { postUUID, rollback }) => ({
             ...state,
-            posts: state.posts.map((post: IPost) => {
+            posts: state.posts.map((post: IPost): IPost => {
                 if (post.postUUID === postUUID) {
                     let newCountOfDisLikes = post.countOfDislikes;
                     if (rollback) {
@@ -203,7 +203,7 @@ const _postsReducer = createReducer(
     on(postsActions.wasDislikedActionSuccess,
         (state: IPostsState, { postUUID, value }) => ({
             ...state,
-            posts: state.posts.map((post: IPost) => {
+            posts: state.posts.map((post: IPost): IPost => {
                 if (post.postUUID === postUUID) {
                     return { ...post, disliked: value };
                 }

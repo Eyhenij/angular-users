@@ -1,10 +1,10 @@
-<div *ngIf="!isEditMode" class="post__content">
+<div *ngIf="!editPostMode" class="post__content">
     {{content}}
 </div>
 
 
 <div
-    *ngIf="isEditMode"
+    *ngIf="editPostMode"
     class="post__content_edit"
     (change)="onChange()"
 >

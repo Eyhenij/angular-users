@@ -15,25 +15,25 @@ import {getUsersAction} from '../../../store/users/users.actions';
 })
 export class UsersPageComponent implements OnInit {
 
+    @ViewChild(MatPaginator)
+    private readonly _paginator: MatPaginator;
+
     private readonly _allUsers$: Observable<IUser[]> = this._store$.select(getUsersSelector);
+    private _dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
     public totalUsersCount$: Observable<number> = this._allUsers$
         .pipe(
             map((users: IUser[]): number => users.length)
         );
+
     public users$: Observable<IUser[]> = this._allUsers$
         .pipe(
             map((users: IUser[]): IUser[] => {
                 return users.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize);
             })
         );
-
     public pageSize = 2;
     public currentPage = 1;
-    private _dataSource: MatTableDataSource<any> = new MatTableDataSource();
-
-    @ViewChild(MatPaginator)
-    private readonly _paginator: MatPaginator;
 
     constructor(private readonly _store$: Store) {}
 
