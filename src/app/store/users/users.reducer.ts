@@ -7,6 +7,7 @@ import { IUsersState } from '../app.store';
 const initialState: IUsersState = {
     onLoading: false,
     users: [],
+    totalUsersCount: null,
     selectedUser: null,
     serverError: null
 };
@@ -28,6 +29,29 @@ const _usersReducer = createReducer(
         })
     ),
     on(usersActions.getUsersActionFailure,
+        (state: IUsersState, serverResponse: IServerResponse) => ({
+            ...state,
+            onLoading: false,
+            serverError: serverResponse
+        })
+    ),
+
+// ===================  GET CURRENT USERS  ===================
+    on(usersActions.getCurrentUsersAction,
+        (state: IUsersState) => ({
+            ...state,
+            onLoading: true
+        })
+    ),
+    on(usersActions.getCurrentUsersActionSuccess,
+        (state: IUsersState, { res }) => ({
+            ...state,
+            users: res.items,
+            totalUsersCount: res.totalCount,
+            onLoading: false
+        })
+    ),
+    on(usersActions.getCurrentUsersActionFailure,
         (state: IUsersState, serverResponse: IServerResponse) => ({
             ...state,
             onLoading: false,

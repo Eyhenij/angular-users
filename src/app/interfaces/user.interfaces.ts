@@ -12,3 +12,8 @@ export interface IUserForPost {
     email: string;
     password?: string;
 }
+
+export interface ICurrentUsers {
+    currentPage: number;
+    pageSize: number;
+}

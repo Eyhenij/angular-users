@@ -13,6 +13,7 @@ export const COMMENTS_FEATURE_NODE = 'comments';
 export interface IUsersState {
     onLoading: boolean;
     users: IUser[];
+    totalUsersCount: number;
     selectedUser: IUser;
     serverError?: IServerResponse;
 }
@@ -39,6 +40,7 @@ export interface IProfileState {
 export interface IPostsState {
     onLoading: boolean;
     posts: IPost[];
+    totalPostsCount: number;
     selectedPost: IPost;
     serverError: IServerResponse;
 }

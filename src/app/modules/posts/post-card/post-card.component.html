@@ -1,4 +1,4 @@
-<div>
+<div class="post">
     <div class="post__container">
         <div class="post__title">
             <app-post-card-title
@@ -25,6 +25,7 @@
                 (onEditModeChange)="toggleEditMode($event)"
                 (onShowCommentsChange)="toggleShowCommentsMode($event)"
                 (makePostChange)="makeDispatch($event)"
+                (onDeletePostEvent)="onDeleteChanges()"
             ></app-post-card-button-block>
         </div>
     </div>

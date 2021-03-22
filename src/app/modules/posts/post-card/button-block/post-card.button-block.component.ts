@@ -23,6 +23,8 @@ export class PostCardButtonBlockComponent {
     public makePostChange: EventEmitter<boolean> = new EventEmitter<boolean>();
     @Output()
     public onShowCommentsChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output()
+    public onDeletePostEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     constructor(private readonly _store$: Store) {}
 
@@ -48,6 +50,7 @@ export class PostCardButtonBlockComponent {
 
     public deletePost(): void {
         this._store$.dispatch(deletePostAction({ postUUID: this.post.postUUID }));
+        this.onDeletePostEvent.emit();
     }
 
     public toggleShowComments(): void {

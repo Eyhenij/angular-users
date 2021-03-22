@@ -1,12 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {IUser} from '../../../interfaces/user.interfaces';
-import {MatPaginator, PageEvent} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {Store} from '@ngrx/store';
-import {getUsersSelector} from '../../../store/users/users.selectors';
-import {getUsersAction} from '../../../store/users/users.actions';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IUser } from '../../../interfaces/user.interfaces';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { getCurrentUsersAction } from '../../../store/users/users.actions';
+import { getTotalUsersCountSelector, getUsersSelector } from '../../../store/users/users.selectors';
 
 @Component({
     selector: 'app-users-page',
@@ -18,38 +17,27 @@ export class UsersPageComponent implements OnInit {
     @ViewChild(MatPaginator)
     private readonly _paginator: MatPaginator;
 
-    private readonly _allUsers$: Observable<IUser[]> = this._store$.select(getUsersSelector);
-    private _dataSource: MatTableDataSource<any> = new MatTableDataSource();
+    private readonly _dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
-    public totalUsersCount$: Observable<number> = this._allUsers$
-        .pipe(
-            map((users: IUser[]): number => users.length)
-        );
-
-    public users$: Observable<IUser[]> = this._allUsers$
-        .pipe(
-            map((users: IUser[]): IUser[] => {
-                return users.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize);
-            })
-        );
+    public totalUsersCount$: Observable<number> = this._store$.select(getTotalUsersCountSelector);
+    public currentUsers$: Observable<IUser[]> = this._store$.select(getUsersSelector);
     public pageSize = 2;
     public currentPage = 1;
 
     constructor(private readonly _store$: Store) {}
 
     ngOnInit(): void {
-        this._store$.dispatch(getUsersAction());
+        this._getCurrentUsers();
         this._dataSource.paginator = this._paginator;
     }
 
     public onPageChange(event: PageEvent): void {
         this.pageSize = event.pageSize;
         this.currentPage = event.pageIndex + 1;
-        this.users$ = this._allUsers$
-            .pipe(
-                map((users: IUser[]): IUser[] => {
-                    return users.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize);
-                })
-            );
+        this._getCurrentUsers();
+    }
+
+    private _getCurrentUsers(): void {
+        this._store$.dispatch(getCurrentUsersAction({ currentData: { currentPage: this.currentPage, pageSize: this.pageSize } }));
     }
 }

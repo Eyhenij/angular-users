@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { ICreatePostData, IPost } from '../../../interfaces/post.interface';
 import { Store } from '@ngrx/store';
 import { updatePostAction } from '../../../store/posts/posts.actions';
@@ -12,6 +12,9 @@ export class PostCardComponent implements OnInit {
 
     @Input()
     public post: IPost;
+
+    @Output()
+    public onDeletePostEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     public editPostMode = false;
     public showCommentsMode = false;
@@ -50,5 +53,9 @@ export class PostCardComponent implements OnInit {
             };
             this._store$.dispatch(updatePostAction({ newData, postUUID: this.post.postUUID }));
         }
+    }
+
+    public onDeleteChanges(): void {
+        this.onDeletePostEvent.emit();
     }
 }

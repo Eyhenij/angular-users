@@ -7,19 +7,32 @@ import {IUser} from '../../interfaces/user.interfaces';
 import {Observable, of} from 'rxjs';
 import {Router} from '@angular/router';
 import {Action} from '@ngrx/store';
-import {IServerResponse} from '../../interfaces/server-responses.interface';
+import {ICurrentItemsResponse, IServerResponse} from '../../interfaces/server-responses.interface';
 
 
 @Injectable()
 export class UsersEffects {
 
-    getUsers$ = createEffect((): Observable<Action> => this._actions$
+    getAllUsers$ = createEffect((): Observable<Action> => this._actions$
         .pipe(
             ofType(usersActions.getUsersAction),
-            switchMap((): Observable<IUser[]> => this._usersService.getUsersData()),
+            switchMap((): Observable<IUser[]> => this._usersService.getAllUsers()),
             map((serverResponse: IUser[]): Action => usersActions.getUsersActionSuccess({users: serverResponse})),
             catchError((err: Error): Observable<Action> => of(
                 usersActions.getUsersActionFailure({message: err.message, success: false}))
+            )
+        )
+    );
+
+    getCurrentUsers$ = createEffect((): Observable<Action> => this._actions$
+        .pipe(
+            ofType(usersActions.getCurrentUsersAction),
+            switchMap(({ currentData }): Observable<ICurrentItemsResponse<IUser[]>> => {
+                return this._usersService.getCurrentUsers(currentData);
+            }),
+            map((res: ICurrentItemsResponse<IUser[]>): Action => usersActions.getCurrentUsersActionSuccess({ res })),
+            catchError((err: Error): Observable<Action> => of(
+                usersActions.getCurrentUsersActionFailure({message: err.message, success: false}))
             )
         )
     );

@@ -7,9 +7,9 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './components/header/header.component';
 import {OnLoadingComponent} from './components/on-loading/on-loading.component';
-import {RegisterUserPageComponent} from '../authorization/components/register-user-page/register-user-page.component';
+import {RegisterUserPageComponent} from './components/register-user-page/register-user-page.component';
 import {NotFoundPageComponent} from './components/not-found-page/not-found-page.component';
-import {LoginPageComponent} from '../authorization/components/login-page/login-page.component';
+import {LoginPageComponent} from './components/login-page/login-page.component';
 
 import {RoleGuard} from '../../guards/role.guard';
 import {AuthGuard} from '../../guards/auth.guard';
@@ -22,11 +22,10 @@ import {EffectsModule} from '@ngrx/effects';
 import {StoreRouterConnectingModule} from '@ngrx/router-store';
 
 import {AuthStoreModule} from '../../store/authorization/auth-store.module';
-import {UsersStoreModule} from '../../store/users/users-store.module';
-import {ProfileStoreModule} from '../../store/profile/profile-store.module';
 import {HeaderContainerComponent} from './components/header/header.container.component';
-import {PostsStoreModule} from '../../store/posts/posts-store.module';
-import {CommentsStoreModule} from '../../store/comments/comments-store.module';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MaterialModule} from '../material/material.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
@@ -39,19 +38,19 @@ import {CommentsStoreModule} from '../../store/comments/comments-store.module';
         LoginPageComponent
     ],
     imports: [
-        MainPageModule,
         BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
+        BrowserAnimationsModule,
         StoreModule.forRoot({}, {}),
         StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-        EffectsModule.forRoot(),
         StoreRouterConnectingModule.forRoot(),
-        AuthStoreModule,
-        UsersStoreModule,
-        ProfileStoreModule,
-        PostsStoreModule,
-        CommentsStoreModule
+        EffectsModule.forRoot(),
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MaterialModule,
+        AppRoutingModule,
+        MainPageModule,
+        AuthStoreModule
     ],
     providers: [
         {

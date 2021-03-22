@@ -10,7 +10,7 @@ export const getProfilePostsSelector = createSelector<IPostsState, IPostsState, 
     (state: IPostsState): IPost[] => state.posts
 );
 
-export const getOnePostSelector = createSelector<IPostsState, IPostsState, IPost>(
+export const getTotalPostsCountSelector = createSelector<IPostsState, IPostsState, number>(
     _postsFeatureSelector,
-    (state: IPostsState): IPost => state.selectedPost
+    (state: IPostsState): number => state.totalPostsCount
 );

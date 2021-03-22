@@ -15,3 +15,8 @@ export interface IServerErrors {
     usersServerError: string;
     postsServerError: string;
 }
+
+export interface ICurrentItemsResponse<T> {
+    totalCount: number;
+    items: T;
+}

@@ -10,6 +10,7 @@ import { PostCardButtonBlockComponent } from './post-card/button-block/post-card
 import { PostCardContentComponent } from './post-card/content/post-card.content.component';
 import { PostCardComponent } from './post-card/post-card.component';
 import { CommentsModule } from '../comments/comments.module';
+import { PostsStoreModule } from '../../store/posts/posts-store.module';
 
 @NgModule({
     declarations: [
@@ -21,11 +22,12 @@ import { CommentsModule } from '../comments/comments.module';
         PostCardContentComponent
     ],
     imports: [
-        CommentsModule,
         ReactiveFormsModule,
         MaterialModule,
+        CommonModule,
+        CommentsModule,
         PostsRoutingModule,
-        CommonModule
+        PostsStoreModule
     ]
 })
 export class PostsModule {}

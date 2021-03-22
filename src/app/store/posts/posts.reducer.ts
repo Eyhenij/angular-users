@@ -7,6 +7,7 @@ import {IPost} from '../../interfaces/post.interface';
 const initialState: IPostsState = {
     onLoading: false,
     posts: [],
+    totalPostsCount: 0,
     selectedPost: null,
     serverError: null
 };
@@ -37,6 +38,29 @@ const _postsReducer = createReducer(
         })
     ),
 
+// ===================  GET CURRENT POSTS  ===================
+    on(postsActions.getCurrentPostsAction,
+        (state: IPostsState) => ({
+            ...state,
+            onLoading: true
+        })
+    ),
+    on(postsActions.getCurrentPostsActionSuccess,
+        (state: IPostsState, { res }) => ({
+            ...state,
+            posts: res.items,
+            totalPostsCount: res.totalCount,
+            onLoading: false
+        })
+    ),
+    on(postsActions.getCurrentPostsActionFailure,
+        (state: IPostsState, serverResponse: IServerResponse) => ({
+            ...state,
+            onLoading: false,
+            serverError: serverResponse
+        })
+    ),
+
 // ===================  GET ONE POST  ===================
     on(postsActions.getOnePostAction,
         (state: IPostsState) => ({
@@ -59,7 +83,7 @@ const _postsReducer = createReducer(
         })
     ),
 
-// ===================  CREATE POSTS  ===================
+// ===================  CREATE POST  ===================
     on(postsActions.createPostAction,
         (state: IPostsState) => ({
             ...state,
@@ -67,9 +91,8 @@ const _postsReducer = createReducer(
         })
     ),
     on(postsActions.createPostActionSuccess,
-        (state: IPostsState, { newPost }) => ({
+        (state: IPostsState) => ({
             ...state,
-            posts: [newPost, ...state.posts],
             onLoading: false
         })
     ),
@@ -145,12 +168,20 @@ const _postsReducer = createReducer(
                     return { ...post, countOfLikes: newCountOfLikes, liked: !rollback };
                 }
                 return post;
-            })
+            }),
+            onLoading: true,
+        })
+    ),
+    on(postsActions.likeActionSuccess,
+        (state: IPostsState) => ({
+            ...state,
+            onLoading: false
         })
     ),
     on(postsActions.likeActionFailure,
         (state: IPostsState, serverResponse: IServerResponse) => ({
             ...state,
+            onLoading: false,
             serverError: serverResponse
         })
     ),
@@ -189,12 +220,20 @@ const _postsReducer = createReducer(
                     return { ...post, countOfDislikes: newCountOfDisLikes, disliked: !rollback };
                 }
                 return post;
-            })
+            }),
+            onLoading: true
+        })
+    ),
+    on(postsActions.disLikeActionSuccess,
+        (state: IPostsState) => ({
+            ...state,
+            onLoading: false
         })
     ),
     on(postsActions.disLikeActionFailure,
         (state: IPostsState, serverResponse: IServerResponse) => ({
             ...state,
+            onLoading: false,
             serverError: serverResponse
         })
     ),

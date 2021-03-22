@@ -22,3 +22,11 @@ export interface IWasPostLiked {
     postUUID: string;
     value: boolean;
 }
+
+export interface ICurrentPosts {
+    userUUID: string;
+    currentPage: number;
+    pageSize: number;
+}
+
+

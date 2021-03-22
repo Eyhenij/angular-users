@@ -1,25 +1,29 @@
-.post__container {
-    position: relative;
-    width: 100%;
-    height: 100%;
+.post {
+    //background-color: lightgrey;
 
-    .post__title {
-        min-height: 30px;
-        background-color: #bdbbbf;
-    }
-
-    .post__content {
-        min-height: 100px;
-        background-color: lightgrey;
-    }
-
-    .btn__block {
-        position: absolute;
+    .post__container {
+        position: relative;
         width: 100%;
-        bottom: 0;
+        height: 100%;
+
+        .post__title {
+            min-height: 30px;
+            background-color: #bdbbbf;
+        }
+
+        .post__content {
+            min-height: 100px;
+        }
+
+        .btn__block {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+    }
+
+    .comments__container {
+        border-bottom: 1px solid black;
     }
 }
 
-.comments__container {
-
-}
