@@ -10,6 +10,11 @@ export const getUsersSelector = createSelector<IUsersState, IUsersState, IUser[]
     (state: IUsersState): IUser[] => state.users
 );
 
+export const getTotalUsersCountSelector = createSelector<IUsersState, IUsersState, number>(
+    _usersFeatureSelector,
+    (state: IUsersState): number => state.totalUsersCount
+);
+
 export const getUserByIdSelector = createSelector<IUsersState, IUsersState, IUser>(
     _usersFeatureSelector,
     (state: IUsersState): IUser => state.selectedUser

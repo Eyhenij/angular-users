@@ -1,27 +1,39 @@
-<div class="post__container">
-    <div class="post__title">
-        <app-post-card-title
-            [updatedAt]="post.updatedAt"
-            [title]="post.title"
-            [isEditMode]="isEditMode"
-            (onChangeTitle)="setNewPostTitle($event)"
-        ></app-post-card-title>
+<div class="post">
+    <div class="post__container">
+        <div class="post__title">
+            <app-post-card-title
+                [updatedAt]="post.updatedAt"
+                [title]="post.title"
+                [editPostMode]="editPostMode"
+                (onChangeTitle)="setNewPostTitle($event)"
+            ></app-post-card-title>
+        </div>
+
+        <div class="post__content">
+            <app-post-card-content
+                [content]="post.content"
+                [editPostMode]="editPostMode"
+                (onChangeContent)="setNewPostContent($event)"
+            ></app-post-card-content>
+        </div>
+
+        <div class="btn__block">
+            <app-post-card-button-block
+                [post]="post"
+                [editPostMode]="editPostMode"
+                [showCommentsMode]="showCommentsMode"
+                (onEditModeChange)="toggleEditMode($event)"
+                (onShowCommentsChange)="toggleShowCommentsMode($event)"
+                (makePostChange)="makeDispatch($event)"
+                (onDeletePostEvent)="onDeleteChanges()"
+            ></app-post-card-button-block>
+        </div>
     </div>
 
-    <div class="post__content">
-        <app-post-card-content
-            [content]="post.content"
-            [isEditMode]="isEditMode"
-            (onChangeContent)="setNewPostContent($event)"
-        ></app-post-card-content>
-    </div>
-
-    <div class="btn__block">
-        <app-post-card-button-block
-            [post]="post"
-            [isEditMode]="isEditMode"
-            (onEditModeChange)="toggleEditMode($event)"
-            (makePostChange)="makeDispatch($event)"
-        ></app-post-card-button-block>
+    <div class="comments__container">
+        <app-comment-container
+            [_parentUUID]="post.postUUID"
+            [showCommentsMode]="showCommentsMode"
+        ></app-comment-container>
     </div>
 </div>

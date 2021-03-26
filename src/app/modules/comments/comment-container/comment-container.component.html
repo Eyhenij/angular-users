@@ -1,0 +1,41 @@
+<div class="comment__container">
+    <div class="new_comment">
+        <mat-form-field appearance="fill" class="input__container">
+            <mat-label>leave your comment</mat-label>
+
+            <input
+                matInput
+                type="text"
+                aria-label="New Content"
+                [formControl]="newCommentControl"
+            >
+
+            <button
+                *ngIf="newCommentControl.value"
+                matSuffix
+                mat-button
+                mat-icon-button
+                aria-label="Submit"
+                (click)="createComment()">
+                <mat-icon>done</mat-icon>
+            </button>
+
+            <button
+                *ngIf="newCommentControl.value"
+                matSuffix
+                mat-button
+                mat-icon-button
+                aria-label="Clear"
+                (click)="newCommentControl.setValue('')">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+
+    <div *ngIf="showCommentsMode">
+        <app-comment-card
+            *ngFor="let comment of (comments$ | async)"
+            [comment]="comment"
+        ></app-comment-card>
+    </div>
+</div>

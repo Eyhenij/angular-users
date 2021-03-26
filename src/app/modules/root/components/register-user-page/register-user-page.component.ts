@@ -11,10 +11,10 @@ import {registerAction} from '../../../../store/authorization/auth.actions';
 export class RegisterUserPageComponent {
 
     public newUser: IUserForPost = {
-        name: 'John Doe',
+        name: 'John',
         login: '@john',
         email: 'john@email.com',
-        password: 'thePasswordOfJohnDoe'
+        password: 'passwordOfJohn'
     };
 
     constructor(private readonly _store$: Store) {}

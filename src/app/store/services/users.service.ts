@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {IUser} from '../../interfaces/user.interfaces';
+import {ICurrentUsers, IUser} from '../../interfaces/user.interfaces';
 import {IUserForPost} from '../../interfaces/user.interfaces';
-import {IServerResponse} from '../../interfaces/server-responses.interface';
+import {ICurrentItemsResponse, IServerResponse} from '../../interfaces/server-responses.interface';
 import {AuthService} from './auth.service';
 
 @Injectable()
@@ -16,8 +16,13 @@ export class UsersService {
         private readonly _authService: AuthService
     ) {}
 
-    public getUsersData(): Observable<IUser[]> {
+    public getAllUsers(): Observable<IUser[]> {
         return this._http.get<IUser[]>(this._usersUrl);
+    }
+
+    public getCurrentUsers(data: ICurrentUsers): Observable<ICurrentItemsResponse<IUser[]>> {
+        return this._http.get<ICurrentItemsResponse<IUser[]>>(
+            `${this._usersUrl}/current?currentPage=${data.currentPage}&pageSize=${data.pageSize}`);
     }
 
     public getUserById(id: number): Observable<IUser> {

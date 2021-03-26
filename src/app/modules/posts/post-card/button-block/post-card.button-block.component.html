@@ -17,14 +17,22 @@
             <mat-icon color="{{post.disliked ? 'warn' : 'primary'}}">thumb_down</mat-icon>
             {{post.countOfDislikes}}
         </button>
+
+        <button
+            mat-button
+            aria-label="Comments"
+            (click)="toggleShowComments()"
+        >
+            <mat-icon color="{{showCommentsMode ? 'warn' : 'primary'}}">question_answer</mat-icon>
+        </button>
     </div>
 
-    <div *ngIf="!isEditMode" class="btn__block_edit">
+    <div *ngIf="!editPostMode" class="btn__block_edit">
         <button
             mat-button
             mat-icon-button
             aria-label="Edit"
-            (click)="goEditMode()"
+            (click)="toggleEditPostMode()"
         >
             <mat-icon color="primary">edit</mat-icon>
         </button>
@@ -40,12 +48,12 @@
         </button>
     </div>
 
-    <div *ngIf="isEditMode" class="btn__block_edit">
+    <div *ngIf="editPostMode" class="btn__block_edit">
         <button
             mat-button
             mat-icon-button
             aria-label="Submit"
-            (click)="done()"
+            (click)="updatePost()"
         >
             <mat-icon color="primary">done</mat-icon>
         </button>
@@ -54,7 +62,7 @@
             mat-button
             mat-icon-button
             aria-label="Cancel"
-            (click)="leaveEditMode()"
+            (click)="toggleEditPostMode()"
         >
             <mat-icon color="primary">close</mat-icon>
         </button>

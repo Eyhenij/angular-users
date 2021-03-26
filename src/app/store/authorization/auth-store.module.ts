@@ -5,9 +5,11 @@ import {authReducer} from './auth.reducer';
 import {AUTH_FEATURE_NODE} from '../app.store';
 import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from './auth.effects';
+import {AuthService} from '../services/auth.service';
 
 
 @NgModule({
+    providers: [AuthService],
     imports: [
         CommonModule,
         StoreModule.forFeature(AUTH_FEATURE_NODE, authReducer),

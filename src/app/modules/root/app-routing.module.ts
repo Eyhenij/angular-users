@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {RegisterUserPageComponent} from '../authorization/components/register-user-page/register-user-page.component';
+import {RegisterUserPageComponent} from './components/register-user-page/register-user-page.component';
 import {NotFoundPageComponent} from './components/not-found-page/not-found-page.component';
 import {AuthGuard} from '../../guards/auth.guard';
-import {LoginPageComponent} from '../authorization/components/login-page/login-page.component';
+import {LoginPageComponent} from './components/login-page/login-page.component';
 import {StoreModule} from '@ngrx/store';
 import {DEFAULT_ROUTER_FEATURENAME, routerReducer} from '@ngrx/router-store';
 

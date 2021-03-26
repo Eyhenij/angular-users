@@ -30,6 +30,9 @@
         class="post__card"
         *ngFor="let post of (currentPosts$ | async)"
     >
-        <app-post-card [post]="post"></app-post-card>
+        <app-post-card
+            [post]="post"
+            (onDeletePostEvent)="onDeleteChanges()"
+        ></app-post-card>
     </div>
 </div>

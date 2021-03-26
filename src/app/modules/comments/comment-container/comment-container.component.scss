@@ -1,0 +1,13 @@
+.comment__container {
+    //background-color: lightgrey;
+
+    .new_comment {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        .input__container {
+            width: 98%;
+        }
+    }
+}

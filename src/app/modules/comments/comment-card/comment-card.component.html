@@ -1,0 +1,69 @@
+<div class="comment__container">
+    <div class="comment__avatar">
+
+    </div>
+
+    <mat-card class="comment__content">
+        <span class="content__wrap">
+            <span *ngIf="!editCommentMode">
+                {{comment.content}}
+            </span>
+
+            <span *ngIf="editCommentMode">
+                <mat-form-field appearance="fill" class="input__container">
+                    <mat-label>New Title</mat-label>
+
+                    <input
+                        matInput
+                        type="text"
+                        aria-label="Comment"
+                        [formControl]="commentControl"
+                    >
+                </mat-form-field>
+            </span>
+        </span>
+
+        <span class="btn__block">
+            <span *ngIf="!editCommentMode">
+                <button
+                    mat-button
+                    mat-icon-button
+                    aria-label="Edit"
+                    (click)="toggleEditCommentMode()"
+                >
+                    <mat-icon color="primary">edit</mat-icon>
+                </button>
+
+                <button
+                    mat-button
+                    mat-icon-button
+                    aria-label="Remove"
+                    routerLink="/"
+                    (click)="deleteComment()"
+                >
+                    <mat-icon color="primary">delete</mat-icon>
+                </button>
+            </span>
+
+            <span *ngIf="editCommentMode">
+                <button
+                    mat-button
+                    mat-icon-button
+                    aria-label="Submit"
+                    (click)="updateComment()"
+                >
+                    <mat-icon color="primary">done</mat-icon>
+                </button>
+
+                <button
+                    mat-button
+                    mat-icon-button
+                    aria-label="Cancel"
+                    (click)="toggleEditCommentMode()"
+                >
+                    <mat-icon color="primary">close</mat-icon>
+                </button>
+            </span>
+        </span>
+    </mat-card>
+</div>

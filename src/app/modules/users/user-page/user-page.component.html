@@ -4,7 +4,7 @@
 
     <div *ngIf="(isAdmin$ | async)" class="btn__block">
         <button
-            [routerLink]="'/users/edit/' + userUUID"
+            [routerLink]="'/users/' + userUUID + '/edit'"
             mat-button
             mat-icon-button
             aria-label="Edit user-account">

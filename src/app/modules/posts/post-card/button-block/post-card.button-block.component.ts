@@ -13,12 +13,18 @@ export class PostCardButtonBlockComponent {
     @Input()
     public post: IPost;
     @Input()
-    public isEditMode: boolean;
+    public editPostMode: boolean;
+    @Input()
+    public showCommentsMode: boolean;
 
     @Output()
     public onEditModeChange: EventEmitter<boolean> = new EventEmitter<boolean>();
     @Output()
     public makePostChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output()
+    public onShowCommentsChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output()
+    public onDeletePostEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     constructor(private readonly _store$: Store) {}
 
@@ -44,18 +50,19 @@ export class PostCardButtonBlockComponent {
 
     public deletePost(): void {
         this._store$.dispatch(deletePostAction({ postUUID: this.post.postUUID }));
+        this.onDeletePostEvent.emit();
     }
 
-    public goEditMode(): void {
-        this.onEditModeChange.emit(true);
+    public toggleShowComments(): void {
+        this.onShowCommentsChange.emit(!this.showCommentsMode);
     }
 
-    public leaveEditMode(): void {
-        this.onEditModeChange.emit(false);
+    public toggleEditPostMode(): void {
+        this.onEditModeChange.emit(!this.editPostMode);
     }
 
-    public done(): void {
-        this.onEditModeChange.emit(false);
+    public updatePost(): void {
         this.makePostChange.emit(true);
+        this.toggleEditPostMode();
     }
 }

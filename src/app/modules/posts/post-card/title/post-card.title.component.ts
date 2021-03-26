@@ -12,7 +12,7 @@ export class PostCardTitleComponent implements OnChanges {
     @Input()
     public updatedAt: string;
     @Input()
-    public isEditMode: boolean;
+    public editPostMode: boolean;
 
     public newTitleControl: FormControl;
 
