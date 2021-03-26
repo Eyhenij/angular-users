@@ -1,0 +1,93 @@
+<div class="page__container">
+    <mat-card class="form__container" [formGroup]="form">
+        <div>
+            <mat-form-field appearance="fill" class="input__container">
+                <mat-icon matPrefix class="prefix-icon">account_circle</mat-icon>
+
+                <mat-label>Login</mat-label>
+                <input type="text" formControlName="loginControl" aria-label="label" matInput>
+
+                <mat-error *ngIf="form.get('loginControl').invalid && form.get('loginControl').touched">
+
+                    <mat-error *ngIf="form.get('loginControl').hasError('required')">
+                        Login cannot be empty
+                    </mat-error>
+
+                    <mat-error *ngIf="form.get('loginControl').hasError('minlength')">
+                        Login must contain more then 3 symbols
+                    </mat-error>
+
+                </mat-error>
+
+                <button
+                    mat-button
+                    *ngIf="form.get('loginControl').value"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="form.get('loginControl').setValue('')">
+                    <mat-icon>close</mat-icon>
+                </button>
+
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill" class="input__container">
+                <mat-icon matPrefix class="prefix-icon">vpn_key</mat-icon>
+
+                <mat-label>Password</mat-label>
+                <input [type]="hide ? 'password' : 'text'" formControlName="passwordControl" aria-label="label" matInput>
+
+                <mat-error *ngIf="form.get('passwordControl').invalid && form.get('passwordControl').touched">
+
+                    <mat-error *ngIf="form.get('passwordControl').hasError('required')">
+                        Password cannot be empty
+                    </mat-error>
+
+                    <mat-error *ngIf="form.get('passwordControl').hasError('minlength')">
+                        Password must contain more then 8 symbols
+                    </mat-error>
+
+                </mat-error>
+
+                <button
+                    mat-button
+                    matSuffix
+                    mat-icon-button
+                    (click)="hide = !hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+
+                <button
+                    mat-button
+                    *ngIf="form.get('passwordControl').value"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="form.get('passwordControl').setValue('')">
+                    <mat-icon>close</mat-icon>
+                </button>
+
+            </mat-form-field>
+        </div>
+
+        <div class="btn__container">
+            <button
+                class="btn"
+                [disabled]="form.invalid || (isAuth$ | async)"
+                mat-flat-button
+                (click)="authorization()"
+                color="primary"
+            >Login</button>
+
+            <button
+                [disabled]="isAuth$ | async"
+                mat-flat-button
+                class="btn"
+                color="warn"
+                routerLink="/register"
+            >Register</button>
+        </div>
+    </mat-card>
+</div>

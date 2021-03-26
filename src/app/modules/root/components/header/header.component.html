@@ -1,0 +1,19 @@
+<mat-toolbar class="header__container">
+    <div *ngIf="!isAuth" class="header__greet">Welcome !</div>
+
+    <div *ngIf="isAuth" class="header__wrap">
+        <span class="header__profile">
+            <mat-icon class="profile__icon">account_circle</mat-icon>
+            {{login}}
+        </span>
+
+        <div class="header__btn_wrap">
+            <button
+                class="header__btn"
+                mat-flat-button
+                color="warn"
+                (click)="logOut()"
+            >Logout</button>
+        </div>
+    </div>
+</mat-toolbar>

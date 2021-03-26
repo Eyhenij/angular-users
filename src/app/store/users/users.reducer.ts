@@ -31,7 +31,7 @@ const _usersReducer = createReducer(
         (state: IUsersState, serverResponse: IServerResponse) => ({
             ...state,
             onLoading: false,
-            serverError: serverResponse.message
+            serverError: serverResponse
         })
     ),
 
@@ -53,7 +53,7 @@ const _usersReducer = createReducer(
         (state: IUsersState, serverResponse: IServerResponse) => ({
             ...state,
             onLoading: false,
-            serverError: serverResponse.message
+            serverError: serverResponse
         })
     ),
 
@@ -74,7 +74,7 @@ const _usersReducer = createReducer(
         (state: IUsersState, serverResponse: IServerResponse) => ({
             ...state,
             onLoading: false,
-            serverError: serverResponse.message
+            serverError: serverResponse
         })
     ),
 
@@ -95,7 +95,7 @@ const _usersReducer = createReducer(
         (state: IUsersState, serverResponse: IServerResponse) => ({
             ...state,
             onLoading: false,
-            serverError: serverResponse.message
+            serverError: serverResponse
         })
     ),
 
@@ -116,7 +116,7 @@ const _usersReducer = createReducer(
         (state: IUsersState, serverResponse: IServerResponse) => ({
             ...state,
             onLoading: false,
-            serverError: serverResponse.message
+            serverError: serverResponse
         })
     )
 );

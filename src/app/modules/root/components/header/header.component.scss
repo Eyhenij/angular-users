@@ -1,0 +1,55 @@
+.header__container {
+    height: 60px;
+    background-color: cornflowerblue;
+    color: white;
+
+    .header__wrap {
+        width: 100%;
+        display: grid;
+        grid-template-areas:
+        "p b";
+
+        .header__profile {
+            grid-area: p;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            margin-left: 40px;
+
+            .profile__icon {
+                margin-right: 10px;
+            }
+        }
+
+        .header__btn_wrap {
+            grid-area: b;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+
+            .header__btn {
+                border: 1px solid #eee;
+                font-size: 14px;
+                transition: all 0.2s ease-in-out;
+
+                &:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .header__greet {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        font-size: larger;
+    }
+}

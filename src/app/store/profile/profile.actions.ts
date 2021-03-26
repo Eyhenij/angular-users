@@ -1,6 +1,6 @@
 import {createAction, props} from '@ngrx/store';
-import {IUser} from '../../interfaces/user.interfaces';
+import {IProfile} from '../../interfaces/profile.interface';
 
-export const setProfileDataAction = createAction('[Profile] set profile data', props<{profile: IUser}>());
-export const setProfileDataActionSuccess = createAction('[Profile] set profile data success', props<{profile: IUser}>());
-export const setProfileDataActionFailure = createAction('[Profile] set profile data failure', props<{message: string}>());
+export const setProfileDataAction = createAction('[PROFILE_SET_DATA]', props<{profile: IProfile}>());
+export const setProfileDataActionSuccess = createAction('[PROFILE_SET_DATA_SUCCESS]', props<{profile: IProfile}>());
+export const setProfileDataActionFailure = createAction('[PROFILE_SET_DATA_FAILURE]', props<{message: string, success: boolean}>());
