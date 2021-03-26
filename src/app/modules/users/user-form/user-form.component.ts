@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {IUserForPost} from '../../interfaces/user.interfaces';
+import {IUserForPost} from '../../../interfaces/user.interfaces';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({

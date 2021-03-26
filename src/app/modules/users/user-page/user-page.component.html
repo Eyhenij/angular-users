@@ -4,11 +4,13 @@
 
     <div *ngIf="(isAdmin$ | async)" class="btn__block">
         <button
-            [routerLink]="'/edit/' + userId"
+            [routerLink]="'/users/edit/' + userUUID"
             mat-button
             mat-icon-button
             aria-label="Edit user-account">
-            <mat-icon color="primary">edit</mat-icon>
+            <mat-icon color="primary"
+            >
+                edit</mat-icon>
         </button>
 
         <button
@@ -16,7 +18,9 @@
             mat-button
             mat-icon-button
             aria-label="Remove user-account">
-            <mat-icon color="warn">delete</mat-icon>
+            <mat-icon color="primary"
+            >
+                delete</mat-icon>
         </button>
     </div>
 

@@ -1,0 +1,77 @@
+<div class="card__container" [formGroup]="form">
+    <div>
+        <mat-form-field appearance="fill" class="input__container">
+            <mat-label>Title</mat-label>
+            <input type="text" formControlName="title" aria-label="title" matInput>
+
+            <mat-error *ngIf="form.get('title').invalid && form.get('title').touched">
+                <mat-error *ngIf="form.get('title').hasError('required')">
+                    Post-title cannot be empty
+                </mat-error>
+
+                <mat-error *ngIf="form.get('title').hasError('minlength')">
+                    Post-title must contain more then 3 symbols
+                </mat-error>
+            </mat-error>
+
+            <button
+                mat-button
+                *ngIf="form.get('title').value"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="form.get('title').setValue('')">
+                <mat-icon>close</mat-icon>
+            </button>
+
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field appearance="fill" class="input__container">
+            <mat-label>Content</mat-label>
+            <input type="text" formControlName="content" aria-label="content" matInput>
+
+            <mat-error *ngIf="form.get('content').invalid && form.get('content').touched">
+                <mat-error *ngIf="form.get('content').hasError('required')">
+                    Post-content cannot be empty
+                </mat-error>
+
+                <mat-error *ngIf="form.get('content').hasError('minlength')">
+                    Post-content must contain more then 3 symbols
+                </mat-error>
+            </mat-error>
+
+            <button
+                mat-button
+                *ngIf="form.get('content').value"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="form.get('content').setValue('')">
+                <mat-icon>close</mat-icon>
+            </button>
+
+        </mat-form-field>
+    </div>
+
+    <div class="btn__container">
+        <span>
+            <button
+                mat-flat-button
+                color="primary"
+                class="btn"
+                (click)="onSave()"
+            >Save</button>
+        </span>
+
+        <span>
+            <button
+                mat-flat-button
+                color="primary"
+                class="btn"
+                (click)="onCancel()"
+            >Cancel</button>
+        </span>
+    </div>
+</div>

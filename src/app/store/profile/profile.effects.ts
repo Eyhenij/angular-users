@@ -11,7 +11,7 @@ import {PostsService} from '../services/posts.service';
 @Injectable()
 export class ProfileEffects {
 
-    setProfileData$ = createEffect(() => this._actions
+    setProfileData$ = createEffect((): Observable<Action> => this._actions
         .pipe(
             ofType(profileActions.setProfileDataAction),
             tap(({profile}): void => this._profileService.setProfileData(profile)),

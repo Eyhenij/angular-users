@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IServerResponse} from '../../interfaces/server-responses.interface';
 import {AuthService} from './auth.service';
-import {ICreatePostData, IPost} from '../../interfaces/post.interface';
+import {ICreatePostData, IPost, IWasPostLiked} from '../../interfaces/post.interface';
 
 @Injectable()
 export class PostsService {
@@ -15,20 +15,46 @@ export class PostsService {
         private readonly _authService: AuthService
     ) {}
 
-    public getPostsData(userUUID: string): Observable<IPost[]> {
+    public getAllProfilePosts(userUUID: string): Observable<IPost[]> {
         return this._http.get<IPost[]>(`${this._postsUrl}?userUUID=${userUUID}`);
+    }
+
+    public getOneProfilePost(userUUID: string, postUUID: string): Observable<IPost> {
+        return this._http.get<IPost>(`${this._postsUrl}/${userUUID}?postUUID=${postUUID}`);
+    }
+
+    public createNewPost(newData: ICreatePostData): Observable<IPost> {
+        return this._http.post<IPost>(`${this._postsUrl}`, newData);
     }
 
     public updatePostData(newData: ICreatePostData, postUUID: string): Observable<IServerResponse> {
         return this._http.put<IServerResponse>(`${this._postsUrl}/${postUUID}`, newData);
     }
 
-    public makeLike(postUUID: string, rollback: boolean): Observable<IServerResponse> {
-        return this._http.put<IServerResponse>(`${this._postsUrl}/like/${postUUID}?rollback=${rollback}`, null);
+    public deletePost(postUUID: string): Observable<IServerResponse> {
+        return this._http.delete<IServerResponse>(`${this._postsUrl}/${postUUID}`);
     }
 
-    public makeDisLike(postUUID: string, rollback: boolean): Observable<IServerResponse> {
-        return this._http.put<IServerResponse>(`${this._postsUrl}/dislike/${postUUID}?rollback=${rollback}`, null);
+    public makeLike(userUUID: string, postUUID: string, rollback: boolean): Observable<IServerResponse> {
+        return this._http.put<IServerResponse>(
+            `${this._postsUrl}/like/${postUUID}?userUUID=${userUUID}&rollback=${rollback}`,
+            null
+        );
+    }
+
+    public wasPostLiked(userUUID: string, postUUID: string): Observable<IWasPostLiked> {
+        return this._http.get<IWasPostLiked>(`${this._postsUrl}/like/${postUUID}?userUUID=${userUUID}`);
+    }
+
+    public makeDisLike(userUUID: string, postUUID: string, rollback: boolean): Observable<IServerResponse> {
+        return this._http.put<IServerResponse>(
+            `${this._postsUrl}/dislike/${postUUID}?userUUID=${userUUID}&rollback=${rollback}`,
+            null
+        );
+    }
+
+    public wasPostDisliked(userUUID: string, postUUID: string): Observable<IWasPostLiked> {
+        return this._http.get<IWasPostLiked>(`${this._postsUrl}/dislike/${postUUID}?userUUID=${userUUID}`);
     }
 
     public setProfilePostsData(posts: IPost[]): void {

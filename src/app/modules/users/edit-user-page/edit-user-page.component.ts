@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {IUser, IUserForPost} from '../../../../interfaces/user.interfaces';
+import {IUser, IUserForPost} from '../../../interfaces/user.interfaces';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {getUserByIdSelector} from '../../../../store/users/users.selectors';
-import {getUserByIdAction, updateUserDataAction} from '../../../../store/users/users.actions';
+import {getUserByIdSelector} from '../../../store/users/users.selectors';
+import {getUserByIdAction, updateUserDataAction} from '../../../store/users/users.actions';
 
 @Component({
     selector: 'app-edit-user-page',
@@ -28,10 +28,10 @@ export class EditUserPageComponent implements OnInit {
         this._store$.dispatch(getUserByIdAction({id: this.userId}));
     }
 
-    public updateUserData(): void {
+    public async updateUserData(): Promise<void> {
         this._store$.dispatch(updateUserDataAction({newUserData: this.userDataForUpdate, id: this.userId}));
         alert('you just have updated user data');
-        this._router.navigateByUrl('users');
+        await this._router.navigateByUrl('users');
     }
 
     public changeUserData(changedUser: IUserForPost): void {

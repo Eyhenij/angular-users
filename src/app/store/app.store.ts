@@ -37,5 +37,6 @@ export interface IProfileState {
 export interface IPostsState {
     onLoading: boolean;
     posts: IPost[];
+    selectedPost: IPost;
     serverError: IServerResponse;
 }

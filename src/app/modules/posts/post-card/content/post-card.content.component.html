@@ -1,0 +1,41 @@
+<div *ngIf="!isEditMode" class="post__content">
+    {{content}}
+</div>
+
+
+<div
+    *ngIf="isEditMode"
+    class="post__content_edit"
+    (change)="onChange()"
+>
+    <mat-form-field appearance="fill" class="input__container">
+        <mat-label>New Title</mat-label>
+
+        <input
+            matInput
+            type="text"
+            aria-label="New Content"
+            [formControl]="newContentControl"
+        >
+
+        <mat-error *ngIf="newContentControl.invalid && newContentControl.touched">
+            <mat-error *ngIf="newContentControl.hasError('required')">
+                Post-title cannot be empty
+            </mat-error>
+
+            <mat-error *ngIf="newContentControl.hasError('minlength')">
+                Post-title must contain more then 3 symbols
+            </mat-error>
+        </mat-error>
+
+        <button
+            *ngIf="newContentControl.value"
+            matSuffix
+            mat-button
+            mat-icon-button
+            aria-label="Clear"
+            (click)="newContentControl.setValue('')">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+</div>

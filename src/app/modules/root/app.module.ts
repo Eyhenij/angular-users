@@ -29,6 +29,9 @@ import {ProfileStoreModule} from '../../store/profile/profile-store.module';
 import {HeaderContainerComponent} from './components/header/header.container.component';
 import {PostsStoreModule} from '../../store/posts/posts-store.module';
 import {PostsService} from '../../store/services/posts.service';
+import {AuthEffects} from '../../store/authorization/auth.effects';
+import {UsersEffects} from '../../store/users/users.effects';
+import {ProfileEffects} from '../../store/profile/profile.effects';
 
 @NgModule({
     declarations: [
@@ -47,7 +50,7 @@ import {PostsService} from '../../store/services/posts.service';
         HttpClientModule,
         StoreModule.forRoot({}, {}),
         StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-        EffectsModule.forRoot([]),
+        EffectsModule.forRoot([AuthEffects, UsersEffects, ProfileEffects]),
         StoreRouterConnectingModule.forRoot(),
         AuthStoreModule,
         UsersStoreModule,
@@ -68,5 +71,4 @@ import {PostsService} from '../../store/services/posts.service';
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}

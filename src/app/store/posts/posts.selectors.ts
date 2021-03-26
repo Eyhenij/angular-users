@@ -9,3 +9,8 @@ export const getProfilePostsSelector = createSelector<IPostsState, IPostsState, 
     _postsFeatureSelector,
     (state: IPostsState): IPost[] => state.posts
 );
+
+export const getOnePostSelector = createSelector<IPostsState, IPostsState, IPost>(
+    _postsFeatureSelector,
+    (state: IPostsState): IPost => state.selectedPost
+);

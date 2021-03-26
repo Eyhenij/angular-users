@@ -1,0 +1,15 @@
+.btn__block {
+    position: relative;
+
+    .btn__block_reactions {
+        position: absolute;
+        left: 10px;
+        bottom: 0;
+    }
+
+    .btn__block_edit {
+        position: absolute;
+        right: 10px;
+        bottom: 0;
+    }
+}

@@ -1,0 +1,23 @@
+.card__container {
+    height: 200px;
+    width: 95%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 40px;
+
+    .input__container {
+        width: 100%;
+    }
+
+    .btn__container {
+        height: 20%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+
+        .btn {
+            width: 200px;
+        }
+    }
+}

@@ -1,0 +1,21 @@
+.post__title {
+    position: relative;
+    min-height: 30px;
+    background-color: #bdbbbf;
+
+    .post__title_text {
+        margin-left: 10px;
+    }
+
+    .post__title_createdAt {
+        position: absolute;
+        right: 10px;
+    }
+}
+
+.post__title_edit {
+
+    .input__container {
+        width: 100%;
+    }
+}
