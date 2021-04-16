@@ -22,24 +22,24 @@ const _commentsReducer = createReducer(
     ),
     on(postsActions.getCommentsActionSuccess,
         (state: ICommentsState, { commentsContainer }) => {
-            const foo = (oldState, newCommentsContainer): ICommentContainer[] =>  {
-                const doesContainerExist = oldState.commentsContainer.find((container: ICommentContainer): boolean => {
-                    return container.parentUUID === newCommentsContainer.parentUUID;
+            const foo = (): ICommentContainer[] =>  {
+                const doesContainerExist = state.commentsContainer.find((container: ICommentContainer): boolean => {
+                    return container.parentUUID === commentsContainer.parentUUID;
                 });
                 if (doesContainerExist) {
-                    return oldState.commentsContainer.map((container: ICommentContainer): ICommentContainer => {
-                        if (container.parentUUID === newCommentsContainer.parentUUID) {
+                    return state.commentsContainer.map((container: ICommentContainer): ICommentContainer => {
+                        if (container.parentUUID === commentsContainer.parentUUID) {
                             return { ...container, comments: commentsContainer.comments};
                         }
                         return container;
                     });
                 } else {
-                    return [...oldState.commentsContainer, newCommentsContainer];
+                    return [...state.commentsContainer, commentsContainer];
                 }
             };
             return {
                 ...state,
-                commentsContainer: foo(state, commentsContainer),
+                commentsContainer: foo(),
                 onLoading: false
             };
         }

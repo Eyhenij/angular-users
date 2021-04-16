@@ -25,14 +25,13 @@
         (onCreatePost)="createNewPost($event)"
         (closeCreatePostMode)="isCreateMode = false"
     ></app-new-post-form>
-
     <div
         class="post__card"
         *ngFor="let post of (currentPosts$ | async)"
     >
         <app-post-card
             [post]="post"
-            (onDeletePostEvent)="onDeleteChanges()"
+            (onDeletePostEvent)="onDeletePost()"
         ></app-post-card>
     </div>
 </div>

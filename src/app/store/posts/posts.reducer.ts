@@ -91,8 +91,9 @@ const _postsReducer = createReducer(
         })
     ),
     on(postsActions.createPostActionSuccess,
-        (state: IPostsState) => ({
+        (state: IPostsState, { newPost }) => ({
             ...state,
+            posts: [newPost, ...state.posts],
             onLoading: false
         })
     ),
@@ -187,6 +188,12 @@ const _postsReducer = createReducer(
     ),
 
 // ===================  WAS LIKED  ===================
+    on(postsActions.wasLikedAction,
+        (state: IPostsState) => ({
+            ...state,
+            onLoading: true
+        })
+    ),
     on(postsActions.wasLikedActionSuccess,
         (state: IPostsState, { postUUID, value }) => ({
             ...state,
@@ -195,12 +202,14 @@ const _postsReducer = createReducer(
                     return { ...post, liked: value };
                 }
                 return post;
-            })
-        })
+            }),
+            onLoading: false
+        }),
     ),
     on(postsActions.wasLikedActionFailure,
         (state: IPostsState, serverResponse: IServerResponse) => ({
             ...state,
+            onLoading: false,
             serverError: serverResponse
         })
     ),

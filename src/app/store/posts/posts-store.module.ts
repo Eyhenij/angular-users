@@ -16,5 +16,4 @@ import {PostsService} from '../services/posts.service';
         EffectsModule.forFeature([PostsEffects])
     ]
 })
-export class PostsStoreModule {
-}
+export class PostsStoreModule {}

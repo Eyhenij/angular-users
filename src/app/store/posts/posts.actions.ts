@@ -15,7 +15,7 @@ export const getOnePostActionSuccess = createAction('[POSTS_GET_ONE_SUCCESS]', p
 export const getOnePostActionFailure = createAction('[POSTS_GET_ONE_FAILURE]', props<{message: string, success: boolean}>());
 
 export const createPostAction = createAction('[POSTS_CREATE]', props<{newData: ICreatePostData}>());
-export const createPostActionSuccess = createAction('[POSTS_CREATE_SUCCESS]');
+export const createPostActionSuccess = createAction('[POSTS_CREATE_SUCCESS]', props<{ newPost: IPost}>());
 export const createPostActionFailure = createAction('[POSTS_CREATE_FAILURE]', props<{message: string, success: boolean}>());
 
 export const updatePostAction = createAction('[POSTS_UPDATE]', props<{newData: ICreatePostData, postUUID: string}>());

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { ICreatePostData, IPost } from '../../../interfaces/post.interface';
 import { Store } from '@ngrx/store';
 import { updatePostAction } from '../../../store/posts/posts.actions';

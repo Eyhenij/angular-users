@@ -1,59 +1,43 @@
-<div class="card__container" [formGroup]="form">
+<div class="card__container">
     <div>
         <mat-form-field appearance="fill" class="input__container">
             <mat-label>Title</mat-label>
-            <input type="text" formControlName="title" aria-label="title" matInput>
+            <input type="text" [formControl]="titleControl" aria-label="title" matInput>
 
-            <mat-error *ngIf="form.get('title').invalid && form.get('title').touched">
-                <mat-error *ngIf="form.get('title').hasError('required')">
+            <mat-error *ngIf="titleControl.invalid && titleControl.touched">
+                <mat-error *ngIf="titleControl.hasError('required')">
                     Post-title cannot be empty
                 </mat-error>
 
-                <mat-error *ngIf="form.get('title').hasError('minlength')">
+                <mat-error *ngIf="titleControl.hasError('minlength')">
                     Post-title must contain more then 3 symbols
                 </mat-error>
             </mat-error>
 
             <button
                 mat-button
-                *ngIf="form.get('title').value"
+                *ngIf="titleControl.value"
                 matSuffix
                 mat-icon-button
                 aria-label="Clear"
-                (click)="form.get('title').setValue('')">
+                (click)="titleControl.setValue('')">
                 <mat-icon>close</mat-icon>
             </button>
 
         </mat-form-field>
     </div>
 
-    <div>
-        <mat-form-field appearance="fill" class="input__container">
-            <mat-label>Content</mat-label>
-            <input type="text" formControlName="content" aria-label="content" matInput>
+<!--    <app-quill-editor-component-->
+<!--        (onEditorContentChange)="changeNewPost($event)"-->
+<!--    ></app-quill-editor-component>-->
 
-            <mat-error *ngIf="form.get('content').invalid && form.get('content').touched">
-                <mat-error *ngIf="form.get('content').hasError('required')">
-                    Post-content cannot be empty
-                </mat-error>
+<!--    <app-tiny-editor-component-->
+<!--        (onEditorContentChange)="changeNewPostForTiny($event)"-->
+<!--    ></app-tiny-editor-component>-->
 
-                <mat-error *ngIf="form.get('content').hasError('minlength')">
-                    Post-content must contain more then 3 symbols
-                </mat-error>
-            </mat-error>
+    <app-fate-editor-component></app-fate-editor-component>
 
-            <button
-                mat-button
-                *ngIf="form.get('content').value"
-                matSuffix
-                mat-icon-button
-                aria-label="Clear"
-                (click)="form.get('content').setValue('')">
-                <mat-icon>close</mat-icon>
-            </button>
-
-        </mat-form-field>
-    </div>
+<!--    <app-kolkov-editor-component></app-kolkov-editor-component>-->
 
     <div class="btn__container">
         <span>

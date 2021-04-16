@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { IPost } from '../../../interfaces/post.interface';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -23,11 +23,14 @@ export class PostsPageComponent implements OnInit, OnDestroy {
 
     public totalPostsCount$: Observable<number> = this._store$.select(getTotalPostsCountSelector);
     public currentPosts$: Observable<IPost[]> = this._store$.select(getProfilePostsSelector);
-    public pageSize = 2;
+    public pageSize = 3;
     public currentPage = 1;
     public isCreateMode = false;
 
-    constructor(private readonly _store$: Store) {}
+    constructor(
+        private readonly _store$: Store,
+        private readonly _changeDetector: ChangeDetectorRef
+    ) {}
 
     ngOnInit(): void {
         this._dataSource.paginator = this._paginator;
@@ -46,17 +49,18 @@ export class PostsPageComponent implements OnInit, OnDestroy {
         this._getCurrentPosts();
     }
 
-    public async createNewPost(newPostData): Promise<void> {
+    public async createNewPost(newPostData: { title: string, content: string }): Promise<void> {
         this._store$.dispatch(createPostAction({ newData: { userUUID: this._userUUID, ...newPostData } }));
-        this._getCurrentPosts();
         this.isCreateMode = false;
+        this._getCurrentPosts();
     }
 
-    public onDeleteChanges(): void {
+    public onDeletePost(): void {
         this._getCurrentPosts();
     }
 
     private _getCurrentPosts(): void {
+        this._changeDetector.markForCheck();
         this._store$.dispatch(getCurrentPostsAction({
             currentData: {
                 userUUID: this._userUUID,

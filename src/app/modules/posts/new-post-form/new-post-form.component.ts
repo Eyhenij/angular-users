@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ICreatePostData} from '../../../interfaces/post.interface';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-new-post-form',
@@ -10,27 +9,30 @@ import {ICreatePostData} from '../../../interfaces/post.interface';
 export class NewPostFormComponent {
 
     @Output()
-    public onCreatePost: EventEmitter<ICreatePostData> = new EventEmitter<ICreatePostData>();
+    public onCreatePost: EventEmitter<{ title: string, content: string }> = new EventEmitter<{ title: string, content: string }>();
     @Output()
     public closeCreatePostMode: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    public form: FormGroup;
+    public titleControl: FormControl;
+    public newPostContent: string = null;
 
     constructor() {
-        this.form = new FormGroup({
-            title: new FormControl(
-                'title',
-                [Validators.minLength(3), Validators.required]
-            ),
-            content: new FormControl(
-                'content',
-                [Validators.minLength(3), Validators.required]
-            )
-        });
+        this.titleControl = new FormControl(
+            'title',
+            [Validators.minLength(3), Validators.required]
+        );
+    }
+
+    public changeNewPost(newPostContent: string): void {
+        this.newPostContent = newPostContent;
+    }
+
+    public changeNewPostForTiny(event): void {
+        this.newPostContent = event;
     }
 
     public onSave(): void {
-        this.onCreatePost.emit(this.form.value);
+        this.onCreatePost.emit({ title: this.titleControl.value, content: this.newPostContent});
     }
 
     public onCancel(): void {
